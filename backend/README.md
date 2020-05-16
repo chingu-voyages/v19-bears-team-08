@@ -12,9 +12,7 @@ replace with build/installation steps
 
 ## **.env** file
 
-```
-place any environment variables here (don't put the actual value in if it's sensitive)
-ie) key=value
-```
+DB_CONNECT = mongodb+srv://Snow:<password>@cluster0-scly5.mongodb.net/test?retryWrites=true&w=majority
+TOKEN_SECRET = ajsodhosaidj
 
 > Any other details here
