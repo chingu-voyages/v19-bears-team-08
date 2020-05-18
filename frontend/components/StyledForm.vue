@@ -1,0 +1,38 @@
+<template>
+  <div class="form-container">
+    <form @submit.prevent="handleSubmit">
+      <slot name="inputs" />
+
+      <StyledButton green normal full type="submit">
+        Submit
+      </StyledButton>
+    </form>
+
+    <slot name="extras" />
+  </div>
+</template>
+
+<script lang="ts">
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import StyledButton from '~/components/StyledButton.vue'
+
+@Component({
+  components: {
+    StyledButton,
+  },
+})
+export default class StyledForm extends Vue {
+  @Prop() readonly handleSubmit!: () => Promise<any>
+}
+</script>
+
+<style>
+.form-container {
+  width: 400px;
+  margin-top: 1rem;
+}
+
+button {
+  margin-top: 0.75rem;
+}
+</style>
