@@ -22,8 +22,8 @@
           name="password"
           type="password"
           placeholder="A unique password between 6 and 20 characters"
-          minLength="6"
-          maxLength="20"
+          :minLength="6"
+          :maxLength="20"
         >
           Password
         </StyledInput>

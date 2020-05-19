@@ -36,7 +36,7 @@ export default class Form extends Vue {
 }
 </script>
 
-<style>
+<style lang="postcss">
 .btn {
   @apply font-bold py-2 px-4 rounded border transition-all duration-100;
 }

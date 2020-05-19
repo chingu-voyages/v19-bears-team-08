@@ -1,9 +1,15 @@
 <template>
-  <div class="form-container">
-    <form @submit.prevent="handleSubmit">
-      <slot name="inputs" />
+  <div ref="form" class="form-container">
+    <form :setDisableSubmit="disableSubmit.set" @submit.prevent="handleSubmit">
+      <slot name="inputs" :checkFormValidity="disableSubmit.set" />
 
-      <StyledButton green normal full type="submit">
+      <StyledButton
+        green
+        normal
+        full
+        type="submit"
+        :disabled="disableSubmit.get"
+      >
         Submit
       </StyledButton>
     </form>
@@ -13,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Ref } from 'vue-property-decorator'
 import StyledButton from '~/components/StyledButton.vue'
 
 @Component({
@@ -23,6 +29,12 @@ import StyledButton from '~/components/StyledButton.vue'
 })
 export default class StyledForm extends Vue {
   @Prop() readonly handleSubmit!: () => Promise<any>
+  @Ref() readonly form!: HTMLFormElement
+
+  disableSubmit = {
+    get: (): boolean => this.form.checkValidity(),
+    set: (): boolean => this.form.checkValidity(),
+  }
 }
 </script>
 

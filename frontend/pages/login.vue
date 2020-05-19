@@ -4,6 +4,7 @@
     <StyledForm :handleSubmit="handleSubmit">
       <template v-slot:inputs>
         <StyledInput
+          v-model="email"
           required
           name="email"
           type="email"
@@ -13,9 +14,12 @@
         </StyledInput>
 
         <StyledInput
+          v-model="password"
           required
           name="password"
           type="password"
+          :minLength="6"
+          :maxLength="20"
           placeholder="Your password"
         >
           Password
@@ -51,16 +55,19 @@ import StyledForm from '~/components/StyledForm.vue'
   },
 })
 export default class Login extends Vue {
+  email = ''
+  password = ''
+
   handleSubmit() {
+    console.log(this.email, this.password)
     setTimeout(() => {
-      // eslint-disable-next-line no-console
       console.log('send form submission here..')
     }, 2000)
   }
 }
 </script>
 
-<style>
+<style lang="postcss">
 .form-links {
   @apply text-gray-700 no-underline;
 }
