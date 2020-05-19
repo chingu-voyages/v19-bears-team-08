@@ -13,6 +13,7 @@ module.exports = {
   ],
   plugins: ['prettier'],
   rules: {
+    "no-console": process.env.NODE_ENV === 'production' ? "error" : "off",
     'vue/attribute-hyphenation': ['error', 'never'],
   },
 }
