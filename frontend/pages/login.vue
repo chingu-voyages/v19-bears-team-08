@@ -9,9 +9,8 @@
           name="email"
           type="email"
           placeholder="Your email address"
-        >
-          Email
-        </StyledInput>
+          label="Email"
+        />
 
         <StyledInput
           v-model="password"
@@ -21,9 +20,8 @@
           :minLength="6"
           :maxLength="20"
           placeholder="Your password"
-        >
-          Password
-        </StyledInput>
+          label="Password"
+        />
       </template>
 
       <template v-slot:extras>
@@ -42,10 +40,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import StyledHeader from '~/components/StyledHeader.vue'
-import StyledInput from '~/components/StyledInput.vue'
-import StyledForm from '~/components/StyledForm.vue'
+import { Vue, Component } from 'vue-property-decorator';
+import StyledHeader from '~/components/StyledHeader.vue';
+import StyledInput from '~/components/StyledInput.vue';
+import StyledForm from '~/components/StyledForm.vue';
 
 @Component({
   components: {
@@ -55,14 +53,14 @@ import StyledForm from '~/components/StyledForm.vue'
   },
 })
 export default class Login extends Vue {
-  email = ''
-  password = ''
+  email = '';
+  password = '';
 
   handleSubmit() {
-    console.log(this.email, this.password)
+    console.log(this.email, this.password);
     setTimeout(() => {
-      console.log('send form submission here..')
-    }, 2000)
+      console.log('send login form submission here..');
+    }, 2000);
   }
 }
 </script>

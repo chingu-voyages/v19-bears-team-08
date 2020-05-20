@@ -1,12 +1,14 @@
 <template>
   <div class="pb-5 relative flex flex-col">
     <label class="text-xl" :for="name">
-      <slot />
+      {{ label }}
     </label>
+
     <input
       class="w-full rounded p-2 mt-2 bg-gray-300 text-base border"
-      :class="{ 'border-red-700': showError }"
-      :type="type"
+      :class="{ 'border-red-700': !!error }"
+      :required="required"
+      :type="type || 'text'"
       :name="name"
       :minLength="minLength"
       :maxLength="maxLength"
@@ -15,57 +17,75 @@
       @input="onInputChange"
       @blur="onBlur"
     />
+
     <p
-      v-if="showError"
+      v-if="!!error"
       class="text-xs text-center text-red-500 w-full absolute bottom-0"
     >
-      {{ errors[error] }}
+      {{ error }}
     </p>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Model, Emit } from 'vue-property-decorator'
+import { Vue, Component, Prop, Model, Emit } from 'vue-property-decorator';
 
 @Component
 export default class StyledInput extends Vue {
-  @Prop({ type: String, default: 'text' }) readonly type!: string
-  @Prop(Number) readonly minLength!: number
-  @Prop(Number) readonly maxLength!: number
-  @Prop(Boolean) readonly required!: boolean
-  @Prop(String) readonly placeholder!: string
-  @Prop(String) readonly name!: string
-  @Prop() readonly value!: any
-  @Prop() readonly checkFormValidity!: () => boolean
-  @Model('input', { type: String }) inputVal!: string
+  @Prop(String) readonly type!: string;
+  @Prop(Number) readonly minLength!: number;
+  @Prop(Number) readonly maxLength!: number;
+  @Prop(Boolean) readonly required!: boolean;
+  @Prop({ type: String, required: true }) readonly placeholder!: string;
+  @Prop({ type: String, required: true }) readonly name!: string;
+  @Prop({ type: String, required: true }) readonly label!: string;
+  @Prop() readonly value!: any;
+  @Model('input', { type: String }) inputVal!: string;
 
-  showError = false
-  error = ''
+  error = '';
 
-  errors = {
-    tooLong: `${this.capitalizedName} is too long. Max ${this.maxLength} characters.`,
-  }
+  errors: any = {
+    tooLong: `${this.label} is too long. Max ${this.maxLength} characters.`,
+    tooShort: `${this.label} is too short. Min ${this.minLength} character${
+      this.minLength === 0 ? '' : 's'
+    }.`,
+    typeMismatch: `${
+      this.label
+    } is currently not acceptable. Please enter a valid ${this.label.toLowerCase()}`,
+    valueMissing: `${this.label} is required`,
+  };
 
-  get capitalizedName(): string {
-    return this.name.replace(this.name[0], this.name[0].toUpperCase())
+  checkForError(target: HTMLInputElement) {
+    const isValid = target.checkValidity();
+    if (isValid) {
+      this.error = '';
+    } else {
+      const validityState: any = target.validity;
+      for (const key in validityState) {
+        if (validityState[key]) {
+          const customMsg = this.errors[key];
+          this.error = customMsg || target.validationMessage;
+          break;
+        }
+      }
+    }
   }
 
   @Emit('input')
   onInputChange(e: Event): string {
-    return (e.target as HTMLInputElement).value
+    // if there's an error present, this will ...
+    // ... update the error state as the user types
+    if (this.error) {
+      this.checkForError(e.target as HTMLInputElement);
+    }
+    return (e.target as HTMLInputElement).value;
   }
 
   @Emit('blur')
   onBlur(e: Event): void {
-    const isValid = (e.target as HTMLInputElement).checkValidity()
-    this.showError = !isValid
-    this.checkFormValidity()
+    this.checkForError(e.target as HTMLInputElement);
   }
 }
 </script>
 
-<style scoped lang="postcss">
-input:invalid {
-  @apply border-red-700;
-}
-</style>
+<style></style>

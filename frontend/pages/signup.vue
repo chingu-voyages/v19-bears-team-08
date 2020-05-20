@@ -2,31 +2,35 @@
   <div>
     <StyledHeader :level="1" :size="4">Sign up below</StyledHeader>
 
-    <StyledForm>
+    <StyledForm :handleSubmit="handleSubmit">
       <template v-slot:inputs>
-        <StyledInput required name="name" placeholder="Your full name">
-          Name
-        </StyledInput>
+        <StyledInput
+          v-model="name"
+          required
+          name="name"
+          placeholder="Your full name"
+          label="Name"
+        />
 
         <StyledInput
+          v-model="email"
           required
           name="email"
           type="email"
           placeholder="Your email address"
-        >
-          Email
-        </StyledInput>
+          label="Email"
+        />
 
         <StyledInput
+          v-model="password"
           required
           name="password"
           type="password"
           placeholder="A unique password between 6 and 20 characters"
           :minLength="6"
           :maxLength="20"
-        >
-          Password
-        </StyledInput>
+          label="Password"
+        />
       </template>
 
       <template v-slot:extras>
@@ -41,10 +45,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import StyledHeader from '~/components/StyledHeader.vue'
-import StyledInput from '~/components/StyledInput.vue'
-import StyledForm from '~/components/StyledForm.vue'
+import { Vue, Component } from 'vue-property-decorator';
+import StyledHeader from '~/components/StyledHeader.vue';
+import StyledInput from '~/components/StyledInput.vue';
+import StyledForm from '~/components/StyledForm.vue';
 
 @Component({
   components: {
@@ -53,7 +57,18 @@ import StyledForm from '~/components/StyledForm.vue'
     StyledForm,
   },
 })
-export default class Signup extends Vue {}
+export default class Signup extends Vue {
+  name = '';
+  email = '';
+  password = '';
+
+  handleSubmit() {
+    console.log(this.name, this.email, this.password);
+    setTimeout(() => {
+      console.log('send signup form submission here..');
+    }, 2000);
+  }
+}
 </script>
 
 <style></style>
