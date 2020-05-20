@@ -1,27 +1,31 @@
-require(mongoose);
+const mongoose = require("mongoose");
+const { validationLengths } = require("../utils/validation");
+
+const { name, email, password } = validationLengths;
+
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        min: 6,
-        max: 255
-    },
-    email: {
+  name: {
     type: String,
     required: true,
-    max: 255,
-    min: 6
-    },
-    password: {
-        type: String,
-        required: true,
-        max: 1024,
-        min: 6
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    }
+    min: name.min,
+    max: name.max,
+  },
+  email: {
+    type: String,
+    required: true,
+    min: email.min,
+    max: email.max,
+  },
+  password: {
+    type: String,
+    required: true,
+    min: password.min,
+    max: password.max,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);
