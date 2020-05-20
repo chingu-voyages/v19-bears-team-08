@@ -2,26 +2,28 @@
 
 ## Tech Choices
 
-I have chosen to use Node.js and mongoDB for the api as I have used them in the past, it is my first time making an API with authenticaion for the login as my pervious projects did not require it. 
+I have chosen to use Node.js and mongoDB for the api as I have used them in the past, it is my first time making an API with authenticaion for the login as my pervious projects did not require it.
 
 ## Build Setup
 
-```
+```bash
 # install dependencies
 $ npm install
 
-# Postman 
-I used postman for testing the server, this can be found at: https://www.postman.com/
 
-# build for production and launch server
-$ npm run build
+# production
 $ npm run start
+
+# development
+$ npm run dev
 
 ```
 
 ## **.env** file
 
-DB_CONNECT = mongodb+srv://Snow:<password>@cluster0-scly5.mongodb.net/test?retryWrites=true&w=majority
-TOKEN_SECRET = ajsodhosaidj
+```
+DB_CONNECT = DB_URL_HERE
+TOKEN_SECRET = TOKEN_STRING_HERE
+```
 
-> Any other details here
+> I used [Postman](https://www.postman.com/) for testing the server
