@@ -10,7 +10,6 @@ I have chosen to use Node.js and mongoDB for the api as I have used them in the 
 # install dependencies
 $ npm install
 
-
 # production
 $ npm run start
 
