@@ -50,7 +50,7 @@ const loginValidation = data => {
       .max(validationLengths.password.max)
       .required(),
   });
-  return Joi.validate(data);
+  return schema.validate(data);
 };
 
 module.exports = {
