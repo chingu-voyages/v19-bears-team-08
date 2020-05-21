@@ -17,8 +17,10 @@ const validationLengths = {
   },
 };
 
+//(JSON.parse(req.body))
+
 const registerValidation = data => {
-  const schema = {
+  const schema = Joi.object({
     name: Joi.string()
       .min(validationLengths.name.min)
       .max(validationLengths.name.max)
@@ -28,27 +30,27 @@ const registerValidation = data => {
       .max(validationLengths.email.max)
       .email()
       .required(),
-    password: JOI.string()
+    password: Joi.string()
       .min(validationLengths.password.min)
       .max(validationLengths.password.max)
       .required(),
-  };
-  return Joi.validate(data, schema);
+  });
+  return schema.validate(data);
 };
 
 const loginValidation = data => {
-  const schema = {
+  const schema = Joi.object({
     email: Joi.string()
       .min(validationLengths.email.min)
       .max(validationLengths.email.max)
       .email()
       .required(),
-    password: JOI.string()
+    password: Joi.string()
       .min(validationLengths.password.min)
       .max(validationLengths.password.max)
       .required(),
-  };
-  return Joi.validate(data, schema);
+  });
+  return Joi.validate(data);
 };
 
 module.exports = {

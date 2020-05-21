@@ -7,6 +7,7 @@ const { registerValidation, loginValidation } = require("../utils/validation");
 router.get("/", (req, res) => res.send("auth endpoints"));
 
 router.post("/register", async (req, res) => {
+  console.log(req.body);
   //LETS VALIDATE THE DATA BEFORE WE ADD A User
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -16,7 +17,7 @@ router.post("/register", async (req, res) => {
   if (emailExist) return res.status(400).send("Email already exists");
 
   // hash the password
-  const salt = await bcrypt.gentSalt(10);
+  const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
   //Create a new user
