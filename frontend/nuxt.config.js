@@ -21,21 +21,19 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
   ],
-  modules: ['@nuxtjs/axios', '@nuxtjs/auth'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth', '@nuxtjs/toast'],
+
   axios: {
-    baseURL: 'http://localhost:3000/api  ',
+    baseURL: 'http://localhost:3000/api',
   },
+
   auth: {
     strategies: {
       local: {
         endpoints: {
-          login: {
-            url: '/api/auth/login',
-            method: 'post',
-            propertyName: 'token',
-          },
-          logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/auth/user', method: 'get', propertyName: 'user' },
+          login: { url: '/auth/login', method: 'post', propertyName: 'token' },
+          logout: { url: '/auth/logout', method: 'post' },
+          user: { url: '/auth/user', method: 'get', propertyName: 'user' },
         },
         // tokenRequired: true,
         // tokenType: 'bearer',
@@ -44,6 +42,13 @@ export default {
       },
     },
   },
+
+  toast: {
+    position: 'bottom-center',
+    duration: 7000,
+    theme: 'bubble',
+  },
+
   build: {
     // extend(config, ctx) {}
   },
