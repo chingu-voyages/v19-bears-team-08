@@ -3,7 +3,7 @@
     <nuxt-link
       :to="link.to"
       class="w-full h-full p-3 text-center hover:bg-gray-200"
-      exact-active-class="bg-gray-200"
+      exactActiveClass="bg-gray-200"
     >
       {{ link.text }}
     </nuxt-link>
@@ -11,17 +11,17 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
 type LinkTypes = {
-  to: string
-  text: string
-  authRequired: boolean
-}
+  to: string;
+  text: string;
+  authRequired: boolean;
+};
 
 @Component
 export default class Link extends Vue {
-  @Prop() readonly link!: LinkTypes
+  @Prop() readonly link!: LinkTypes;
 }
 </script>
 

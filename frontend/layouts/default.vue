@@ -17,13 +17,13 @@
 </template>
 
 <script lang="ts">
-import Links from '~/components/Links.vue'
+import Links from '~/components/Links.vue';
 
 export default {
   components: {
     Links,
   },
-}
+};
 </script>
 
 <style>

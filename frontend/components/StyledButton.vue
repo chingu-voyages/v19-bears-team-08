@@ -16,23 +16,23 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
 export default class Form extends Vue {
-  @Prop({ type: Boolean, default: false }) readonly green!: boolean
-  @Prop({ type: Boolean, default: false }) readonly pink!: boolean
-  @Prop({ type: Boolean, default: false }) readonly normal!: boolean
-  @Prop({ type: Boolean, default: false }) readonly inverted!: boolean
-  @Prop({ type: Boolean, default: false }) readonly full!: boolean
-  @Prop({ type: Boolean, default: false }) readonly disabled!: boolean
+  @Prop({ type: Boolean, default: false }) readonly green!: boolean;
+  @Prop({ type: Boolean, default: false }) readonly pink!: boolean;
+  @Prop({ type: Boolean, default: false }) readonly normal!: boolean;
+  @Prop({ type: Boolean, default: false }) readonly inverted!: boolean;
+  @Prop({ type: Boolean, default: false }) readonly full!: boolean;
+  @Prop({ type: Boolean, default: false }) readonly disabled!: boolean;
 
-  isGreen = this.green
-  isPink = this.pink
-  isNormal = this.normal
-  isInverted = this.inverted
-  isFull = this.full
-  isDisabled = this.disabled
+  isGreen = this.green;
+  isPink = this.pink;
+  isNormal = this.normal;
+  isInverted = this.inverted;
+  isFull = this.full;
+  isDisabled = this.disabled;
 }
 </script>
 

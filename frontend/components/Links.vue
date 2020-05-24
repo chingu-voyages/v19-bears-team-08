@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import Link from '~/components/Link.vue'
+import { Vue, Component } from 'vue-property-decorator';
+import Link from '~/components/Link.vue';
 
 @Component({
   components: {
@@ -32,7 +32,7 @@ export default class Links extends Vue {
       { to: '/', text: 'Home', authRequired: false },
       { to: '/profile', text: 'Profile', authRequired: false },
     ],
-  }
+  };
 }
 </script>
 
