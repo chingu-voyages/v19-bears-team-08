@@ -62,11 +62,18 @@ export default class Signup extends Vue {
   email = '';
   password = '';
 
-  handleSubmit() {
-    console.log(this.name, this.email, this.password);
-    setTimeout(() => {
-      console.log('send signup form submission here..');
-    }, 2000);
+  async handleSubmit() {
+    try {
+      await this.$axios.$post('/register', {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+      });
+      this.$toast.success('Thanks for joining!');
+    } catch (err) {
+      console.log(err);
+      this.$toast.error('Error, please try again.');
+    }
   }
 }
 </script>

@@ -56,11 +56,18 @@ export default class Login extends Vue {
   email = '';
   password = '';
 
-  handleSubmit() {
-    console.log(this.email, this.password);
-    setTimeout(() => {
-      console.log('send login form submission here..');
-    }, 2000);
+  async handleSubmit() {
+    try {
+      const data = { email: this.email, password: this.password };
+      await this.$auth.loginWith('local', { data });
+      this.$toast.clear();
+      this.$toast.success(
+        `Welcome back, ${this.$auth.user.name || 'your name'}!`
+      );
+    } catch (err) {
+      console.log(err);
+      this.$toast.error('Error, please try again.');
+    }
   }
 }
 </script>
