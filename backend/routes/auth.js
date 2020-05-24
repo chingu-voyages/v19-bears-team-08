@@ -28,7 +28,7 @@ router.post("/register", async (req, res) => {
   });
   try {
     const savedUser = await user.save();
-    res.send(savedUser);
+    res.json(savedUser);
   } catch (err) {
     res.status(400).send(err);
   }
@@ -45,9 +45,36 @@ router.post("/login", async (req, res) => {
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) return res.status(400).send("Email or Password is Wrong");
 
-  // reate and asign a token
+  // create and asign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
-  res.header("auth-token", token).send(token);
+  res.header("auth-token", token).json(token);
 });
+
+// User (returns the user object)
+router.post("/user", async (req, res) => {
+  console.log(req.body);
+  //validate data 
+  const { error } = userValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  //check log if the user is already in the database
+  const userExists = await User.findOne({ name: req.body.name });
+  if (!userExists) return res.status(400).send("Cannot find user");
+  
+  // token should already be assigned from login 
+
+  // verifyToken.js
+
+  // send back user name 
+  else  {
+    var hash = bcrypt.hashSync(password, 8);
+    var user = {
+      "name": name,
+      "password": hash,
+      "email": email
+    }
+    res.json(user);
+}});
+
 
 module.exports = router;
