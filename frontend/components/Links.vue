@@ -31,6 +31,12 @@ export default class Links extends Vue {
     other: [
       { to: '/', text: 'Home', authRequired: false },
       { to: '/profile', text: 'Profile', authRequired: false },
+      { to: '/faq', text: 'FAQ', authRequired: false },
+      { to: '/pricing', text: 'Pricing', authRequired: false },
+      { to: '/schedule', text: 'Schedule', authRequired: false },
+      { to: '/howitworks', text: 'How It Works', authRequired: false },
+      { to: '/showcase', text: 'Showcase', authRequired: false },
+      { to: '/settings', text: 'Settings', authRequired: false },
     ],
   };
 }
