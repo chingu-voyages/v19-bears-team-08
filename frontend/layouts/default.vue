@@ -10,7 +10,7 @@
       <Links />
     </nav>
 
-    <main class="w-full overflow-y-scroll px-4 py-3">
+    <main class="w-full overflow-y-auto overflow-x-hidden px-6 py-5">
       <nuxt />
     </main>
   </div>
@@ -26,7 +26,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="postcss">
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -44,5 +44,27 @@ html {
 *:after {
   box-sizing: border-box;
   margin: 0;
+}
+
+h1 {
+  @apply text-5xl;
+}
+h2 {
+  @apply text-4xl;
+}
+h3 {
+  @apply text-3xl;
+}
+h4 {
+  @apply text-2xl;
+}
+h5 {
+  @apply text-xl;
+}
+h6 {
+  @apply text-lg;
+}
+p {
+  @apply text-gray-800 leading-relaxed;
 }
 </style>
