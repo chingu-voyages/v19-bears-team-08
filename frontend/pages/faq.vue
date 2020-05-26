@@ -1,15 +1,29 @@
 <template>
-  <div>
-    <p>This would be the faq page</p>
+  <div class="max-w-2xl">
+    <h2 class="mb-4">
+      Frequently Asked Questions
+    </h2>
+    <nuxt-content :document="faqs" />
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-
-export default Vue.extend({
-  components: {},
-});
+<script>
+export default {
+  async asyncData({ $content }) {
+    const faqs = await $content('pages/faq').fetch();
+    return { faqs };
+  },
+};
 </script>
 
-<style></style>
+<style lang="postcss" scoped>
+h4 {
+  @apply mb-4;
+}
+p {
+  @apply my-5 px-2;
+}
+a {
+  @apply text-pink;
+}
+</style>
