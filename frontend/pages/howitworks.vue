@@ -29,12 +29,32 @@
     </div>
 
     <div class="flex flex-col">
-      <h2>Our Process</h2>
+      <h2 class="mb-2">Our Process</h2>
 
-      <div v-for="(process, index) in processes" :key="process.title" class="">
-        <p>{{ index + 1 }}</p>
-        <p>{{ process.title }}</p>
-        <p>{{ process.description }}</p>
+      <div
+        v-for="(process, index) in processes"
+        :key="process.title"
+        class="flex items-center h-32 md:h-20"
+      >
+        <div class="relative flex justify-center items-center h-full mr-4">
+          <div
+            class="flex justify-center items-center rounded-full h-10 w-10 bg-green transform transition-transform duration-150"
+          />
+          <span
+            class="absolute h-full w-1 bg-green"
+            :class="{
+              'first-connector': index === 0,
+              'last-connector': index === processes.length - 1,
+            }"
+          />
+          <div class="absolute text-white font-bold">
+            {{ index + 1 }}
+          </div>
+        </div>
+        <div>
+          <h4>{{ process.title }}</h4>
+          <p>{{ process.description }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -97,7 +117,12 @@ export default Vue.extend({
 .container > div:last-child {
   @apply mb-0;
 }
-.top-50 {
-  top: 50%;
+.first-connector {
+  height: 50%;
+  bottom: 0;
+}
+.last-connector {
+  height: 50%;
+  top: 0;
 }
 </style>
