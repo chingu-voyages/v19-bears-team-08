@@ -21,7 +21,7 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
   ],
-  modules: ['@nuxtjs/axios', '@nuxtjs/auth', '@nuxtjs/toast'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth', '@nuxtjs/toast', '@nuxt/content'],
 
   axios: {
     baseURL: 'http://localhost:3000/api',
@@ -47,6 +47,10 @@ export default {
     position: 'bottom-center',
     duration: 7000,
     theme: 'bubble',
+  },
+
+  content: {
+    // Options
   },
 
   build: {
