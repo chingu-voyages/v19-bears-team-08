@@ -18,10 +18,10 @@ export default {
 
 <style lang="postcss" scoped>
 h4 {
-  @apply mb-4;
+  @apply mb-3;
 }
 p {
-  @apply my-5 px-2;
+  @apply mb-6 px-2;
 }
 a {
   @apply text-pink;
