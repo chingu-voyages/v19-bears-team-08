@@ -2,28 +2,84 @@
   <div
     class="min-h-screen max-h-screen overflow-hidden bg-gray-200 flex flex-row"
   >
-    <nav class=" flex flex-col lg:w-64 bg-gray-300 py-3">
+    <div
+      class="fixed z-20 top-0 w-full h-12 flex justify-between px-2 items-center bg-gray-300 md:hidden"
+    >
+      <div
+        class="flex justify-center items-center h-10 w-10 rounded-full bg-gray-300 hover:bg-gray-200"
+      >
+        <fa
+          v-if="isOpen"
+          icon="times"
+          class="md:hidden text-xl"
+          @click="setIsOpen(false)"
+        />
+        <fa
+          v-else
+          icon="bars"
+          class="md:hidden text-xl"
+          @click="setIsOpen(true)"
+        />
+      </div>
+      <nuxt-link to="/">
+        <img src="/Logo.png" alt="Chingu logo" class="w-10" />
+      </nuxt-link>
+    </div>
+    <nav
+      class="absolute md:static flex flex-col h-full md:h-auto w-64 bg-gray-300 pt-10 md:mt-0 md:py-3 z-10 transition-transform duration-150 transform md:translate-x-0"
+      :class="{
+        'translate-x-0': isOpen,
+        '-translate-x-full': !isOpen,
+      }"
+    >
       <nuxt-link class="flex flex-col items-center" to="/">
-        <img src="/Logo.png" alt="Chingu logo" class="w-20" />
+        <img src="/Logo.png" alt="Chingu logo" class="w-20 hidden md:block" />
       </nuxt-link>
 
       <Links />
     </nav>
 
-    <main class="w-full overflow-y-auto overflow-x-hidden px-6 py-5">
+    <main
+      class="w-full overflow-y-auto overflow-x-hidden mt-12 md:mt-0 px-3 md:px-6 py-3 md:py-5 transition-all duration-100"
+      :class="{
+        'bg-gray-700 opacity-25': isOpen,
+      }"
+    >
       <nuxt />
     </main>
   </div>
 </template>
 
 <script lang="ts">
+import { Vue, Component } from 'nuxt-property-decorator';
 import Links from '~/components/Links.vue';
 
-export default {
+@Component({
   components: {
     Links,
   },
-};
+})
+export default class DefaultLayout extends Vue {
+  isOpen = false;
+
+  setIsOpen(bool: boolean) {
+    this.isOpen = bool;
+  }
+
+  onResize() {
+    this.isOpen = window.innerHeight > 767;
+  }
+
+  mounted() {
+    this.$nextTick(() => {
+      window.addEventListener('resize', this.onResize);
+    });
+  }
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onResize);
+  }
+}
 </script>
 
 <style lang="postcss">
