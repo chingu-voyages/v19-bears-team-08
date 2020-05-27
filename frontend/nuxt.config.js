@@ -21,7 +21,13 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
   ],
-  modules: ['@nuxtjs/axios', '@nuxtjs/auth', '@nuxtjs/toast', '@nuxt/content'],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
+    '@nuxtjs/toast',
+    '@nuxt/content',
+    'nuxt-fontawesome',
+  ],
 
   axios: {
     baseURL: 'http://localhost:3000/api',
@@ -51,6 +57,16 @@ export default {
 
   content: {
     // Options
+  },
+
+  fontawesome: {
+    component: 'fa',
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['fas'],
+      },
+    ],
   },
 
   build: {
