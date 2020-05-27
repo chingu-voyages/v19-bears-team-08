@@ -28,22 +28,6 @@
         </ul>
       </div>
     </div>
-
-    <h5 class="mb-5">
-      Chingu offers you several core features of a traditional coding bootcamp,
-      but for a fraction of the cost.
-    </h5>
-
-    <nuxt-link to="/schedule">
-      <StyledButton green normal>
-        View Upcoming Schedule
-      </StyledButton>
-    </nuxt-link>
-    <nuxt-link to="/faq">
-      <StyledButton pink inverted>
-        Have a question?
-      </StyledButton>
-    </nuxt-link>
   </div>
 </template>
 
