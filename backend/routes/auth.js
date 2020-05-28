@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const { registerValidation, loginValidation } = require("../utils/validation");
 
 router.get("/", (req, res) => res.send("auth endpoints"));
-
+// register
 router.post("/register", async (req, res) => {
   console.log(req.body);
   //LETS VALIDATE THE DATA BEFORE WE ADD A User
@@ -48,6 +48,7 @@ router.post("/login", async (req, res) => {
   // create and asign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
   res.header("auth-token", token).json(token);
+  // veify it is you, sends back jwt token and userObject 
 });
 
 // User (returns the user object)
