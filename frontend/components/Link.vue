@@ -2,8 +2,8 @@
   <li v-if="!link.authRequired" class="w-full flex">
     <nuxt-link
       :to="link.to"
-      class="w-full h-full p-3 text-center hover:bg-gray-200"
-      exactActiveClass="bg-gray-200"
+      class="w-full h-full p-3 text-center hover:text-pink"
+      exactActiveClass="text-pink"
     >
       {{ link.text }}
     </nuxt-link>
