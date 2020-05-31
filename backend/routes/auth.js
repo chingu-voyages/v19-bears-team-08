@@ -12,7 +12,7 @@ router.post("/register", async (req, res) => {
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  //checklog if the user is already in the database
+  //check log if the user is already in the database
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist) return res.status(400).send("Email already exists");
 
@@ -45,55 +45,51 @@ router.post("/login", async (req, res) => {
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) return res.status(400).send("Email or Password is Wrong");
 
-  // create and asign a token
+  // create and assign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
   res.header("auth-token", token).json(token);
-  // veify it is you, sends back jwt token and userObject 
+  // verify it is you, sends back jwt token and userObject 
 });
 
-// User (returns the user object) // logged in users only route
+// User (returns the user searched for) // logged in users only route
 router.post("/user", async (req, res) => {
   console.log(req.body);
-  //validate data 
-  const { error } = userValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
-  //check log if the user is already in the database
-  const userExists = await User.findOne({ name: req.body.name });
-  if (!userExists) return res.status(400).send("Cannot find user");
-  
-  // token should already be assigned from login 
 
   // verifyToken.js
-  
-  // send back user name 
+// auth()
 
-  else  {
-    var hash = bcrypt.hashSync(password, 8);
-    var user = {
-      "name": name,
-      "password": hash,
-      "email": email
-    }
-    res.json(user);
+
+ //check log if the user is in the database
+ const userExists = await User.findOne({ name: req.body.name });
+ if (!userExists) {
+  return res.status(400).send("Cannot find user");
+ } else  {
+   console.log(userExists)
+   userExists.email = "****@smith.com"
+   userExists.password = "*****"
+    // var hash = bcrypt.hashSync(password, 8);
+    // var user = {
+    //   "name": name,
+    //   "password": hash,
+    //   "email": email
+    // }
+  // send back user data 
+    res.json(userExists);
 }});
 
 // Dashboard, area you go to once logged in ? // logged in users only !
 router.post("/dashboard", async (req, res) => {
   console.log(req.body);
-  //validate data 
-  const { error } = userValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
+  console.log("user is logged in - Dash") 
+  res.json("Dashboard Page")
 });
 
-// Admin only route
+// Admin only route (should be logged in and admin)
 router.post("/admin", async (req, res) => {
   console.log(req.body);
-  //validate data 
-  const { error } = userValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
+  if (id !== currentUser.sub && currentUser.role !== Role.Admin) {
+    return res.status(401).json({ message: 'Unauthorized' });
+}
 });
 
 module.exports = router;
