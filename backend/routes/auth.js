@@ -54,27 +54,24 @@ router.post("/login", async (req, res) => {
 // User (returns the user searched for) // logged in users only route
 router.post("/user", async (req, res) => {
   console.log(req.body);
-
-  // verifyToken.js
-// auth()
-
-
  //check log if the user is in the database
  const userExists = await User.findOne({ name: req.body.name });
  if (!userExists) {
   return res.status(400).send("Cannot find user");
- } else  {
-   console.log(userExists)
+ } else {
+   let token = req.headers.authorization; // Express headers are auto converted to lowercase
+    token = token.slice(7, token.length);
+    console.log(token);    
+   if (token == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWQzMmI0MTdmMDdhZDQ0NjQ4NjNjZTIiLCJpYXQiOjE1OTA4OTc4Mzh9.EpMZ8IKvUn3DvIGLq9mPIefaBCzdyPYTTsGX-zSrlKk") {
+    res.json(userExists);
+    console.log("arrived here")
+   } else {
    userExists.email = "****@smith.com"
    userExists.password = "*****"
-    // var hash = bcrypt.hashSync(password, 8);
-    // var user = {
-    //   "name": name,
-    //   "password": hash,
-    //   "email": email
-    // }
   // send back user data 
     res.json(userExists);
+    console.log("did this")
+  }  
 }});
 
 // Dashboard, area you go to once logged in ? // logged in users only !
