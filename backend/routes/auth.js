@@ -66,14 +66,12 @@ router.post("/user", async (req, res) => {
  if (!userExists) {
   return res.status(400).send("Cannot find user");
  } else if (token == testToken) {
-    console.log("potatoes")
     return res.json(userExists);   
 
       } else {
       userExists.email = "****@smith.com"
       userExists.password = "*****"
       // send back user data 
-      console.log("did this")
       return res.json(userExists);   
       
       }  
@@ -82,8 +80,22 @@ router.post("/user", async (req, res) => {
 // Dashboard, area you go to once logged in ? // logged in users only !
 router.post("/dashboard", async (req, res) => {
   console.log(req.body);
-  console.log("user is logged in - Dash") 
-  res.json("Dashboard Page")
+  let token = req.headers.authorization; // Express headers are auto converted to lowercase
+      token = token.slice(7, token.length);
+      // str = str.slice(0, -1);
+      // str = str.slice(1)
+      token = token.slice(0, -1)
+      token = token.slice(1)
+      //console.log(token);
+    if(!token) return res.status(401).send('Access Denied');
+    try {
+        const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+        console.log(verified + "User is logged in")
+        return res.json("Dashboard Page") 
+        //req.user = verified;
+    } catch (err) {
+        res.status(400).send('Invalid Token');
+    }
 });
 
 // Admin only route (should be logged in and admin)
