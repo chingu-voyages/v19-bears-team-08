@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { registerValidation, loginValidation } = require("../utils/validation");
 
+const testToken = `"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWQzMmI0MTdmMDdhZDQ0NjQ4NjNjZTIiLCJpYXQiOjE1OTA4OTc4Mzh9.EpMZ8IKvUn3DvIGLq9mPIefaBCzdyPYTTsGX-zSrlKk"`
+
 router.get("/", (req, res) => res.send("auth endpoints"));
 // register // public route
 router.post("/register", async (req, res) => {
@@ -54,25 +56,28 @@ router.post("/login", async (req, res) => {
 // User (returns the user searched for) // logged in users only route
 router.post("/user", async (req, res) => {
   console.log(req.body);
+  // get token from header
+  let token = req.headers.authorization; // Express headers are auto converted to lowercase
+    token = token.slice(7, token.length);
+    console.log(token, testToken)
+    console.log(token == testToken); 
  //check log if the user is in the database
  const userExists = await User.findOne({ name: req.body.name });
  if (!userExists) {
   return res.status(400).send("Cannot find user");
- } else {
-   let token = req.headers.authorization; // Express headers are auto converted to lowercase
-    token = token.slice(7, token.length);
-    console.log(token);    
-   if (token == "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWQzMmI0MTdmMDdhZDQ0NjQ4NjNjZTIiLCJpYXQiOjE1OTA4OTc4Mzh9.EpMZ8IKvUn3DvIGLq9mPIefaBCzdyPYTTsGX-zSrlKk") {
-    res.json(userExists);
-    console.log("arrived here")
-   } else {
-   userExists.email = "****@smith.com"
-   userExists.password = "*****"
-  // send back user data 
-    res.json(userExists);
-    console.log("did this")
-  }  
-}});
+ } else if (token == testToken) {
+    console.log("potatoes")
+    return res.json(userExists);   
+
+      } else {
+      userExists.email = "****@smith.com"
+      userExists.password = "*****"
+      // send back user data 
+      console.log("did this")
+      return res.json(userExists);   
+      
+      }  
+});
 
 // Dashboard, area you go to once logged in ? // logged in users only !
 router.post("/dashboard", async (req, res) => {
