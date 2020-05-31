@@ -43,7 +43,7 @@
       </nav>
 
       <main
-        class="w-full overflow-y-auto overflow-x-hidden mt-12 md:mt-0 px-3 md:px-6 py-3 md:py-5 transition-all duration-100"
+        class="w-full overflow-y-auto overflow-x-hidden mt-12 md:mt-0 px-3 md:px-6 py-3 md:py-5 md:bg-gray-200 md:opacity-100 transition-all duration-100"
         :class="{
           'bg-gray-700 opacity-25': isOpen,
         }"

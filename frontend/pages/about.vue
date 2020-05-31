@@ -114,7 +114,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .container > div {
   @apply my-16;
 }

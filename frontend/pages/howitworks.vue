@@ -30,32 +30,7 @@
 
     <div class="flex flex-col">
       <h2 class="mb-2">Our Process</h2>
-
-      <div
-        v-for="(process, index) in processes"
-        :key="process.title"
-        class="flex items-center h-32 md:h-20"
-      >
-        <div class="relative flex justify-center items-center h-full mr-4">
-          <div
-            class="flex justify-center items-center rounded-full h-10 w-10 bg-green transform transition-transform duration-150"
-          />
-          <span
-            class="absolute h-full w-1 bg-green"
-            :class="{
-              'first-connector': index === 0,
-              'last-connector': index === processes.length - 1,
-            }"
-          />
-          <div class="absolute text-white font-bold">
-            {{ index + 1 }}
-          </div>
-        </div>
-        <div>
-          <h4>{{ process.title }}</h4>
-          <p>{{ process.description }}</p>
-        </div>
-      </div>
+      <StyledList :list="processes" isCentered bubbleText />
     </div>
   </div>
 </template>
@@ -63,43 +38,54 @@
 <script lang="ts">
 import Vue from 'vue';
 import StyledButton from '~/components/StyledButton.vue';
+import StyledList from '~/components/StyledList.vue';
 
 export default Vue.extend({
   name: 'HowItWorks',
   components: {
     StyledButton,
+    StyledList,
   },
   data() {
     return {
       processes: [
         {
           title: 'Apply',
-          description:
+          information: [
             'Your learning adventure starts the moment you decide to join Chingu.',
+          ],
         },
         {
           title: 'Prepare',
-          description:
+          information: [
             "Finish or submit a project to make sure you're prepared for the program.",
+          ],
         },
         {
           title: 'Placement',
-          description: 'Get placed in a remote team of Chingus eager to learn.',
+          information: [
+            'Get placed in a remote team of Chingus eager to learn.',
+          ],
         },
         {
           title: 'Build, Build, Build',
-          description:
+          information: [
             'Decide on a project and build it together. Practice critical team workflow.',
+          ],
         },
         {
           title: 'Persevere',
-          description:
+          information: [
             'Overcome obstacles real developers face. Level up as a human.',
+          ],
         },
-        { title: 'Keep Building', description: 'Continue building!' },
+        {
+          title: 'Keep Building',
+          information: ['Continue building!'],
+        },
         {
           title: 'Succeed & Repeat',
-          description: 'Get a job, join another Voyage - or do both.',
+          information: ['Get a job, join another Voyage - or do both.'],
         },
       ],
     };
@@ -107,7 +93,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .container > div {
   @apply my-16;
 }
