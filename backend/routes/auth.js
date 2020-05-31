@@ -64,6 +64,9 @@ router.post("/user", async (req, res) => {
  if (!userExists) {
   return res.status(400).send("Cannot find user");
  } else  {
+   console.log(userExists)
+   userExists.email = "****@smith.com"
+   userExists.password = "*****"
     // var hash = bcrypt.hashSync(password, 8);
     // var user = {
     //   "name": name,
