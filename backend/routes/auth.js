@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const { registerValidation, loginValidation } = require("../utils/validation");
 
 router.get("/", (req, res) => res.send("auth endpoints"));
-// register
+// register // public route
 router.post("/register", async (req, res) => {
   console.log(req.body);
   //LETS VALIDATE THE DATA BEFORE WE ADD A User
@@ -34,7 +34,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// login
+// login // public route
 router.post("/login", async (req, res) => {
   const { error } = loginValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -51,7 +51,7 @@ router.post("/login", async (req, res) => {
   // veify it is you, sends back jwt token and userObject 
 });
 
-// User (returns the user object)
+// User (returns the user object) // logged in users only route
 router.post("/user", async (req, res) => {
   console.log(req.body);
   //validate data 
@@ -65,8 +65,9 @@ router.post("/user", async (req, res) => {
   // token should already be assigned from login 
 
   // verifyToken.js
-
+  
   // send back user name 
+
   else  {
     var hash = bcrypt.hashSync(password, 8);
     var user = {
@@ -77,5 +78,22 @@ router.post("/user", async (req, res) => {
     res.json(user);
 }});
 
+// Dashboard, area you go to once logged in ? // logged in users only !
+router.post("/dashboard", async (req, res) => {
+  console.log(req.body);
+  //validate data 
+  const { error } = userValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+});
+
+// Admin only route
+router.post("/admin", async (req, res) => {
+  console.log(req.body);
+  //validate data 
+  const { error } = userValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+});
 
 module.exports = router;
