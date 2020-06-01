@@ -20,7 +20,7 @@ module.exports = function verifyToken(req, res, next) {
     // will throw an error if the JWT isn't valid
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
 
-    console.log(decoded);
+    res.locals.userId = decoded.userId;
     // this will run the next middleware or route controller
     next();
   } catch (err) {
