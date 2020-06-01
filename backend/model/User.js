@@ -26,6 +26,18 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  roles: [
+    {
+      // four different types roles [ prospect, member, moderator, admin ]
+      type: String,
+      default: "prospect",
+    },
+  ],
+  // if the user is currently on an paid plan
+  activeMember: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
