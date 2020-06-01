@@ -22,9 +22,10 @@ const userSchema = new mongoose.Schema({
     min: password.min,
     max: password.max,
   },
-  date: {
+  creationDate: {
     type: Date,
     default: Date.now,
+    required: true,
   },
   // four different types roles [ prospect, member, moderator, admin ]
   roles: {
@@ -35,6 +36,7 @@ const userSchema = new mongoose.Schema({
   activeMember: {
     type: Boolean,
     default: false,
+    required: true,
   },
 });
 
