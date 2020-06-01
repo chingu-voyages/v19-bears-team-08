@@ -1,5 +1,5 @@
 <template>
-  <li v-if="!link.authRequired" class="w-full flex">
+  <li v-if="showLink" class="w-full flex">
     <nuxt-link
       :to="link.to"
       class="w-full h-full p-3 text-center hover:text-pink"
@@ -19,9 +19,16 @@ type LinkTypes = {
   authRequired: boolean;
 };
 
-@Component
+@Component({})
 export default class Link extends Vue {
   @Prop() readonly link!: LinkTypes;
+
+  get showLink(): boolean {
+    return (
+      this.link.authRequired === null ||
+      !!this.link.authRequired === this.$auth.loggedIn
+    );
+  }
 }
 </script>
 

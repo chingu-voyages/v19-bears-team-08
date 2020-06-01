@@ -24,13 +24,13 @@ import Link from '~/components/Link.vue';
 export default class Links extends Vue {
   links = {
     top: [
-      { to: '/', text: 'Home', authRequired: false },
-      { to: '/about', text: 'About', authRequired: false },
-      { to: '/faq', text: 'FAQ', authRequired: false },
-      { to: '/pricing', text: 'Pricing', authRequired: false },
-      { to: '/schedule', text: 'Schedule', authRequired: false },
-      { to: '/howitworks', text: 'How It Works', authRequired: false },
-      { to: '/showcase', text: 'Showcase', authRequired: false },
+      { to: '/', text: 'Home', authRequired: null },
+      { to: '/about', text: 'About', authRequired: null },
+      { to: '/faq', text: 'FAQ', authRequired: null },
+      { to: '/pricing', text: 'Pricing', authRequired: null },
+      { to: '/schedule', text: 'Schedule', authRequired: null },
+      { to: '/howitworks', text: 'How It Works', authRequired: null },
+      { to: '/showcase', text: 'Showcase', authRequired: null },
     ],
     bottom: [
       { to: '/login', text: 'Log In', authRequired: false },

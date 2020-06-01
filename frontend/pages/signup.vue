@@ -64,7 +64,7 @@ export default class Signup extends Vue {
 
   async handleSubmit() {
     try {
-      await this.$axios.$post('/register', {
+      await this.$axios.$post('/user/register', {
         name: this.name,
         email: this.email,
         password: this.password,

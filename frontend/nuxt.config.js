@@ -30,21 +30,17 @@ export default {
   ],
 
   axios: {
-    baseURL: 'http://localhost:3000/api',
+    baseURL: 'http://localhost:4000/api',
   },
 
   auth: {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/auth/login', method: 'post', propertyName: 'token' },
-          logout: { url: '/auth/logout', method: 'post' },
-          user: { url: '/auth/user', method: 'get', propertyName: 'user' },
+          login: { url: '/user/login', method: 'post', propertyName: 'token' },
+          logout: null,
+          user: { url: '/user/profile', method: 'get', propertyName: 'user' },
         },
-        // tokenRequired: true,
-        // tokenType: 'bearer',
-        // globalToken: true,
-        // autoFetchUser: true
       },
     },
   },
