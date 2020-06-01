@@ -14,7 +14,7 @@ router.get("/all", async (req, res) => {
 });
 router.post("/register", handleRegistration);
 router.post("/login", handleLogin);
-router.get("/user", verifyToken, getUser);
+router.get("/profile", verifyToken, getProfileInfo);
 // router.post("/admin", getAdmin);
 // router.post("/dashboard", getUser);
 
@@ -55,39 +55,37 @@ async function handleLogin(req, res, next) {
     const { error } = loginValidation(req.body);
     if (error) throw createError(400, error.details[0].message);
 
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email }).lean();
     if (!user) {
       throw createError(400, "An account with that email was not found");
     }
 
-    const validPass = await bcrypt.compare(req.body.password, user.password);
-    if (!validPass) throw createError(400, "Incorrect password");
+    const isPassValid = await bcrypt.compare(req.body.password, user.password);
+    if (!isPassValid) throw createError(400, "Incorrect password");
 
     // create and assign a token
     const token = jwt.sign({ userId: user._id }, process.env.TOKEN_SECRET, {
       expiresIn: "1h",
     });
 
-    res.status(200).json({ token, user });
+    res.status(200).json({ token });
   } catch (err) {
     next(err);
   }
 }
 
-// User (returns the user searched for) // logged in users only route
-async function getUser(req, res, next) {
+// returns the user that owns the given jwt token
+async function getProfileInfo(req, res, next) {
   try {
-    const userExists = await User.findOne({ name: req.body.name });
-    if (!userExists) {
-      return res.status(400).send("Cannot find user");
-    } else if (token == testToken) {
-      return res.json(userExists);
-    } else {
-      userExists.email = "****@smith.com";
-      userExists.password = "*****";
-      // send back user data
-      return res.json(userExists);
-    }
+    const { userId } = res.locals;
+
+    // this takes out the password and send the rest of the user object
+    const user = await User.findById(userId)
+      .select({ password: 0, __v: 0 })
+      .lean();
+    if (!user) throw createError(404, `User(${userId}) not found`);
+
+    res.status(200).json({ user });
   } catch (err) {
     next(err);
   }
