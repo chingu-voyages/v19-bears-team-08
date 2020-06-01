@@ -8,6 +8,10 @@ const { registerValidation, loginValidation } = require("../utils/validation");
 
 // I prefer this way, so you can easily see all the ...
 // ... endpoints and the middlewares used
+// TEMPORARY ROUTE
+router.get("/all", async (req, res) => {
+  User.find().then(users => res.json(users));
+});
 router.post("/register", handleRegistration);
 router.post("/login", handleLogin);
 router.get("/user", verifyToken, getUser);
