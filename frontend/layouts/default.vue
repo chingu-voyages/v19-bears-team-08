@@ -8,6 +8,9 @@
       <div
         class="fixed z-20 top-0 w-full h-12 flex justify-between px-2 items-center bg-gray-300 md:hidden"
       >
+        <nuxt-link to="/">
+          <img src="/Logo.png" alt="Chingu logo" class="w-10" />
+        </nuxt-link>
         <div
           class="flex justify-center items-center h-10 w-10 rounded-full bg-gray-300 hover:bg-gray-200"
         >
@@ -24,9 +27,6 @@
             @click="setIsOpen(true)"
           />
         </div>
-        <nuxt-link to="/">
-          <img src="/Logo.png" alt="Chingu logo" class="w-10" />
-        </nuxt-link>
       </div>
       <nav
         class="absolute md:static flex flex-col h-full md:h-auto w-64 bg-gray-300 pt-10 md:mt-0 md:py-3 z-10 transition-transform duration-150 transform md:translate-x-0"
@@ -45,7 +45,7 @@
       <main
         class="w-full overflow-y-auto overflow-x-hidden mt-12 md:mt-0 px-3 md:px-6 py-3 md:py-5 md:bg-gray-200 md:opacity-100 transition-all duration-100"
         :class="{
-          'bg-gray-700 opacity-25': isOpen,
+          'opacity-25': isOpen,
         }"
       >
         <nuxt />
@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator';
+import { Vue, Component, Watch } from 'nuxt-property-decorator';
 import Links from '~/components/Links.vue';
 
 @Component({
@@ -71,7 +71,12 @@ export default class Default extends Vue {
   }
 
   onResize() {
-    this.isOpen = window.innerHeight > 767;
+    this.isOpen = window.innerWidth > 767;
+  }
+
+  @Watch('$nuxt.$route.fullPath')
+  onRouteChange() {
+    this.isOpen = false;
   }
 
   mounted() {
