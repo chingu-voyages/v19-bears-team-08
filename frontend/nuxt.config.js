@@ -13,7 +13,14 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/Logo.png' }],
   },
-  loading: { color: '#fff' },
+  vue: {
+    config: {
+      devtools: true,
+    },
+  },
+  loading: {
+    color: '#13e58c',
+  },
   css: [],
   plugins: [],
   buildModules: [
