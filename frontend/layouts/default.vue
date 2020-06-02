@@ -3,7 +3,7 @@
     <div class="app-background app-background-left" />
     <div class="app-background app-background-right" />
     <div
-      class="min-h-screen max-h-screen max-w-screen-lg mx-auto overflow-hidden bg-gray-200 flex flex-row"
+      class="main-container min-h-screen max-h-screen ml-auto overflow-hidden bg-gray-200 flex flex-row"
     >
       <div
         class="fixed z-20 top-0 w-full h-12 flex justify-between px-2 items-center bg-gray-300 md:hidden"
@@ -120,6 +120,10 @@ html {
 }
 .app-background-right {
   @apply bg-gray-200 right-0;
+}
+.main-container {
+  max-width: calc(100vw - ((100vw - 1024px) / 2));
+  @apply w-full;
 }
 
 h1 {
