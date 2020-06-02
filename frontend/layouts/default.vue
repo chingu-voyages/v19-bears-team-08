@@ -43,10 +43,8 @@
       </nav>
 
       <main
-        class="w-full overflow-y-auto overflow-x-hidden mt-12 md:mt-0 px-3 md:px-6 py-3 md:py-5 md:bg-gray-200 md:opacity-100 transition-all duration-100"
-        :class="{
-          'opacity-25': isOpen,
-        }"
+        class="w-full overflow-y-auto overflow-x-hidden mt-12 md:mt-0 px-2 sm:px-3 md:px-6 py-3 md:py-5 flex flex-col items-center md:items-start md:bg-gray-200 md:opacity-100 transition-all duration-100"
+        :class="{ 'opacity-25': isOpen }"
       >
         <nuxt />
       </main>
