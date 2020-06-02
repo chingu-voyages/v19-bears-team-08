@@ -30,7 +30,10 @@ export default {
   ],
 
   axios: {
-    baseURL: 'http://localhost:4000/api',
+    baseURL:
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:4000/api'
+        : 'https://bears-team.herokuapp.com/api',
   },
 
   auth: {
