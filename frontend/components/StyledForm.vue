@@ -29,7 +29,9 @@ export default class StyledForm extends Vue {
 
 <style scoped>
 .form-container {
-  width: 400px;
+  width: 90%;
+  min-width: 310px;
+  max-width: 400px;
   margin-top: 1rem;
 }
 

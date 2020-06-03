@@ -79,6 +79,7 @@ export default class Default extends Vue {
 
   mounted() {
     this.$nextTick(() => {
+      this.onResize();
       window.addEventListener('resize', this.onResize);
     });
   }
@@ -124,6 +125,16 @@ html {
 .main-container {
   max-width: calc(100vw - ((100vw - 1024px) / 2));
   @apply w-full;
+}
+
+main > div {
+  @apply flex flex-col items-center w-full;
+}
+
+@screen md {
+  main > div {
+    @apply items-start;
+  }
 }
 
 h1 {
