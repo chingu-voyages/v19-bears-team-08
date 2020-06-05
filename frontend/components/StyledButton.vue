@@ -10,6 +10,7 @@
       'btn-disabled': disabled,
     }"
     :disabled="isDisabled"
+    @click="onClick"
   >
     <slot />
   </button>
@@ -26,6 +27,7 @@ export default class Form extends Vue {
   @Prop({ type: Boolean, default: false }) readonly inverted!: boolean;
   @Prop({ type: Boolean, default: false }) readonly full!: boolean;
   @Prop({ type: Boolean, default: false }) readonly disabled!: boolean;
+  @Prop({ type: Function }) readonly onClick!: any;
 
   isGreen = this.green;
   isPink = this.pink;
