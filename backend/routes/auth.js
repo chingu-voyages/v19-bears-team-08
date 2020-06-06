@@ -2,21 +2,18 @@ const router = require("express").Router();
 const createError = require("http-errors");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const fetch = require("node-fetch");
+
 const User = require("../model/User");
-const verifyToken = require("../middleware/verifyToken");
+const { getToken, verifyToken } = require("../middleware");
 const { registerValidation, loginValidation } = require("../utils/validation");
 
-// I prefer this way, so you can easily see all the ...
-// ... endpoints and the middlewares used
-// TEMPORARY ROUTE
-router.get("/all", async (req, res) => {
-  User.find().then(users => res.json(users));
-});
+// I prefer this way, so you can easily see all ...
+// ... all the endpoints and the middlewares used
 router.post("/register", handleRegistration);
-router.post("/login", handleLogin);
-router.get("/profile", verifyToken, getProfileInfo);
-// router.post("/admin", getAdmin);
-// router.post("/dashboard", getUser);
+router.post("/login/local", handleLocalLogin);
+router.post("/login/github", getToken, handleGithubLogin);
+router.get("/profile", getToken, verifyToken, getProfileInfo);
 
 async function handleRegistration(req, res, next) {
   try {
@@ -50,7 +47,7 @@ async function handleRegistration(req, res, next) {
   }
 }
 
-async function handleLogin(req, res, next) {
+async function handleLocalLogin(req, res, next) {
   try {
     const { error } = loginValidation(req.body);
     if (error) throw createError(400, error.details[0].message);
@@ -74,6 +71,51 @@ async function handleLogin(req, res, next) {
   }
 }
 
+async function handleGithubLogin(req, res, next) {
+  try {
+    // https://developer.github.com/v3/users/#get-the-authenticated-user
+    const githubUserUrl = "https://api.github.com/user";
+    const githubToken = res.locals.token;
+    // attach the Github accessToken sent from the frontend
+    const fetchOptions = { Authorization: `Bearer ${githubToken}` };
+
+    // get the authenticated users github profile
+    const resp = await fetch(githubUserUrl, fetchOptions);
+    if (!resp.ok) throw createError(400, "Github API Error");
+    const githubUser = await resp.json();
+
+    // find that Github user's Chingu account
+    const chinguUser = await User.findOne({ email: githubUser.email })
+      .select({ password: 0, __v: 0 })
+      .lean();
+    if (!chinguUser) {
+      throw createError(
+        400,
+        "An account was not found with the email that's associated with the provided Github account"
+      );
+    }
+
+    // since they've already authenticated on Github, we ...
+    // ... will consider them authenticated for our site too
+
+    // create and assign a token
+    const chinguToken = jwt.sign(
+      { userId: chinguUser._id },
+      process.env.TOKEN_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    const user = {
+      ...githubUser,
+      ...chinguUser,
+    };
+
+    res.status(200).json({ githubToken, chinguToken, user });
+  } catch (err) {
+    next(err);
+  }
+}
+
 // returns the user that owns the given jwt token
 async function getProfileInfo(req, res, next) {
   try {
@@ -91,33 +133,9 @@ async function getProfileInfo(req, res, next) {
   }
 }
 
-// // Admin only route (should be logged in and admin)
-// async function getAdmin(req, res, next) {
-//   console.log(req.body);
-//   if (id !== currentUser.sub && currentUser.role !== Role.Admin) {
-//     return res.status(401).json({ message: "Unauthorized" });
-//   }
-// }
-
-// // Dashboard, area you go to once logged in ? // logged in users only !
-// async function getDashboard(req, res, next) {
-//   console.log(req.body);
-//   let token = req.headers.authorization; // Express headers are auto converted to lowercase
-//   token = token.slice(7, token.length);
-//   // str = str.slice(0, -1);
-//   // str = str.slice(1)
-//   token = token.slice(0, -1);
-//   token = token.slice(1);
-//   //console.log(token);
-//   if (!token) return res.status(401).send("Access Denied");
-//   try {
-//     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
-//     console.log(verified + "User is logged in");
-//     return res.json("Dashboard Page");
-//     //req.user = verified;
-//   } catch (err) {
-//     res.status(400).send("Invalid Token");
-//   }
-// }
+// TEMPORARY ROUTES
+router.get("/all", async (req, res) => {
+  User.find().then(users => res.json(users));
+});
 
 module.exports = router;
