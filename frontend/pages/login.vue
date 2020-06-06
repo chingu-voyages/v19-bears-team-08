@@ -1,7 +1,17 @@
 <template>
   <div>
     <StyledHeader :level="1" :size="4">Log in below</StyledHeader>
+
     <StyledForm :handleSubmit="handleSubmit">
+      <template>
+        <StyledButton full :onClick="githubLogin">
+          <fa :icon="['fab', 'github']" />
+          Login With Github
+        </StyledButton>
+
+        <div class="text-center text-xl mt-2 mb-1">OR</div>
+      </template>
+
       <template v-slot:inputs>
         <StyledInput
           v-model="email"
@@ -44,17 +54,29 @@ import { Vue, Component } from 'vue-property-decorator';
 import StyledHeader from '~/components/StyledHeader.vue';
 import StyledInput from '~/components/StyledInput.vue';
 import StyledForm from '~/components/StyledForm.vue';
+import StyledButton from '~/components/StyledButton.vue';
 
 @Component({
   components: {
     StyledHeader,
     StyledInput,
     StyledForm,
+    StyledButton,
   },
 })
 export default class Login extends Vue {
   email = '';
   password = '';
+
+  async githubLogin() {
+    console.log('github login processing...');
+    try {
+      await this.$auth.loginWith('github');
+    } catch (err) {
+      console.log(err);
+      this.$toast.error('Error, please try again.');
+    }
+  }
 
   async handleSubmit() {
     try {

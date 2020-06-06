@@ -1,5 +1,7 @@
 <template>
   <div class="form-container">
+    <slot />
+
     <form @submit.prevent="handleSubmit">
       <slot name="inputs" />
 
