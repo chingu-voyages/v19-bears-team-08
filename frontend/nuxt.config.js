@@ -22,7 +22,7 @@ export default {
     color: '#13e58c',
   },
   css: [],
-  plugins: [],
+  plugins: ['~/plugins/axios.js'],
   buildModules: [
     '@nuxt/typescript-build',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
@@ -47,10 +47,19 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/user/login', method: 'post', propertyName: 'token' },
+          login: {
+            url: '/user/login/local',
+            method: 'post',
+            propertyName: 'token',
+          },
           logout: null,
           user: { url: '/user/profile', method: 'get', propertyName: 'user' },
         },
+      },
+      github: {
+        client_id: process.env.GITHUB_CLIENT_ID,
+        client_secret: process.env.GITHUB_CLIENT_SECRET,
+        userinfo_endpoint: '/user/login/github',
       },
     },
   },
