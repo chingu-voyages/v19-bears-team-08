@@ -12,7 +12,7 @@ const { registerValidation, loginValidation } = require("../utils/validation");
 // ... all the endpoints and the middlewares used
 router.post("/register", handleRegistration);
 router.post("/login/local", handleLocalLogin);
-router.post("/login/github", getToken, handleGithubLogin);
+router.get("/login/github", getToken, handleGithubLogin);
 router.get("/profile", getToken, verifyToken, getProfileInfo);
 
 async function handleRegistration(req, res, next) {
@@ -73,11 +73,18 @@ async function handleLocalLogin(req, res, next) {
 
 async function handleGithubLogin(req, res, next) {
   try {
+    // this comes from the getToken middleware
+    const githubToken = res.locals.token;
+
     // https://developer.github.com/v3/users/#get-the-authenticated-user
     const githubUserUrl = "https://api.github.com/user";
-    const githubToken = res.locals.token;
+
     // attach the Github accessToken sent from the frontend
-    const fetchOptions = { Authorization: `Bearer ${githubToken}` };
+    const fetchOptions = {
+      headers: {
+        Authorization: `Bearer ${githubToken}`,
+      },
+    };
 
     // get the authenticated users github profile
     const resp = await fetch(githubUserUrl, fetchOptions);
