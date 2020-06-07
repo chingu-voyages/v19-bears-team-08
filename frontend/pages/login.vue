@@ -68,27 +68,23 @@ export default class Login extends Vue {
   email = '';
   password = '';
 
-  async githubLogin() {
+  githubLogin() {
     console.log('github login processing...');
-    try {
-      await this.$auth.loginWith('github');
-    } catch (err) {
-      console.log(err);
-      this.$toast.error('Error, please try again.');
-    }
+    this.$auth.loginWith('github');
   }
 
   async handleSubmit() {
     try {
       const data = { email: this.email, password: this.password };
-      await this.$auth.loginWith('local', { data });
+      const resp = await this.$auth.loginWith('local', { data });
+      console.log(resp);
       this.$toast.clear();
       this.$toast.success(
         `Welcome back, ${this.$auth.user.name || 'your name'}!`
       );
     } catch (err) {
       console.log(err);
-      this.$toast.error('Error, please try again.');
+      this.$toast.error(err);
     }
   }
 }
