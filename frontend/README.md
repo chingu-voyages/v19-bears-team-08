@@ -16,6 +16,8 @@ I'm attempting to write most of the code in TypeScript, but my main goal is to l
 # install dependencies
 $ npm install
 
+# create .env file (refer to the .env file below)
+
 # serve with hot reload at localhost:3000
 $ npm run dev
 
@@ -25,6 +27,13 @@ $ npm run start
 
 # generate static project
 $ npm run generate
+```
+
+
+## .env file
+```
+GITHUB_CLIENT_ID = string
+GITHUB_CLIENT_SECRET = string
 ```
 
 > For detailed explanation on how things work, check out the [Nuxt.js docs](https://nuxtjs.org).
