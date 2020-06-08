@@ -69,10 +69,12 @@ export default class Login extends Vue {
   password = '';
 
   githubLogin() {
+    this.$toast.info('Processing...');
     this.$auth.loginWith('github');
   }
 
   localLogin() {
+    this.$toast.info('Processing...');
     const data = { email: this.email, password: this.password };
     this.$auth.loginWith('local', { data }).then(() => {
       this.$toast.success(`Welcome back, ${this.$auth.user.name}!`);
