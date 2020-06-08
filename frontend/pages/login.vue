@@ -2,7 +2,7 @@
   <div>
     <StyledHeader :level="1" :size="4">Log in below</StyledHeader>
 
-    <StyledForm :handleSubmit="handleSubmit">
+    <StyledForm :handleSubmit="localLogin">
       <template>
         <StyledButton full :onClick="githubLogin">
           <fa :icon="['fab', 'github']" />
@@ -69,23 +69,14 @@ export default class Login extends Vue {
   password = '';
 
   githubLogin() {
-    console.log('github login processing...');
     this.$auth.loginWith('github');
   }
 
-  async handleSubmit() {
-    try {
-      const data = { email: this.email, password: this.password };
-      const resp = await this.$auth.loginWith('local', { data });
-      console.log(resp);
-      this.$toast.clear();
-      this.$toast.success(
-        `Welcome back, ${this.$auth.user.name || 'your name'}!`
-      );
-    } catch (err) {
-      console.log(err);
-      this.$toast.error(err);
-    }
+  localLogin() {
+    const data = { email: this.email, password: this.password };
+    this.$auth.loginWith('local', { data }).then(() => {
+      this.$toast.success(`Welcome back, ${this.$auth.user.name}!`);
+    });
   }
 }
 </script>
