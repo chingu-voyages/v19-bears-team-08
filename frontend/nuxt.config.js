@@ -94,6 +94,7 @@ export default {
     position: 'bottom-center',
     duration: 7000,
     theme: 'bubble',
+    className: 'toasted-msg',
   },
 
   content: {

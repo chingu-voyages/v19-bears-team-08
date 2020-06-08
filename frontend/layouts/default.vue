@@ -158,4 +158,11 @@ h6 {
 p {
   @apply text-gray-800 leading-relaxed;
 }
+
+.toasted-container .toasted.toasted-msg {
+  justify-content: center;
+  text-align: center;
+  line-height: 1.3rem;
+  padding: 5px 20px;
+}
 </style>
