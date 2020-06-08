@@ -8,8 +8,10 @@
       'btn-inverted': isInverted,
       'btn-full': isFull,
       'btn-disabled': disabled,
+      'btn-github': github,
     }"
     :disabled="isDisabled"
+    :style="styles"
     @click="onClick"
   >
     <slot />
@@ -27,7 +29,9 @@ export default class Form extends Vue {
   @Prop({ type: Boolean, default: false }) readonly inverted!: boolean;
   @Prop({ type: Boolean, default: false }) readonly full!: boolean;
   @Prop({ type: Boolean, default: false }) readonly disabled!: boolean;
+  @Prop({ type: Boolean, default: false }) readonly github!: boolean;
   @Prop({ type: Function, default: () => undefined }) readonly onClick!: any;
+  @Prop({ type: Object, default: {} }) readonly styles!: any;
 
   isGreen = this.green;
   isPink = this.pink;
@@ -35,6 +39,7 @@ export default class Form extends Vue {
   isInverted = this.inverted;
   isFull = this.full;
   isDisabled = this.disabled;
+  isGithub = this.github;
 }
 </script>
 
@@ -81,5 +86,14 @@ export default class Form extends Vue {
 }
 .btn-pink.btn-inverted:hover {
   @apply bg-pink text-white border-transparent;
+}
+
+.btn-github {
+  background-color: #24292e;
+  border-color: #24292e;
+  color: white;
+}
+.btn-github:hover {
+  @apply opacity-75;
 }
 </style>

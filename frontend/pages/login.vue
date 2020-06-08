@@ -4,7 +4,7 @@
 
     <StyledForm :handleSubmit="localLogin">
       <template>
-        <StyledButton full :onClick="githubLogin">
+        <StyledButton full github :onClick="githubLogin">
           <fa :icon="['fab', 'github']" />
           Login With Github
         </StyledButton>
