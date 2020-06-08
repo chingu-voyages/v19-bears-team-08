@@ -11,7 +11,6 @@
       'btn-github': github,
     }"
     :disabled="isDisabled"
-    :style="styles"
     @click="onClick"
   >
     <slot />
@@ -31,7 +30,6 @@ export default class Form extends Vue {
   @Prop({ type: Boolean, default: false }) readonly disabled!: boolean;
   @Prop({ type: Boolean, default: false }) readonly github!: boolean;
   @Prop({ type: Function, default: () => undefined }) readonly onClick!: any;
-  @Prop({ type: Object, default: {} }) readonly styles!: any;
 
   isGreen = this.green;
   isPink = this.pink;
