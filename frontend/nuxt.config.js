@@ -1,11 +1,14 @@
+import path from 'path';
 require('dotenv').config();
 
 export default {
   mode: 'universal',
+
   env: {
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
   },
+
   head: {
     title: 'Dashboard | Chingu',
     meta: [
@@ -19,28 +22,44 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/Logo.png' }],
   },
+
   vue: {
     config: {
       devtools: true,
     },
   },
+
   loading: {
     color: '#13e58c',
   },
-  css: [],
+
+  css: ['@/assets/css/tailwind.css'],
+
+  build: {
+    extractCSS: true,
+    postcss: {
+      plugins: {
+        tailwindcss: path.resolve(__dirname, './tailwind.config.js'),
+      },
+    },
+  },
+
   plugins: ['~/plugins/axios.js'],
+
   buildModules: [
     '@nuxtjs/dotenv',
     '@nuxt/typescript-build',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
   ],
+
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth',
     '@nuxtjs/toast',
     '@nuxt/content',
     'nuxt-fontawesome',
+    'nuxt-purgecss',
   ],
 
   axios: {
@@ -95,7 +114,7 @@ export default {
     ],
   },
 
-  build: {
-    // extend(config, ctx) {}
+  purgeCSS: {
+    whitelistPatterns: [/svg.*/, /fa.*/],
   },
 };
