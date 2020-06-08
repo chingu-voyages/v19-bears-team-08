@@ -70,8 +70,13 @@ export default class Signup extends Vue {
         email: this.email,
         password: this.password,
       })
-      .then(() => {
-        this.$toast.success('Thanks for joining!');
+      .then(({ token }) => {
+        this.$auth.setStrategy('local');
+        this.$auth.setUserToken(token).then(() => {
+          this.$router.push('/profile');
+          this.$toast.clear();
+          this.$toast.success('Thanks for joining!');
+        });
       });
   }
 }
