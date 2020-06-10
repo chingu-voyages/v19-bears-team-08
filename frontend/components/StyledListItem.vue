@@ -69,7 +69,7 @@ export default class StyledListItem extends Vue {
 }
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .listitem-centered:first-child span {
   height: 50%;
   bottom: 0;
