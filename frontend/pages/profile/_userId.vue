@@ -84,11 +84,11 @@ type RepoType = {};
         error({ statusCode: 404, message: `Sorry, we couldn't find that user` })
       );
   },
-  head() {
-    return {
-      title: `${this.user.name} | Profile`,
-    };
-  },
+  // head() {
+  //   return {
+  //     title: `${this.user.name} | Profile`,
+  //   };
+  // },
 })
 export default class Profile extends Vue {
   user: UserType = {};
