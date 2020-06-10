@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const createError = require("http-errors");
+const { isValidObjectId } = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const fetch = require("node-fetch");
@@ -10,10 +11,40 @@ const { registerValidation, loginValidation } = require("../utils/validation");
 
 // I prefer this way, so you can easily see all ...
 // ... all the endpoints and the middlewares used
+router.get("/", getUser);
 router.post("/register", handleRegistration);
 router.post("/login/local", handleLocalLogin);
 router.get("/login/github", getToken, handleGithubLogin);
 router.get("/profile", getToken, verifyToken, getProfileInfo);
+
+// accepts a 3 different query fields to search for users
+// only returns non-essential data back
+async function getUser(req, res, next) {
+  try {
+    const { email, githubUsername, userId } = req.query;
+
+    if (!email && !githubUsername && !userId) {
+      throw createError(400, "You need to add queries to search");
+    }
+
+    // check if the userId is a valid format
+    const isValid = isValidObjectId(userId);
+    if (!isValid) throw createError(400, "Invalid userId format");
+
+    // this takes out the password and send the rest of the user object
+    const user = await User.findOne({
+      $or: [{ email }, { githubUsername }, { _id: userId }],
+    })
+      .select({ password: 0, __v: 0, roles: 0 })
+      .lean();
+    if (!user) throw createError(404, "No user found");
+
+    // send the non-sensitive parts back as this isn't a protected route
+    res.status(200).json({ user });
+  } catch (err) {
+    next(err);
+  }
+}
 
 async function handleRegistration(req, res, next) {
   try {
@@ -122,7 +153,6 @@ async function handleGithubLogin(req, res, next) {
         user: githubUser,
       },
     });
-    // res.status(200).json({ githubToken, chinguToken, user });
   } catch (err) {
     next(err);
   }
