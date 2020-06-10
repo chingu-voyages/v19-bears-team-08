@@ -23,7 +23,7 @@ import StyledButton from '~/components/StyledButton.vue';
     StyledButton,
   },
 })
-export default class StyledForm extends Vue {
+export default class StyledAuthForm extends Vue {
   @Prop({ type: Function, required: true })
   readonly handleSubmit!: () => Promise<any>;
 }

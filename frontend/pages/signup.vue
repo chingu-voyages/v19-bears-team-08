@@ -2,7 +2,7 @@
   <div>
     <StyledHeader :level="1" :size="4">Sign up below</StyledHeader>
 
-    <StyledForm :handleSubmit="handleSubmit">
+    <StyledAuthForm :handleSubmit="handleSubmit">
       <template v-slot:inputs>
         <StyledInput
           v-model="name"
@@ -40,7 +40,7 @@
           </nuxt-link>
         </div>
       </template>
-    </StyledForm>
+    </StyledAuthForm>
   </div>
 </template>
 
@@ -48,13 +48,13 @@
 import { Vue, Component } from 'vue-property-decorator';
 import StyledHeader from '~/components/StyledHeader.vue';
 import StyledInput from '~/components/StyledInput.vue';
-import StyledForm from '~/components/StyledForm.vue';
+import StyledAuthForm from '~/components/StyledAuthForm.vue';
 
 @Component({
   components: {
     StyledHeader,
     StyledInput,
-    StyledForm,
+    StyledAuthForm,
   },
 })
 export default class Signup extends Vue {

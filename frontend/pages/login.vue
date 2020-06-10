@@ -2,7 +2,7 @@
   <div>
     <StyledHeader :level="1" :size="4">Log in below</StyledHeader>
 
-    <StyledForm :handleSubmit="localLogin">
+    <StyledAuthForm :handleSubmit="localLogin">
       <template>
         <StyledButton full github :onClick="githubLogin">
           <fa :icon="['fab', 'github']" />
@@ -45,7 +45,7 @@
           </nuxt-link>
         </div>
       </template>
-    </StyledForm>
+    </StyledAuthForm>
   </div>
 </template>
 
@@ -53,14 +53,14 @@
 import { Vue, Component } from 'vue-property-decorator';
 import StyledHeader from '~/components/StyledHeader.vue';
 import StyledInput from '~/components/StyledInput.vue';
-import StyledForm from '~/components/StyledForm.vue';
+import StyledAuthForm from '~/components/StyledAuthForm.vue';
 import StyledButton from '~/components/StyledButton.vue';
 
 @Component({
   components: {
     StyledHeader,
     StyledInput,
-    StyledForm,
+    StyledAuthForm,
     StyledButton,
   },
 })
