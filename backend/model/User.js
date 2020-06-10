@@ -41,6 +41,10 @@ const userSchema = new mongoose.Schema({
   githubUsername: {
     type: String,
   },
+  hideEmail: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);
