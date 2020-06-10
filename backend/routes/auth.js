@@ -112,12 +112,17 @@ async function handleGithubLogin(req, res, next) {
       { expiresIn: "1h" }
     );
 
-    const user = {
-      ...githubUser,
-      ...chinguUser,
-    };
-
-    res.status(200).json({ githubToken, chinguToken, user });
+    res.status(200).json({
+      chingu: {
+        token: chinguToken,
+        user: chinguUser,
+      },
+      github: {
+        token: githubToken,
+        user: githubUser,
+      },
+    });
+    // res.status(200).json({ githubToken, chinguToken, user });
   } catch (err) {
     next(err);
   }
