@@ -10,4 +10,5 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vetur.experimental.templateInterpolationService": true,
   "workbench.colorTheme": "Default Dark+",
+  "workbench.editor.scrollToSwitchTabs": true
 }
