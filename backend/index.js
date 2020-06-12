@@ -17,7 +17,7 @@ app.use(
     allowedHeaders: "X-Requested-With, Content-Type, Accept, Authorization",
     origin:
       NODE_ENV === "production"
-        ? "https://chingudashboard.netlify.app"
+        ? "https://chingudashboard.herokuapp.com/"
         : "http://localhost:3000",
   })
 );
