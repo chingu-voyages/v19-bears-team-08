@@ -58,6 +58,7 @@ type RepoType = {};
 
 @Component({
   middleware: ['auth'],
+
   asyncData({ params, error, $axios }): Promise<void | { user: UserType }> {
     return $axios
       .get(`/user?userId=${params.userId}`)
@@ -84,11 +85,11 @@ type RepoType = {};
         error({ statusCode: 404, message: `Sorry, we couldn't find that user` })
       );
   },
-  // head() {
-  //   return {
-  //     title: `${this.user.name} | Profile`,
-  //   };
-  // },
+  head(this: Profile) {
+    return {
+      title: `${this.user.name} | Profile`,
+    };
+  },
 })
 export default class Profile extends Vue {
   user: UserType = {};
