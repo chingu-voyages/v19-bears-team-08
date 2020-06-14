@@ -28,13 +28,18 @@ async function getUser(req, res, next) {
     }
 
     // check if the userId is a valid format
-    const isValid = isValidObjectId(userId);
-    if (!isValid) throw createError(400, "Invalid userId format");
+    if (userId) {
+      const isValid = isValidObjectId(userId);
+      if (!isValid) throw createError(400, "Invalid userId format");
+    }
+
+    // filter down what we should search for
+    const searchOp = [{ _id: userId }, { email }, { githubUsername }].filter(
+      op => Object.values(op)[0]
+    );
 
     // this takes out the password and send the rest of the user object
-    const user = await User.findOne({
-      $or: [{ email }, { githubUsername }, { _id: userId }],
-    })
+    const user = await User.findOne({ $or: searchOp })
       .select({ password: 0, __v: 0, roles: 0 })
       .lean();
     if (!user) throw createError(404, "No user found");
@@ -180,22 +185,21 @@ router.get("/all", async (req, res) => {
   User.find().then(users => res.json(users));
 });
 
-
-// // user pays , 
+// // user pays ,
 // router.post('/paid', async (req, res) => {
 //   (console.log('paid route'))
 // });
 
-// //reset password 
+// //reset password
 // // router.post('/reset', async (req, res) => {
 // //     const {error} = loginValidation(req.body);
 // //     if (error) return res.status(400).send(error.details[0].message);
 // //     const user = await User.findOne({email: req.body.email});
 // //     if (!user) return res.status(400).send('User by this email is not found')
-// //     // replace password? 
+// //     // replace password?
 // //  });
 
-// // reset password 
+// // reset password
 
 // app.get('/reset/:token', function(req, res) {
 //   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
@@ -219,7 +223,6 @@ router.get("/all", async (req, res) => {
 //           return res.redirect('back');
 //         }
 
-
 //         user.password = req.body.password;
 //         user.resetPasswordToken = undefined;
 //         user.resetPasswordExpires = undefined;
@@ -229,7 +232,7 @@ router.get("/all", async (req, res) => {
 //   if (err) {
 //       console.log('here')
 //        return res.redirect('back');
-//   } else { 
+//   } else {
 //       console.log('here2')
 //     req.logIn(user, function(err) {
 //       done(err, user);
@@ -295,9 +298,8 @@ router.get("/all", async (req, res) => {
 //     function(token, user, done) {
 //         console.log('step 2')
 
-
 //       var smtpTrans = nodemailer.createTransport({
-//          service: 'Gmail', 
+//          service: 'Gmail',
 //          auth: {
 //           user: 'myemail',
 //           pass: 'mypassword'
@@ -333,6 +335,5 @@ router.get("/all", async (req, res) => {
 //     User: req.user
 //   });
 // });
-
 
 module.exports = router;
