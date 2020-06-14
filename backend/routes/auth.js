@@ -182,10 +182,16 @@ async function getProfileInfo(req, res, next) {
 
 // TEMPORARY ROUTES
 router.get("/all", async (req, res) => {
-  if (process.env.NODE_ENV === "production") {
-    throw createError(401, "Whatchu looking for?");
+  try {
+    if (process.env.NODE_ENV === "production") {
+      throw createError(401, "Whatchu looking for?");
+    }
+
+    const users = await User.find().lean();
+    res.status(200).json(users);
+  } catch (err) {
+    next(err);
   }
-  User.find().then(users => res.json(users));
 });
 
 // // user pays ,
