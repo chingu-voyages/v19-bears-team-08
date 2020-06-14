@@ -1,14 +1,16 @@
 <template>
   <div class="container">
-    <div class="flex flex-col md:flex-row items-center">
-      <div class="flex flex-col items-start w-3/5">
-        <h2 class="text-left w-full mb-2">Developer Voyages</h2>
-        <p>
+    <div class="flex flex-col-reverse md:flex-row md:flex-row items-center">
+      <div
+        class="flex flex-col items-center md:items-start w-full md:w-3/5 px-2 md:px-0"
+      >
+        <h2 class="text-center md:text-left mb-2">Developer Voyages</h2>
+        <p class="text-center md:text-left">
           A Chingu Voyage is a remote 6-week program for web developers. You
           will build a project in a remote team and level-up with the technical
           and soft skills required in a professional software job.
         </p>
-        <div class="flex mt-2">
+        <div class="flex mt-4 md:mb-2">
           <nuxt-link to="/login">
             <StyledButton green normal>
               Create an Account
@@ -21,15 +23,16 @@
           </nuxt-link>
         </div>
       </div>
+
       <img
         src="/page/howitworks/TeamSpirit.svg"
         alt="team spirit"
-        class="w-2/5 ml-2"
+        class="w-8/12 md:w-2/5 ml-0 md:ml-2 mb-2 md:mb-0"
       />
     </div>
 
     <div class="flex flex-col">
-      <h2 class="mb-2">Our Process</h2>
+      <h2 class="text-center md:text-left mb-2">Our Process</h2>
       <StyledList :list="processes" isCentered bubbleText />
     </div>
   </div>

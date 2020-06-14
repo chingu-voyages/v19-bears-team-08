@@ -36,7 +36,11 @@
         }"
       >
         <nuxt-link class="flex flex-col items-center" to="/">
-          <img src="/Logo.png" alt="Chingu logo" class="w-20 hidden md:block" />
+          <img
+            src="/Logo.png"
+            alt="Chingu logo"
+            class="w-20 h-20 hidden md:block"
+          />
         </nuxt-link>
 
         <Links />
@@ -109,7 +113,9 @@ html {
   box-sizing: border-box;
   margin: 0;
 }
-
+nav {
+  box-shadow: 1px 0 5px 1px #d1d4d8;
+}
 .app-background {
   width: 50%;
   height: 100vh;
