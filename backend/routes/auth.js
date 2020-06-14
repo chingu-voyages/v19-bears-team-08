@@ -182,6 +182,9 @@ async function getProfileInfo(req, res, next) {
 
 // TEMPORARY ROUTES
 router.get("/all", async (req, res) => {
+  if (process.env.NODE_ENV === "production") {
+    throw createError(401, "Whatchu looking for?");
+  }
   User.find().then(users => res.json(users));
 });
 
