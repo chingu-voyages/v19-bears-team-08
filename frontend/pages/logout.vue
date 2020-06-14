@@ -14,5 +14,10 @@ export default {
       this.$toast.success('Successfully logged out');
     }, 2000);
   },
+  head() {
+    return {
+      title: 'Logout | Chingu',
+    };
+  },
 };
 </script>

@@ -72,6 +72,11 @@ export default {
       ],
     };
   },
+  head() {
+    return {
+      title: 'Pricing | Chingu',
+    };
+  },
 };
 </script>
 

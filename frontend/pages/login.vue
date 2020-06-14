@@ -63,6 +63,11 @@ import StyledButton from '~/components/StyledButton.vue';
     StyledAuthForm,
     StyledButton,
   },
+  head() {
+    return {
+      title: 'Login | Chingu',
+    };
+  },
 })
 export default class Login extends Vue {
   email = '';

@@ -90,6 +90,11 @@ export default Vue.extend({
       ],
     };
   },
+  head() {
+    return {
+      title: 'How It Works | Chingu',
+    };
+  },
 });
 </script>
 

@@ -36,6 +36,11 @@ import StyledInput from '~/components/StyledInput.vue';
     StyledInput,
   },
   middleware: ['auth'],
+  head() {
+    return {
+      title: 'Your Profile | Chingu',
+    };
+  },
 })
 export default class Profile extends Vue {
   get user() {

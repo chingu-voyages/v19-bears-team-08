@@ -56,6 +56,11 @@ import StyledAuthForm from '~/components/StyledAuthForm.vue';
     StyledInput,
     StyledAuthForm,
   },
+  head() {
+    return {
+      title: 'Signup | Chingu',
+    };
+  },
 })
 export default class Signup extends Vue {
   name = '';

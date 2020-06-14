@@ -36,6 +36,11 @@ import StyledList from '~/components/StyledList.vue';
   components: {
     StyledList,
   },
+  head() {
+    return {
+      title: 'Schedule | Chingu',
+    };
+  },
 })
 export default class Schedule extends Vue {
   voyageSchedule = [

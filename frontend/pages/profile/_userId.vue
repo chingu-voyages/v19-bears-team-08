@@ -87,7 +87,7 @@ type RepoType = {};
   },
   head(this: Profile) {
     return {
-      title: `${this.user.name} | Profile`,
+      title: `${this.user.name} | Profile | Chingu`,
     };
   },
 })

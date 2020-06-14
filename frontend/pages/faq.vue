@@ -13,6 +13,11 @@ export default {
     const faqs = await $content('pages/faq').fetch();
     return { faqs };
   },
+  head() {
+    return {
+      title: 'FAQ | Chingu',
+    };
+  },
 };
 </script>
 

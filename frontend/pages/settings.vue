@@ -4,12 +4,15 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-
-export default Vue.extend({
+<script>
+export default {
   components: {},
-});
+  head() {
+    return {
+      title: 'Your Settings | Chingu',
+    };
+  },
+};
 </script>
 
 <style></style>
