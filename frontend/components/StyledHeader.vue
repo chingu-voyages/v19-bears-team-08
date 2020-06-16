@@ -1,14 +1,5 @@
 <template>
-  <component
-    :is="['h1', 'h2', 'h3', 'h4', 'h5', 'h6'][level - 1]"
-    class="font-light leading-tight"
-    :class="[
-      ...(size <= 1 ? ['text-1xl'] : []),
-      ...(size === 2 ? ['text-2xl'] : []),
-      ...(size === 3 ? ['text-3xl'] : []),
-      ...(size === 4 ? ['text-4xl'] : []),
-    ]"
-  >
+  <component :is="level" class="header relative pl-3 pr-2">
     <slot />
   </component>
 </template>
@@ -19,8 +10,18 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 @Component
 export default class StyledHeader extends Vue {
   @Prop() readonly level!: number;
-  @Prop() readonly size!: number;
 }
 </script>
 
-<style></style>
+<style lang="postcss" scoped>
+.header:before {
+  content: '';
+  height: 2ch;
+  @apply absolute top-0 left-0 w-1 bg-pink opacity-50;
+}
+.header:after {
+  content: '';
+  width: 2ch;
+  @apply absolute top-0 left-0 h-1 bg-green opacity-50;
+}
+</style>
