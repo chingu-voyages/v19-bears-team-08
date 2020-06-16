@@ -199,6 +199,9 @@ a,
 div {
   @apply text-gray-700 font-normal leading-relaxed mb-1;
 }
+div {
+  @apply mb-0;
+}
 
 * > :first-child {
   margin-top: 0 !important;
