@@ -1,6 +1,9 @@
 <template>
   <div>
-    <p>This would be the landing page</p>
+    <StyledHeader level="h1">
+      Welcome to Chingu
+    </StyledHeader>
+
     <p>
       We could have a notifications board, pull Chingu tweets, links to external
       source, etc.. here
@@ -9,8 +12,12 @@
 </template>
 
 <script>
+import StyledHeader from '~/components/StyledHeader.vue';
+
 export default {
-  components: {},
+  components: {
+    StyledHeader,
+  },
   head() {
     return {
       title: 'Home | Chingu',

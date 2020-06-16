@@ -2,9 +2,9 @@
   <div class="container">
     <div class="flex flex-col md:flex-row items-center">
       <div class="flex flex-col items-start w-3/5">
-        <h2 class="text-left w-full mb-2">
+        <StyledHeader level="h1">
           Boost Your Career
-        </h2>
+        </StyledHeader>
         <p>
           All self-directed developers run into the same problems. No team
           experience, feeling lost working alone, endless tutorials, not enough
@@ -63,11 +63,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import StyledHeader from '~/components/StyledHeader.vue';
 import StyledButton from '~/components/StyledButton.vue';
 
 export default Vue.extend({
   name: 'About',
   components: {
+    StyledHeader,
     StyledButton,
   },
   data() {
