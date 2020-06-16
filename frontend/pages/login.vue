@@ -3,15 +3,6 @@
     <StyledHeader level="h1">Log in below</StyledHeader>
 
     <StyledAuthForm :handleSubmit="localLogin">
-      <template>
-        <StyledButton full github :onClick="githubLogin">
-          <fa :icon="['fab', 'github']" />
-          Login With Github
-        </StyledButton>
-
-        <div class="text-center text-xl mt-2 mb-1">OR</div>
-      </template>
-
       <template v-slot:inputs>
         <StyledInput
           v-model="email"
@@ -35,6 +26,13 @@
       </template>
 
       <template v-slot:extras>
+        <div class="text-center text-xl mt-2 mb-0">OR</div>
+
+        <StyledButton full github :onClick="githubLogin">
+          <fa :icon="['fab', 'github']" />
+          Login With Github
+        </StyledButton>
+
         <div class="flex flex-wrap justify-between w-full mt-2 pt-2">
           <nuxt-link to="/signup" class="form-links">
             No account? Sign up here.
