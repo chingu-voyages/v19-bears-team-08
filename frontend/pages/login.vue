@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StyledHeader :level="1" :size="4">Log in below</StyledHeader>
+    <StyledHeader level="h1">Log in below</StyledHeader>
 
     <StyledAuthForm :handleSubmit="localLogin">
       <template>
@@ -35,7 +35,7 @@
       </template>
 
       <template v-slot:extras>
-        <div class="flex justify-between w-full mt-1 p-2">
+        <div class="flex flex-wrap justify-between w-full mt-2 pt-2">
           <nuxt-link to="/signup" class="form-links">
             No account? Sign up here.
           </nuxt-link>
@@ -91,7 +91,7 @@ export default class Login extends Vue {
 
 <style lang="postcss">
 .form-links {
-  @apply text-gray-700 no-underline;
+  @apply text-gray-700 no-underline mb-2 px-2;
 }
 .form-links:hover {
   @apply underline;
