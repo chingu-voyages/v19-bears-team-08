@@ -18,6 +18,8 @@ $ npm install
 
 # create .env file (refer to the .env file below)
 
+# install Vetur from the VSCode marketplace for development purposes
+
 # serve with hot reload at localhost:3000
 $ npm run dev
 
