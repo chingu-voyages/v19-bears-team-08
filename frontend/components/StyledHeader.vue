@@ -1,5 +1,5 @@
 <template>
-  <component :is="level" class="header relative pl-3 pr-2 mx-auto">
+  <component :is="level" class="header relative pl-3 pr-2 mx-auto text-center">
     <slot />
   </component>
 </template>
