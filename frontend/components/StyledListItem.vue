@@ -30,7 +30,6 @@
       <h4>{{ item.title }}</h4>
       <ul
         v-if="item.information && item.information.length"
-        class="text-gray-800"
         :class="{ 'py-1': !isCentered, 'mt-2 mb-3': isCentered }"
       >
         <li
@@ -86,8 +85,12 @@ export default class StyledListItem extends Vue {
   padding-bottom: 0px;
 }
 
+.text-container {
+  margin: 8px 0;
+}
+
 h4 {
-  margin: 7px 0 9px;
+  margin-bottom: 9px;
   @apply leading-none;
 }
 </style>

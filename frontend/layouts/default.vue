@@ -156,22 +156,22 @@ h6 {
   @apply font-light;
 }
 h1 {
-  @apply text-4xl mb-4;
+  @apply text-4xl mb-4 text-gray-900;
 }
 h2 {
-  @apply text-3xl mb-3;
+  @apply text-3xl mb-3 text-gray-900;
 }
 h3 {
-  @apply text-2xl mb-2;
+  @apply text-2xl mb-2 text-gray-800;
 }
 h4 {
-  @apply text-xl mb-2;
+  @apply text-xl mb-2 text-gray-800;
 }
 h5 {
-  @apply text-lg mb-1;
+  @apply text-lg mb-1 text-gray-700;
 }
 h6 {
-  @apply text-base mb-1;
+  @apply text-base mb-1 text-gray-700;
 }
 @media md {
   h1 {
@@ -197,19 +197,17 @@ p,
 li,
 a,
 div {
-  @apply text-gray-700 font-normal leading-relaxed mb-1;
+  @apply text-gray-600 font-normal leading-relaxed mb-1;
 }
 div {
   @apply mb-0;
 }
 
 * > :first-child {
-  margin-top: 0 !important;
-  margin-left: 0 !important;
+  margin-top: 0;
 }
 * > :last-child {
-  margin-bottom: 0 !important;
-  margin-right: 0 !important;
+  margin-bottom: 0;
 }
 
 .toasted-container .toasted.toasted-msg {
