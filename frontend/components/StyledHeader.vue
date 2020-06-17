@@ -14,6 +14,11 @@ export default class StyledHeader extends Vue {
 </script>
 
 <style lang="postcss" scoped>
+@screen md {
+  .header {
+    margin-left: -0.75rem !important;
+  }
+}
 .header:before {
   content: '';
   height: 2ch;
