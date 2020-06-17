@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h2 class="mb-2">Profile</h2>
+    <StyledHeader level="h1">
+      Profile
+    </StyledHeader>
 
     <h4>Want to connect your GitHub?</h4>
     <StyledInput
@@ -27,11 +29,13 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator';
+import StyledHeader from '~/components/StyledHeader.vue';
 import StyledButton from '~/components/StyledButton.vue';
 import StyledInput from '~/components/StyledInput.vue';
 
 @Component({
   components: {
+    StyledHeader,
     StyledButton,
     StyledInput,
   },

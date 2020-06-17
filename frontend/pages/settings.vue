@@ -1,12 +1,27 @@
 <template>
   <div>
-    <p>This would be the settings page</p>
+    <StyledHeader level="h1">Your Settings</StyledHeader>
+
+    <p>
+      If you want to work on this page, please visit the GitHub issue
+      <a
+        class="text-pink"
+        target="_blank"
+        href="https://github.com/chingu-voyages/v19-bears-team-08/issues/16"
+      >
+        here.
+      </a>
+    </p>
   </div>
 </template>
 
 <script>
+import StyledHeader from '~/components/StyledHeader.vue';
+
 export default {
-  components: {},
+  components: {
+    StyledHeader,
+  },
   head() {
     return {
       title: 'Your Settings | Chingu',

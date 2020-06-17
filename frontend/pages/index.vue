@@ -5,8 +5,14 @@
     </StyledHeader>
 
     <p>
-      We could have a notifications board, pull Chingu tweets, links to external
-      source, etc.. here
+      If you want to work on this page, please visit the GitHub issue
+      <a
+        class="text-pink"
+        target="_blank"
+        href="https://github.com/chingu-voyages/v19-bears-team-08/issues/21"
+      >
+        here.
+      </a>
     </p>
   </div>
 </template>

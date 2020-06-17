@@ -4,7 +4,16 @@
       Project Showcase
     </StyledHeader>
 
-    <p>This would be the showcase page</p>
+    <p>
+      If you want to work on this page, please visit the GitHub issue
+      <a
+        class="text-pink"
+        target="_blank"
+        href="https://github.com/chingu-voyages/v19-bears-team-08/issues/22"
+      >
+        here.
+      </a>
+    </p>
   </div>
 </template>
 
