@@ -28,6 +28,9 @@ export default {
 h3 {
   @apply text-center mt-10;
 }
+h3:first-child {
+  @apply mt-0;
+}
 @screen md {
   h3 {
     @apply text-left;
