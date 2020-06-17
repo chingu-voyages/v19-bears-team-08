@@ -1,16 +1,18 @@
 <template>
-  <div class="container">
-    <div class="flex flex-col-reverse md:flex-row md:flex-row items-center">
+  <div>
+    <div
+      class="my-6 md:my-8 flex flex-col-reverse md:flex-row md:flex-row items-center"
+    >
       <div
-        class="flex flex-col items-center md:items-start w-full md:w-3/5 px-2 md:px-0"
+        class="flex flex-col items-center md:items-start self-start w-full md:w-3/5 px-2 md:px-0"
       >
         <StyledHeader level="h1">Developer Voyages</StyledHeader>
-        <p class="text-center md:text-left">
+        <p class="mb-6 text-center md:text-left">
           A Chingu Voyage is a remote 6-week program for web developers. You
           will build a project in a remote team and level-up with the technical
           and soft skills required in a professional software job.
         </p>
-        <div class="flex mt-4 md:mb-2">
+        <div class="flex">
           <nuxt-link to="/login">
             <StyledButton green normal>
               Create an Account
@@ -27,12 +29,12 @@
       <img
         src="/page/howitworks/TeamSpirit.svg"
         alt="team spirit"
-        class="w-8/12 md:w-2/5 ml-0 md:ml-2 mb-2 md:mb-0"
+        class="w-8/12 sm:w-1/2 md:w-2/5 ml-0 md:ml-2"
       />
     </div>
 
-    <div class="flex flex-col">
-      <h2 class="text-center md:text-left mb-2">Our Process</h2>
+    <div class="my-6 md:my-8 flex flex-col ">
+      <StyledHeader level="h2">Our Process</StyledHeader>
       <StyledList :list="processes" isCentered bubbleText />
     </div>
   </div>
@@ -104,21 +106,12 @@ export default Vue.extend({
 </script>
 
 <style lang="postcss" scoped>
-.container > div {
-  @apply my-16;
+img {
+  margin-bottom: 1.5rem !important;
 }
-.container > div:first-child {
-  @apply mt-0;
-}
-.container > div:last-child {
-  @apply mb-0;
-}
-.first-connector {
-  height: 50%;
-  bottom: 0;
-}
-.last-connector {
-  height: 50%;
-  top: 0;
+@screen md {
+  img {
+    margin-bottom: 0 !important;
+  }
 }
 </style>

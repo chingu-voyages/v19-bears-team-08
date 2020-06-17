@@ -1,16 +1,20 @@
 <template>
-  <div class="container">
-    <div class="flex flex-col md:flex-row items-center">
-      <div class="flex flex-col items-start w-3/5">
+  <div>
+    <div
+      class="my-6 md:my-8 flex flex-col-reverse md:flex-row md:flex-row items-center"
+    >
+      <div
+        class="flex flex-col items-center md:items-start self-start w-full md:w-3/5 px-2 md:px-0"
+      >
         <StyledHeader level="h1">
           Boost Your Career
         </StyledHeader>
-        <p>
+        <p class="mb-6 text-center md:text-left">
           All self-directed developers run into the same problems. No team
           experience, feeling lost working alone, endless tutorials, not enough
           finished projects. The good news? Chingu solves them.
         </p>
-        <div class="flex mt-2">
+        <div class="flex">
           <nuxt-link to="/login">
             <StyledButton green normal>
               Create an Account
@@ -26,36 +30,37 @@
       <img
         src="/page/about/ToTheStars.svg"
         alt="team spirit"
-        class="w-2/5 ml-2"
+        class="w-8/12 sm:w-1/2 md:w-2/5 ml-0 md:ml-2"
       />
     </div>
 
-    <div class="flex justify-between">
-      <div
-        v-for="stat in stats"
-        :key="stat.title"
-        class="flex flex-col items-center text-center mx-3"
-      >
-        <h2>{{ stat.num }}</h2>
-        <h5 class="text-gray-700 font-bold mb-2">{{ stat.title }}</h5>
-        <p>{{ stat.body }}</p>
+    <div class="my-6 md:my-8 flex flex-col items-center md:items-start">
+      <StyledHeader level="h2">Accomplishments</StyledHeader>
+      <div class="flex flex-wrap justify-center md:justify-start">
+        <div
+          v-for="stat in stats"
+          :key="stat.title"
+          class="stat-container flex flex-col items-center w-10/12 md:w-1/3 text-center p-3"
+        >
+          <h2 class="mb-2">{{ stat.num }}</h2>
+          <h5 class="font-bold">{{ stat.title }}</h5>
+          <p>{{ stat.body }}</p>
+        </div>
       </div>
     </div>
 
-    <div class="text-center">
-      <h2 class="mb-2">
-        Past Voyager Experiences
-      </h2>
-      <p class="mb-2 text-gray-600 text-lg">
+    <div class="my-6 md:my-8 flex flex-col items-center md:items-start">
+      <StyledHeader level="h2">Past Voyager Experiences</StyledHeader>
+      <p class="mb-2 text-lg text-center md:text-left">
         Chingu has helped thousands of people accelerate their learning
       </p>
       <div
         v-for="testimonial in testimonials"
         :key="testimonial.author"
-        class="max-w-xl mx-auto mt-6"
+        class="max-w-xl w-10/12 md:w-full mx-auto mt-6"
       >
         <h6 class="mb-2">"{{ testimonial.text }}"</h6>
-        <p class="text-gray-700 italic">{{ testimonial.author }}</p>
+        <p class="text-gray-700 italic text-right">{{ testimonial.author }}</p>
       </div>
     </div>
   </div>
@@ -122,13 +127,20 @@ export default Vue.extend({
 </script>
 
 <style lang="postcss" scoped>
-.container > div {
-  @apply my-16;
+img {
+  margin-bottom: 1.5rem !important;
 }
-.container > div:first-child {
-  @apply mt-0;
+@screen md {
+  img {
+    margin-bottom: 0 !important;
+  }
 }
-.container > div:last-child {
-  @apply mb-0;
+.stat-container {
+  min-width: 300px;
+}
+@screen md {
+  .stat-container {
+    min-width: 250px;
+  }
 }
 </style>
