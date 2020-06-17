@@ -37,7 +37,7 @@ h3:first-child {
   }
 }
 p {
-  @apply mb-6 px-2;
+  @apply px-2;
 }
 a {
   @apply text-pink;
