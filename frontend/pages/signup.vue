@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StyledHeader :level="1" :size="4">Sign up below</StyledHeader>
+    <StyledHeader level="h1">Sign up below</StyledHeader>
 
     <StyledAuthForm :handleSubmit="handleSubmit">
       <template v-slot:inputs>
@@ -34,7 +34,7 @@
       </template>
 
       <template v-slot:extras>
-        <div class="flex justify-between w-full mt-1 p-2">
+        <div class="flex justify-between w-full mt-2 pt-2">
           <nuxt-link to="/login" class="form-links">
             Have an account? Log in here.
           </nuxt-link>

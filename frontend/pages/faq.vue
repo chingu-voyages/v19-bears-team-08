@@ -1,14 +1,17 @@
 <template>
-  <div class="max-w-2xl">
-    <h2 class="mb-4">
-      Frequently Asked Questions
-    </h2>
+  <div>
+    <StyledHeader level="h1">Frequently Asked Questions</StyledHeader>
     <nuxt-content :document="faqs" />
   </div>
 </template>
 
 <script>
+import StyledHeader from '~/components/StyledHeader.vue';
+
 export default {
+  components: {
+    StyledHeader,
+  },
   async asyncData({ $content }) {
     const faqs = await $content('pages/faq').fetch();
     return { faqs };
@@ -22,8 +25,13 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-h4 {
-  @apply mb-3;
+h3 {
+  @apply text-center mt-10;
+}
+@screen md {
+  h3 {
+    @apply text-left;
+  }
 }
 p {
   @apply mb-6 px-2;

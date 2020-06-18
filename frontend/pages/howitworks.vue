@@ -4,7 +4,7 @@
       <div
         class="flex flex-col items-center md:items-start w-full md:w-3/5 px-2 md:px-0"
       >
-        <h2 class="text-center md:text-left mb-2">Developer Voyages</h2>
+        <StyledHeader level="h1">Developer Voyages</StyledHeader>
         <p class="text-center md:text-left">
           A Chingu Voyage is a remote 6-week program for web developers. You
           will build a project in a remote team and level-up with the technical
@@ -40,12 +40,14 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import StyledHeader from '~/components/StyledHeader.vue';
 import StyledButton from '~/components/StyledButton.vue';
 import StyledList from '~/components/StyledList.vue';
 
 export default Vue.extend({
   name: 'HowItWorks',
   components: {
+    StyledHeader,
     StyledButton,
     StyledList,
   },
