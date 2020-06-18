@@ -230,14 +230,14 @@ console.log('step 1')
       var smtpTrans = nodemailer.createTransport({
          service: 'Gmail',
          auth: {
-          user: 'myemail',
-          pass: 'mypassword'
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD
         }
       });
       var mailOptions = {
 
         to: user.email,
-        from: 'myemail',
+        from: process.env.EMAIL,
         subject: 'Node.js Password Reset',
         text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
           'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
@@ -314,14 +314,14 @@ user.save(function(err) {
       var smtpTrans = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-          user: 'myemail',
-          pass: 'mypass'
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD
           // put email and password into here maybe use dotenv for both
         }
       });
       var mailOptions = {
         to: user.email,
-        from: 'myemail',
+        from: process.env.EMAIL,
         subject: 'Your password has been changed',
         text: 'Hello,\n\n' +
           ' - This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
