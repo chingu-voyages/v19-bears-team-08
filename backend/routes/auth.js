@@ -8,6 +8,7 @@ const fetch = require("node-fetch");
 const User = require("../model/User");
 const { getToken, verifyToken } = require("../middleware");
 const { registerValidation, loginValidation } = require("../utils/validation");
+const sendMail = require("../utils/mailTransporter");
 
 // I prefer this way, so you can easily see all ...
 // ... all the endpoints and the middlewares used
@@ -16,6 +17,29 @@ router.post("/register", handleRegistration);
 router.post("/login/local", handleLocalLogin);
 router.get("/login/github", getToken, handleGithubLogin);
 router.get("/profile", getToken, verifyToken, getProfileInfo);
+router.get("/verify/:token", verifyEmail);
+router.get("/verify", renderEmail);
+
+async function renderEmail(req, res, next) {
+  try {
+    console.log("verifying email view");
+    // res.render("verifyEmail.pug", {
+    //   name: "Daniel",
+    //   message: "Hello there!",
+    // });
+    const err = await sendMail({
+      to: process.env.MAILER_EMAIL,
+      subject: "Confirm your email - Chingu",
+      template: "verifyEmail",
+      ctx: {
+        name: "Tester1",
+        token: "1234567890",
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+}
 
 // accepts a 3 different query fields to search for users
 // only returns non-essential data back
@@ -82,6 +106,12 @@ async function handleRegistration(req, res, next) {
     const token = jwt.sign({ userId: newUser._id }, process.env.TOKEN_SECRET, {
       expiresIn: "1h",
     });
+
+    const err = await sendMail({
+      to: req.body.email,
+      subject: "Confirm your email - Chingu",
+    });
+    console.log(err);
 
     res.status(201).json({ token });
   } catch (err) {
@@ -181,6 +211,19 @@ async function getProfileInfo(req, res, next) {
     if (!user) throw createError(404, `User(${userId}) not found`);
 
     res.status(200).json({ user });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function verifyEmail(req, res, next) {
+  try {
+    const { token } = req.params;
+    console.log(token);
+
+    res
+      .status(200)
+      .json({ message: "Thanks for confirming your email address" });
   } catch (err) {
     next(err);
   }
