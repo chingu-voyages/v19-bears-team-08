@@ -10,6 +10,9 @@ dotenv.config();
 const PORT = process.env.PORT || 4000;
 const NODE_ENV = process.env.NODE_ENV;
 
+app.set("views", "./views");
+app.set("view engine", "pug");
+
 //middlewares
 app.use(express.json());
 app.use(
