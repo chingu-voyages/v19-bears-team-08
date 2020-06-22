@@ -1,7 +1,8 @@
 const router = require("express").Router();
+const { checkDev } = require("../middleware");
 
-router.get("/:name", showEmailTemplates);
-router.get("/verify", renderEmail);
+router.get("/:name", checkDev, showEmailTemplates);
+router.get("/verify", checkDev, renderEmail);
 
 async function showEmailTemplates(req, res, next) {
   try {

@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const fetch = require("node-fetch");
 
 const User = require("../model/User");
-const { getToken, verifyToken } = require("../middleware");
+const { getToken, verifyToken, checkDev } = require("../middleware");
 const { registerValidation, loginValidation } = require("../utils/validation");
 const sendMail = require("../utils/mailTransporter");
 
@@ -208,12 +208,8 @@ async function verifyEmail(req, res, next) {
 }
 
 // TEMPORARY ROUTES
-router.get("/all", async (req, res) => {
+router.get("/all", checkDev, async (req, res, next) => {
   try {
-    if (process.env.NODE_ENV === "production") {
-      throw createError(401, "Whatchu looking for?");
-    }
-
     const users = await User.find().lean();
     res.status(200).json(users);
   } catch (err) {
