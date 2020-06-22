@@ -28,7 +28,9 @@ app.use(
 
 //load and set base endpoints here
 const authRoutes = require("./routes/auth");
+const pugTemplateRoutes = require("./routes/pug-templates");
 app.use("/api/user", authRoutes);
+app.use("/api/templates", pugTemplateRoutes);
 
 //catches all endpoints that don't exist above
 app.use((req, res, next) => next(createError(404, `Invalid URL: ${req.url}`)));

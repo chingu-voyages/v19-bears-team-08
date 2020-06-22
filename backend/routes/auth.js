@@ -18,28 +18,6 @@ router.post("/login/local", handleLocalLogin);
 router.get("/login/github", getToken, handleGithubLogin);
 router.get("/profile", getToken, verifyToken, getProfileInfo);
 router.get("/verify/:token", verifyEmail);
-router.get("/verify", renderEmail);
-
-async function renderEmail(req, res, next) {
-  try {
-    console.log("verifying email view");
-    // res.render("verifyEmail.pug", {
-    //   name: "Daniel",
-    //   message: "Hello there!",
-    // });
-    const err = await sendMail({
-      to: process.env.MAILER_EMAIL,
-      subject: "Confirm your email - Chingu",
-      template: "verifyEmail",
-      ctx: {
-        name: "Tester1",
-        token: "1234567890",
-      },
-    });
-  } catch (err) {
-    next(err);
-  }
-}
 
 // accepts a 3 different query fields to search for users
 // only returns non-essential data back
