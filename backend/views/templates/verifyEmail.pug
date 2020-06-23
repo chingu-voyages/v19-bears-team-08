@@ -3,7 +3,8 @@ extends ../layout.pug
 
 block content
   div
-    h3 Hello #{name}
+    - const greeting = name ? `Hey ${name},` : 'Hey,'
+    h3 #{greeting}
     p Thank you for creating a Chingu account.
     p Please confirm this is your email address by clicking on the button below.
 
