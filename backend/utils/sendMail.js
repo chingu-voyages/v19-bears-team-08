@@ -12,14 +12,7 @@ const mailer = nodemailer.createTransport({
     pass: process.env.MAILER_PASSWORD,
   },
 });
-
-mailer.use(
-  "compile",
-  pugEngine({
-    templateDir: "./views",
-    pretty: true,
-  })
-);
+mailer.use("compile", pugEngine({ templateDir: "./views" }));
 
 // pass ANY nodemailer options // 'from' is already set and can't be overidden courrently
 // template = which template should we use

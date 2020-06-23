@@ -1,28 +1,34 @@
 const router = require("express").Router();
 const { checkDev } = require("../middleware");
+const sendMail = require("../utils/sendMail");
 
-router.get("/:name", checkDev, showEmailTemplates);
-router.get("/verify", checkDev, renderEmail);
+router.get("/view/:file", checkDev, showEmailTemplates);
+router.get("/test/:file", checkDev, sendEmailTemplates);
 
 async function showEmailTemplates(req, res, next) {
   try {
-    res.render(`templates/${req.params.name}`, req.query);
+    res.status(200).render(`templates/${req.params.file}`, req.query);
   } catch (err) {
     next(err);
   }
 }
 
-async function renderEmail(req, res, next) {
+async function sendEmailTemplates(req, res, next) {
   try {
+    const { to, subject, name, token } = req.query;
+
     const err = await sendMail({
-      to: process.env.MAILER_EMAIL,
-      subject: "Confirm your email - Chingu",
-      template: "verifyEmail",
+      template: `templates/${req.params.file}`,
+      to,
+      subject,
       ctx: {
-        name: "Tester1",
-        token: "1234567890",
+        name,
+        token,
       },
     });
+
+    console.log(err);
+    res.status(200).json({ message: "Email sent. Check your inbox." });
   } catch (err) {
     next(err);
   }

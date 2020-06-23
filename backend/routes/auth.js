@@ -8,7 +8,7 @@ const fetch = require("node-fetch");
 const User = require("../model/User");
 const { getToken, verifyToken, checkDev } = require("../middleware");
 const { registerValidation, loginValidation } = require("../utils/validation");
-const sendMail = require("../utils/mailTransporter");
+const sendMail = require("../utils/sendMail");
 
 // I prefer this way, so you can easily see all ...
 // ... all the endpoints and the middlewares used

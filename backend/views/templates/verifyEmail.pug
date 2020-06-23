@@ -2,14 +2,14 @@
 extends ../layout.pug
 
 block content
-  div
+  div.content
     - const greeting = name ? `Hey ${name},` : 'Hey,'
     h3 #{greeting}
     p Thank you for creating a Chingu account.
     p Please confirm this is your email address by clicking on the button below.
 
-  - const baseURL = process.env.NODE_ENV === "production" ? "https://chingudashboard.herokuapp.com" : "http://localhost:3000"
+  - const frontURL = process.env.NODE_ENV === "production" ? "https://chingudashboard.herokuapp.com" : "http://localhost:3000"
   a.styled-button(
-    href=baseURL + '/verify/user/'+ token 
+    href=frontURL + '/verify/user/'+ token 
     target='_blank'
   ) Verify Your Email
