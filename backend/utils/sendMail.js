@@ -1,10 +1,6 @@
 const nodemailer = require("nodemailer");
 const { pugEngine } = require("nodemailer-pug-engine");
 
-const defaultMailOptions = {
-  from: process.env.MAILER_EMAIL,
-};
-
 const mailer = nodemailer.createTransport({
   service: "Gmail",
   auth: {
@@ -12,16 +8,20 @@ const mailer = nodemailer.createTransport({
     pass: process.env.MAILER_PASSWORD,
   },
 });
+
 mailer.use("compile", pugEngine({ templateDir: "./views" }));
 
-// pass ANY nodemailer options // 'from' is already set and can't be overidden courrently
+// pass ANY nodemailer options // 'from' is already set and can't be overidden currently
 // template = which template should we use
 // ctx = contains the variables that will be passed to the template
+//       refer to the files in views/templates to see the necessary variables
 const sendMail = (
-  mailOptions = {
+  options = {
     template: "",
+    to: "",
+    subject: "RE: Your Chingu account",
     ctx: {},
   }
-) => mailer.sendMail({ ...mailOptions, ...defaultMailOptions });
+) => mailer.sendMail({ ...options, from: process.env.MAILER_EMAIL });
 
 module.exports = sendMail;
