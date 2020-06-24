@@ -79,10 +79,13 @@ export default class Login extends Vue {
   localLogin() {
     this.$toast.info('Processing...');
     const data = { email: this.email, password: this.password };
-    this.$auth.loginWith('local', { data }).then(() => {
-      this.$toast.clear();
-      this.$toast.success(`Welcome back, ${this.$auth.user.name}!`);
-    });
+    this.$auth
+      .loginWith('local', { data })
+      .then(() => {
+        this.$toast.clear();
+        this.$toast.success(`Welcome back, ${this.$auth.user.name}!`);
+      })
+      .catch(err => this.$toast.error(err.message));
   }
 }
 </script>

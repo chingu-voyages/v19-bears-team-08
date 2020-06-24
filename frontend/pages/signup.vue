@@ -82,7 +82,8 @@ export default class Signup extends Vue {
           this.$toast.clear();
           this.$toast.success('Thanks for joining!');
         });
-      });
+      })
+      .catch(err => this.$toast.error(err.message));
   }
 }
 </script>
