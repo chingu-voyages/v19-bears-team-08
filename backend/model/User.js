@@ -37,8 +37,9 @@ const userSchema = new mongoose.Schema({
     default: false,
     required: true,
   },
-  emailVerifyCode: {
-    type: String,
+  emailVerification: {
+    code: String,
+    expiry: Date,
   },
   // if the user is currently on an paid plan
   isActiveMember: {
