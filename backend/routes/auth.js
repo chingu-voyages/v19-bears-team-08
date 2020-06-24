@@ -5,6 +5,7 @@ const { isValidObjectId } = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const fetch = require("node-fetch");
+const uid = require("uid");
 
 // USER MADE MODULES HERE
 const User = require("../model/User");
@@ -73,6 +74,9 @@ async function handleRegistration(req, res, next) {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
+    // create a long string to be used to verify user's email
+    const emailVerificationCode = uid(36);
+
     //create the new user
     const newUser = await User.create({
       name: req.body.name,
@@ -80,6 +84,11 @@ async function handleRegistration(req, res, next) {
       password: hashedPassword,
       //the first user in the DB would be the admin
       roles: [userCount ? "prospect" : "admin"],
+      emailVerification: {
+        // code is valid for 10 mins
+        expiry: Date.now() + 1000 * 60 * 10,
+        code: emailVerificationCode,
+      },
     });
 
     //create jwt token
@@ -87,11 +96,15 @@ async function handleRegistration(req, res, next) {
       expiresIn: "1h",
     });
 
-    const err = await sendMail({
+    await sendMail({
+      template: "verifyEmail",
       to: req.body.email,
       subject: "Confirm your email - Chingu",
+      ctx: {
+        name: req.body.name,
+        token: emailVerificationCode,
+      },
     });
-    console.log(err);
 
     res.status(201).json({ token });
   } catch (err) {
@@ -199,7 +212,20 @@ async function getProfileInfo(req, res, next) {
 async function verifyEmail(req, res, next) {
   try {
     const { token } = req.params;
-    console.log(token);
+
+    // find the user with that code
+    const user = await User.findOne({ "emailVerification.code": token });
+    if (!user) throw createError(404, "No user found");
+
+    // check if the code is expired
+    if (Date.now() > user.emailVerification.expiry) {
+      throw createError(400, "Code expired");
+    }
+
+    // user found; code is valid; verify email, delete code, and save user
+    user.isEmailVerified = true;
+    user.emailVerification = undefined;
+    await user.save();
 
     res
       .status(200)
