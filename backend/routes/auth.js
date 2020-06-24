@@ -1,3 +1,4 @@
+// IMPORTED PACKAGES HERE
 const router = require("express").Router();
 const createError = require("http-errors");
 const { isValidObjectId } = require("mongoose");
@@ -5,13 +6,13 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const fetch = require("node-fetch");
 
+// USER MADE MODULES HERE
 const User = require("../model/User");
 const { getToken, verifyToken, checkDev } = require("../middleware");
 const { registerValidation, loginValidation } = require("../utils/validation");
 const sendMail = require("../utils/sendMail");
 
-// I prefer this way, so you can easily see all ...
-// ... all the endpoints and the middlewares used
+// ROUTER ENDPOINTS
 router.get("/", getUser);
 router.post("/register", handleRegistration);
 router.post("/login/local", handleLocalLogin);
@@ -19,6 +20,7 @@ router.get("/login/github", getToken, handleGithubLogin);
 router.get("/profile", getToken, verifyToken, getProfileInfo);
 router.get("/verify/:token", verifyEmail);
 
+// ENDPOINT CONTROLLERS
 // accepts a 3 different query fields to search for users
 // only returns non-essential data back
 async function getUser(req, res, next) {
