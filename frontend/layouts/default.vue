@@ -199,6 +199,12 @@ a,
 div {
   @apply text-gray-600 font-normal leading-relaxed mb-1;
 }
+a {
+  @apply text-pink;
+}
+a:hover {
+  @apply underline;
+}
 div {
   @apply mb-0;
 }
@@ -208,6 +214,10 @@ div {
 }
 * > :last-child {
   margin-bottom: 0;
+}
+button:focus,
+a:focus {
+  outline: none;
 }
 
 .toasted-container .toasted.toasted-msg {
