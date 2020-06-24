@@ -1,18 +1,25 @@
 <template>
   <div>
-    <h2>Logging out...</h2>
-    <p>You will be redirected soon.</p>
+    <StyledHeader level="h1">Logging out...</StyledHeader>
+
+    <StyledLoader />
   </div>
 </template>
 
 <script>
+import StyledHeader from '~/components/StyledHeader.vue';
+import StyledLoader from '~/components/StyledLoader.vue';
+
 export default {
   name: 'Logout',
+  components: {
+    StyledHeader,
+    StyledLoader,
+  },
   mounted() {
-    setTimeout(async () => {
-      await this.$auth.logout();
+    this.$auth.logout().then(() => {
       this.$toast.success('Successfully logged out');
-    }, 2000);
+    });
   },
   head() {
     return {
