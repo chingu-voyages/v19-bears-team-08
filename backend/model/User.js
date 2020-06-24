@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
     type: [String],
     default: ["prospect"],
   },
+  emailVerified: {
+    type: Boolean,
+    default: false,
+  },
   // if the user is currently on an paid plan
   activeMember: {
     type: Boolean,
