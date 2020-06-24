@@ -1,4 +1,4 @@
-export default function({ $axios, app }) {
+export default function({ $axios }) {
   $axios.interceptors.response.use(
     response => response,
     error => {
@@ -8,8 +8,7 @@ export default function({ $axios, app }) {
         },
       } = error;
 
-      app.$toast.error(message);
-      return Promise.reject(error);
+      return Promise.reject(new Error(message));
     }
   );
 }
