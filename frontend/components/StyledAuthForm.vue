@@ -32,8 +32,4 @@ export default class StyledAuthForm extends Vue {
   width: 100%;
   max-width: 400px;
 }
-
-button {
-  margin-top: 0.75rem;
-}
 </style>

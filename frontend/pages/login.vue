@@ -26,7 +26,7 @@
       </template>
 
       <template v-slot:extras>
-        <div class="text-center text-xl mt-2 mb-0">OR</div>
+        <div class="text-center text-xl my-3 leading-none">OR</div>
 
         <StyledButton full github :onClick="githubLogin">
           <fa :icon="['fab', 'github']" />
@@ -38,7 +38,7 @@
             No account? Sign up here.
           </nuxt-link>
 
-          <nuxt-link to="/forgotpassword" class="form-links">
+          <nuxt-link to="/password/forgot" class="form-links">
             Forgot Password?
           </nuxt-link>
         </div>
