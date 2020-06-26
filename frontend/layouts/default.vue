@@ -7,7 +7,7 @@
       <div
         class="fixed z-20 top-0 w-full h-12 flex justify-between px-2 items-center bg-gray-300 md:hidden"
       >
-        <nuxt-link to="/">
+        <nuxt-link to="/" class="m-0">
           <img src="/Logo.png" alt="Chingu logo" class="w-10" />
         </nuxt-link>
         <div
@@ -36,7 +36,7 @@
           '-translate-x-full': !isOpen,
         }"
       >
-        <nuxt-link class="flex flex-col items-center" to="/">
+        <nuxt-link class="flex flex-col items-center m-0" to="/">
           <img
             src="/Logo.png"
             alt="Chingu logo"
