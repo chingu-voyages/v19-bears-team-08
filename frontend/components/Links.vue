@@ -1,7 +1,7 @@
 <template>
-  <div class="flex-auto flex flex-col justify-between">
+  <div class="flex-auto flex flex-col justify-between pt-3">
     <!-- Top Links -->
-    <ul class="mt-3">
+    <ul>
       <Link v-for="link in links.top" :key="link.to" :link="link" />
     </ul>
 
