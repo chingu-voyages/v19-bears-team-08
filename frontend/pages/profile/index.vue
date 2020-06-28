@@ -7,11 +7,12 @@
     <h4>Want to connect your GitHub?</h4>
     <StyledInput
       required
+      showInlineButton
+      label="GitHub Username"
+      name="githubUsername"
       type="text"
       :minLength="3"
       placeholder="Enter your GitHub username"
-      name="githubUsername"
-      label="GitHub Username"
     />
     <div v-if="this.$auth.strategy.name === 'github'">
       <p>{{ this.$auth.user.github.user.name }}</p>

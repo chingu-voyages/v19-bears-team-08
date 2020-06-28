@@ -9,29 +9,21 @@
           Don't worry it happens to everyone. Just submit the email address you
           signed up with and we'll send you an email to reset your password.
         </p>
-        <StyledInputWithButton
-          v-model="email"
-          :handleSubmit="handleSubmit"
-          buttonText="Submit"
-          placeholder="Your email address"
-          type="email"
-          name="email"
-          :minLength="3"
-          :maxLength="300"
-        />
 
-        <StyledAuthForm :handleSubmit="handleSubmit">
-          <template v-slot:inputs>
-            <StyledInput
-              v-model="email"
-              required
-              type="email"
-              name="email"
-              :minLength="3"
-              placeholder="The email you signed up to Chingu with"
-            />
-          </template>
-        </StyledAuthForm>
+        <form :handleSubmit="handleSubmit" class="w-full">
+          <StyledInput
+            v-model="email"
+            required
+            label="Email"
+            showInlineButton
+            buttonText="Submit"
+            placeholder="Your email address"
+            type="email"
+            name="email"
+            :minLength="3"
+            :maxLength="300"
+          />
+        </form>
       </div>
 
       <img
@@ -45,17 +37,13 @@
 
 <script>
 import StyledHeader from '~/components/StyledHeader.vue';
-import StyledAuthForm from '~/components/StyledAuthForm.vue';
 import StyledInput from '~/components/StyledInput.vue';
-import StyledInputWithButton from '~/components/StyledInputWithButton.vue';
 
 export default {
   name: 'ForgotPassword',
   components: {
     StyledHeader,
-    StyledAuthForm,
     StyledInput,
-    StyledInputWithButton,
   },
   data() {
     return {

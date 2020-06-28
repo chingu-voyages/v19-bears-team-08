@@ -7,29 +7,32 @@
         <StyledInput
           v-model="name"
           required
+          showLabel
+          label="Name"
           name="name"
           placeholder="Your full name"
-          label="Name"
         />
 
         <StyledInput
           v-model="email"
           required
-          name="email"
-          type="email"
-          placeholder="Your email address"
+          showLabel
           label="Email"
+          type="email"
+          name="email"
+          placeholder="Your email address"
         />
 
         <StyledInput
           v-model="password"
           required
-          name="password"
+          showLabel
+          label="Password"
           type="password"
-          placeholder="A unique password between 6 and 20 characters"
+          name="password"
           :minLength="6"
           :maxLength="20"
-          label="Password"
+          placeholder="A unique password between 6 and 20 characters"
         />
       </template>
 

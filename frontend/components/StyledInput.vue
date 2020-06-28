@@ -1,11 +1,13 @@
 <template>
-  <div class="input-container pb-5 relative flex flex-col">
-    <label class="text-xl" :for="name">
+  <div
+    class="input-container relative w-full"
+    :class="{ inputInlineButton: showInlineButton }"
+  >
+    <label v-if="showLabel" class="text-xl" :for="name">
       {{ label }}
     </label>
 
     <input
-      class="w-full rounded p-2 mt-2 bg-gray-300 text-base border"
       :class="{ 'border-red-700': !!error }"
       :required="required"
       :type="type || 'text'"
@@ -18,6 +20,16 @@
       @blur="onBlur"
     />
 
+    <StyledButton
+      v-if="showInlineButton"
+      green
+      normal
+      type="submit"
+      class="w-24 absolute"
+    >
+      {{ buttonText }}
+    </StyledButton>
+
     <p
       v-if="!!error"
       class="text-xs text-center text-red-500 w-full absolute bottom-0"
@@ -29,8 +41,13 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Model, Emit } from 'vue-property-decorator';
+import StyledButton from '~/components/StyledButton.vue';
 
-@Component
+@Component({
+  components: {
+    StyledButton,
+  },
+})
 export default class StyledInput extends Vue {
   @Prop(String) readonly type!: string;
   @Prop(Number) readonly minLength!: number;
@@ -38,7 +55,10 @@ export default class StyledInput extends Vue {
   @Prop(Boolean) readonly required!: boolean;
   @Prop({ type: String, required: true }) readonly placeholder!: string;
   @Prop({ type: String, required: true }) readonly name!: string;
-  @Prop({ type: String, default: '' }) readonly label!: string;
+  @Prop({ type: String, required: true }) readonly label!: string;
+  @Prop({ type: Boolean, default: false }) readonly showLabel!: boolean;
+  @Prop({ type: String, required: false }) readonly buttonText!: string;
+  @Prop({ type: Boolean, required: false }) readonly showInlineButton!: boolean;
   @Prop() readonly value!: any;
   @Model('input', { type: String }) inputVal!: string;
 
@@ -94,5 +114,21 @@ export default class StyledInput extends Vue {
 }
 .input-container:first-of-type {
   margin-bottom: 0;
+}
+/* this is here because of the last child selector in /layout/default */
+.input-container input {
+  @apply w-full rounded p-3 mb-5 bg-gray-300 text-base border;
+}
+.input-container p {
+  bottom: 0.1rem;
+}
+
+.inputInlineButton input {
+  padding-right: calc(6rem + 4px + 0.5rem);
+}
+.inputInlineButton button {
+  margin-left: -6.25rem;
+  top: 4px;
+  right: 4px;
 }
 </style>
