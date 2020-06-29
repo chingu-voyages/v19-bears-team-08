@@ -36,7 +36,6 @@ export default {
     },
   },
   data() {
-    console.log(this.$router);
     return {
       hero: {
         header: "We're Sorry",
