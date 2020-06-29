@@ -6,7 +6,7 @@
       :imgSrc="hero.imgSrc"
       :imgAlt="hero.imgAlt"
     >
-      <form :handleSubmit="handleSubmit" class="w-full">
+      <form class="w-full" @submit.prevent="handleSubmit">
         <StyledInput
           v-model="email"
           required
@@ -51,7 +51,13 @@ export default {
   },
   methods: {
     handleSubmit() {
-      console.log('sending you an email to reset your password');
+      this.$axios
+        .$get(`/user/password/forgot/${this.email}`)
+        .then(resp => {
+          this.$router.push('/');
+          this.$toast.info(resp.message);
+        })
+        .catch(err => this.$toast.error(err.message));
     },
   },
   head() {
