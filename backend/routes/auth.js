@@ -12,6 +12,7 @@ const User = require("../model/User");
 const { getToken, verifyToken, checkDev } = require("../middleware");
 const { registerValidation, loginValidation } = require("../utils/validation");
 const sendMail = require("../utils/sendMail");
+const checkIsEmailValid = require("../utils/checkIsEmailValid");
 
 // ROUTER ENDPOINTS
 router.get("/", getUser);
@@ -20,6 +21,7 @@ router.post("/login/local", handleLocalLogin);
 router.get("/login/github", getToken, handleGithubLogin);
 router.get("/profile", getToken, verifyToken, getProfileInfo);
 router.get("/verify/:token", verifyEmail);
+router.get("/password/forgot/:email", sendForgotPasswordEmail);
 
 // ENDPOINT CONTROLLERS
 // accepts a 3 different query fields to search for users
@@ -230,6 +232,40 @@ async function verifyEmail(req, res, next) {
     res
       .status(200)
       .json({ message: "Thanks for confirming your email address" });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function sendForgotPasswordEmail(req, res, next) {
+  try {
+    const { email } = req.params;
+    if (!email) throw createError(400, "No email specified");
+
+    const validEmailFormat = checkIsEmailValid(email);
+    if (!validEmailFormat) throw createError(400, "Invalid email format");
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw createError(404, "Couldn't find an account with that email.");
+    }
+
+    // need to create a code here
+    // save it to the user
+    // set an expiry date
+    // and attach the code to the ctx.token field below
+
+    await sendMail({
+      template: "forgotPassword",
+      to: email,
+      subject: "Forgot Password - Chingu",
+      ctx: {
+        name: user.name || "",
+        token: "1234567890",
+      },
+    });
+
+    res.status(200).json({ message: "Email sent. Check your inbox." });
   } catch (err) {
     next(err);
   }
