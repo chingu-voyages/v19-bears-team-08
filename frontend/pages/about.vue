@@ -1,38 +1,24 @@
 <template>
   <div>
-    <div
-      class="my-6 md:my-8 flex flex-col-reverse md:flex-row md:flex-row items-center"
+    <StyledHero
+      :header="hero.header"
+      :subText="hero.subText"
+      :imgSrc="hero.imgSrc"
+      :imgAlt="hero.imgAlt"
     >
-      <div
-        class="flex flex-col items-center md:items-start self-start w-full md:w-3/5 px-2 md:px-0"
-      >
-        <StyledHeader level="h1">
-          Boost Your Career
-        </StyledHeader>
-        <p class="mb-6 text-center md:text-left">
-          All self-directed developers run into the same problems. No team
-          experience, feeling lost working alone, endless tutorials, not enough
-          finished projects. The good news? Chingu solves them.
-        </p>
-        <div class="flex">
-          <nuxt-link to="/login">
-            <StyledButton green normal>
-              Create an Account
-            </StyledButton>
-          </nuxt-link>
-          <nuxt-link to="/howitworks" class="ml-3">
-            <StyledButton pink inverted>
-              How It Works
-            </StyledButton>
-          </nuxt-link>
-        </div>
+      <div class="flex">
+        <nuxt-link to="/login">
+          <StyledButton green normal>
+            Create an Account
+          </StyledButton>
+        </nuxt-link>
+        <nuxt-link to="/howitworks" class="ml-3">
+          <StyledButton pink inverted>
+            How It Works
+          </StyledButton>
+        </nuxt-link>
       </div>
-      <img
-        src="/page/about/ToTheStars.svg"
-        alt="team spirit"
-        class="w-8/12 sm:w-1/2 md:w-2/5 ml-0 md:ml-2"
-      />
-    </div>
+    </StyledHero>
 
     <div class="my-6 md:my-8 flex flex-col items-center md:items-start">
       <StyledHeader level="h2">Accomplishments</StyledHeader>
@@ -70,15 +56,27 @@
 import Vue from 'vue';
 import StyledHeader from '~/components/StyledHeader.vue';
 import StyledButton from '~/components/StyledButton.vue';
+import StyledHero from '~/components/StyledHero.vue';
 
 export default Vue.extend({
   name: 'About',
   components: {
     StyledHeader,
     StyledButton,
+    StyledHero,
   },
   data() {
     return {
+      hero: {
+        header: 'Boost Your Career',
+        subText: `
+          All self-directed developers run into the same problems. 
+          No team experience, feeling lost working alone, endless tutorials, not enough finished projects. 
+          The good news? Chingu solves them.
+        `,
+        imgSrc: '/page/about/ToTheStars.svg',
+        imgAlt: 'rocket launching',
+      },
       stats: [
         {
           num: '2,028',
@@ -127,14 +125,6 @@ export default Vue.extend({
 </script>
 
 <style lang="postcss" scoped>
-img {
-  margin-bottom: 1.5rem !important;
-}
-@screen md {
-  img {
-    margin-bottom: 0 !important;
-  }
-}
 .stat-container {
   min-width: 300px;
 }

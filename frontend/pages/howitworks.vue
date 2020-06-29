@@ -1,37 +1,24 @@
 <template>
   <div>
-    <div
-      class="my-6 md:my-8 flex flex-col-reverse md:flex-row md:flex-row items-center"
+    <StyledHero
+      :header="hero.header"
+      :subText="hero.subText"
+      :imgSrc="hero.imgSrc"
+      :imgAlt="hero.imgAlt"
     >
-      <div
-        class="flex flex-col items-center md:items-start self-start w-full md:w-3/5 px-2 md:px-0"
-      >
-        <StyledHeader level="h1">Developer Voyages</StyledHeader>
-        <p class="mb-6 text-center md:text-left">
-          A Chingu Voyage is a remote 6-week program for web developers. You
-          will build a project in a remote team and level-up with the technical
-          and soft skills required in a professional software job.
-        </p>
-        <div class="flex">
-          <nuxt-link to="/login">
-            <StyledButton green normal>
-              Create an Account
-            </StyledButton>
-          </nuxt-link>
-          <nuxt-link to="/about" class="ml-3">
-            <StyledButton pink inverted>
-              About Us
-            </StyledButton>
-          </nuxt-link>
-        </div>
+      <div class="flex">
+        <nuxt-link to="/login">
+          <StyledButton green normal>
+            Create an Account
+          </StyledButton>
+        </nuxt-link>
+        <nuxt-link to="/about" class="ml-3">
+          <StyledButton pink inverted>
+            About Us
+          </StyledButton>
+        </nuxt-link>
       </div>
-
-      <img
-        src="/page/howitworks/TeamSpirit.svg"
-        alt="team spirit"
-        class="w-8/12 sm:w-1/2 md:w-2/5 ml-0 md:ml-2"
-      />
-    </div>
+    </StyledHero>
 
     <div class="my-6 md:my-8 flex flex-col ">
       <StyledHeader level="h2">Our Process</StyledHeader>
@@ -45,6 +32,7 @@ import Vue from 'vue';
 import StyledHeader from '~/components/StyledHeader.vue';
 import StyledButton from '~/components/StyledButton.vue';
 import StyledList from '~/components/StyledList.vue';
+import StyledHero from '~/components/StyledHero.vue';
 
 export default Vue.extend({
   name: 'HowItWorks',
@@ -52,9 +40,19 @@ export default Vue.extend({
     StyledHeader,
     StyledButton,
     StyledList,
+    StyledHero,
   },
   data() {
     return {
+      hero: {
+        header: 'Developer Voyages',
+        subText: `
+          A Chingu Voyage is a remote 6-week program for web developers.
+          You will build a project in a remote team and level-up with the technical and soft skills required in a professional software job.
+        `,
+        imgSrc: '/page/howitworks/TeamSpirit.svg',
+        imgAlt: 'team spirit',
+      },
       processes: [
         {
           title: 'Apply',
@@ -104,14 +102,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<style lang="postcss" scoped>
-img {
-  margin-bottom: 1.5rem !important;
-}
-@screen md {
-  img {
-    margin-bottom: 0 !important;
-  }
-}
-</style>

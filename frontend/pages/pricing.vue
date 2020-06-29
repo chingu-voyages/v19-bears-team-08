@@ -1,37 +1,24 @@
 <template>
   <div>
-    <div
-      class="my-6 md:my-8 flex flex-col-reverse md:flex-row md:flex-row items-center"
+    <StyledHero
+      :header="hero.header"
+      :subText="hero.subText"
+      :imgSrc="hero.imgSrc"
+      :imgAlt="hero.imgAlt"
     >
-      <div
-        class="flex flex-col items-center md:items-start self-start w-full md:w-3/5 px-2 md:px-0"
-      >
-        <StyledHeader level="h1">
-          Our Pricing
-        </StyledHeader>
-        <p class="mb-6 text-center md:text-left">
-          We have two options available to get started. Try out a single voyage
-          or have a year's access to really commit to leveling up.
-        </p>
-        <div class="flex">
-          <nuxt-link to="/schedule">
-            <StyledButton green normal>
-              View Schedule
-            </StyledButton>
-          </nuxt-link>
-          <nuxt-link to="/faqs" class="ml-3">
-            <StyledButton pink inverted>
-              Have a Question?
-            </StyledButton>
-          </nuxt-link>
-        </div>
+      <div class="flex">
+        <nuxt-link to="/schedule">
+          <StyledButton green normal>
+            View Schedule
+          </StyledButton>
+        </nuxt-link>
+        <nuxt-link to="/faq" class="ml-3">
+          <StyledButton pink inverted>
+            Have a Question?
+          </StyledButton>
+        </nuxt-link>
       </div>
-      <img
-        src="/page/pricing/TwoOptions.svg"
-        alt="two options"
-        class="w-8/12 sm:w-1/2 md:w-2/5 ml-0 md:ml-2"
-      />
-    </div>
+    </StyledHero>
 
     <div class="flex flex-col md:flex-row flex-wrap">
       <div
@@ -65,15 +52,26 @@
 <script>
 import StyledHeader from '~/components/StyledHeader.vue';
 import StyledButton from '~/components/StyledButton.vue';
+import StyledHero from '~/components/StyledHero.vue';
 
 export default {
   name: 'Pricing',
   components: {
     StyledHeader,
     StyledButton,
+    StyledHero,
   },
   data() {
     return {
+      hero: {
+        header: 'Our Pricing',
+        subText: `
+          We have two options available to get started. 
+          Try out a single voyage or have a year's access to really commit to leveling up.
+        `,
+        imgSrc: '/page/pricing/TwoOptions.svg',
+        imgAlt: 'two options',
+      },
       currency: '$',
       options: [
         {
@@ -114,15 +112,6 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-img {
-  margin-bottom: 1.5rem !important;
-}
-@screen md {
-  img {
-    margin-bottom: 0 !important;
-  }
-}
-
 .pricing-container {
   min-width: 300px;
 }
