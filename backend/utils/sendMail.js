@@ -1,15 +1,29 @@
 const nodemailer = require("nodemailer");
 const { pugEngine } = require("nodemailer-pug-engine");
 
-const mailer = nodemailer.createTransport({
-  service: "Gmail",
-  auth: {
-    user: process.env.MAILER_EMAIL,
-    pass: process.env.MAILER_PASSWORD,
-  },
-});
+// set the correct variables for the correct environments
+// I used MailTrap for development - https://mailtrap.io/
+const mailerSettings =
+  process.env.NODE_ENV === "production"
+    ? {
+        service: "Gmail",
+        auth: {
+          user: process.env.MAILER_EMAIL,
+          pass: process.env.MAILER_PASSWORD,
+        },
+      }
+    : {
+        host: process.env.DEV_MAILER_HOST,
+        port: process.env.DEV_MAILER_PORT,
+        auth: {
+          user: process.env.DEV_MAILER_USER,
+          pass: process.env.DEV_MAILER_PASS,
+        },
+      };
 
-mailer.use("compile", pugEngine({ templateDir: "./views" }));
+const mailer = nodemailer.createTransport(mailerSettings);
+
+mailer.use("compile", pugEngine({ templateDir: "./views/templates" }));
 
 // pass ANY nodemailer options // 'from' is already set and can't be overidden currently
 // template = which template should we use
