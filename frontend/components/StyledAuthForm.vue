@@ -1,5 +1,5 @@
 <template>
-  <div class="form-container">
+  <div class="w-full max-w-md">
     <form @submit.prevent="handleSubmit">
       <slot name="inputs" />
 
@@ -26,10 +26,3 @@ export default class StyledAuthForm extends Vue {
   readonly handleSubmit!: () => Promise<any>;
 }
 </script>
-
-<style scoped>
-.form-container {
-  width: 100%;
-  max-width: 400px;
-}
-</style>

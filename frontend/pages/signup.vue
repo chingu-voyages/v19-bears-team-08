@@ -37,11 +37,11 @@
       </template>
 
       <template v-slot:extras>
-        <div class="flex justify-between w-full mt-2 pt-2">
-          <nuxt-link to="/login" class="form-links">
+        <StyledFormLinks>
+          <nuxt-link to="/login">
             Have an account? Log in here.
           </nuxt-link>
-        </div>
+        </StyledFormLinks>
       </template>
     </StyledAuthForm>
   </div>
@@ -52,12 +52,14 @@ import { Vue, Component } from 'vue-property-decorator';
 import StyledHeader from '~/components/StyledHeader.vue';
 import StyledInput from '~/components/StyledInput.vue';
 import StyledAuthForm from '~/components/StyledAuthForm.vue';
+import StyledFormLinks from '~/components/StyledFormLinks.vue';
 
 @Component({
   components: {
     StyledHeader,
     StyledInput,
     StyledAuthForm,
+    StyledFormLinks,
   },
   head() {
     return {
@@ -90,5 +92,3 @@ export default class Signup extends Vue {
   }
 }
 </script>
-
-<style></style>

@@ -35,15 +35,15 @@
           Login With Github
         </StyledButton>
 
-        <div class="flex flex-wrap justify-between w-full mt-2 pt-2">
-          <nuxt-link to="/signup" class="form-links">
+        <StyledFormLinks>
+          <nuxt-link to="/signup">
             No account? Sign up here.
           </nuxt-link>
 
-          <nuxt-link to="/password/forgot" class="form-links">
+          <nuxt-link to="/password/forgot">
             Forgot Password?
           </nuxt-link>
-        </div>
+        </StyledFormLinks>
       </template>
     </StyledAuthForm>
   </div>
@@ -55,6 +55,7 @@ import StyledHeader from '~/components/StyledHeader.vue';
 import StyledInput from '~/components/StyledInput.vue';
 import StyledAuthForm from '~/components/StyledAuthForm.vue';
 import StyledButton from '~/components/StyledButton.vue';
+import StyledFormLinks from '~/components/StyledFormLinks.vue';
 
 @Component({
   components: {
@@ -62,6 +63,7 @@ import StyledButton from '~/components/StyledButton.vue';
     StyledInput,
     StyledAuthForm,
     StyledButton,
+    StyledFormLinks,
   },
   head() {
     return {
@@ -91,12 +93,3 @@ export default class Login extends Vue {
   }
 }
 </script>
-
-<style lang="postcss">
-.form-links {
-  @apply text-gray-700 no-underline mb-2 px-2;
-}
-.form-links:hover {
-  @apply underline;
-}
-</style>
