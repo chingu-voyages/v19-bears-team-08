@@ -22,6 +22,7 @@ router.get("/login/github", getToken, handleGithubLogin);
 router.get("/profile", getToken, verifyToken, getProfileInfo);
 router.get("/verify/:token", verifyEmail);
 router.get("/password/forgot/:email", sendForgotPasswordEmail);
+router.post("/password/forgot/change", handleForgotPasswordUpdate);
 
 // ENDPOINT CONTROLLERS
 // accepts a 3 different query fields to search for users
@@ -250,10 +251,15 @@ async function sendForgotPasswordEmail(req, res, next) {
       throw createError(404, "Couldn't find an account with that email.");
     }
 
-    // need to create a code here
-    // save it to the user
-    // set an expiry date
-    // and attach the code to the ctx.token field below
+    // create a medium string to be used to verify user's email
+    const passwordResetCode = uid(20);
+    // code is valid for 5 mins
+    const passwordRestExpiry = Date.now() + 1000 * 60 * 5;
+
+    // update the user's model
+    user.passwordReset.code = passwordResetCode;
+    user.passwordReset.expiry = passwordRestExpiry;
+    await user.save();
 
     await sendMail({
       template: "forgotPassword",
@@ -261,11 +267,49 @@ async function sendForgotPasswordEmail(req, res, next) {
       subject: "Forgot Password - Chingu",
       ctx: {
         name: user.name || "",
-        token: "1234567890",
+        token: passwordResetCode,
       },
     });
 
     res.status(200).json({ message: "Email sent. Check your inbox." });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function handleForgotPasswordUpdate(req, res, next) {
+  try {
+    const { email, password, code } = req.body;
+
+    if (!email || !password || !code) {
+      throw createError(400, "Looks like you left something blank");
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) throw createError(404, `User(${email}) not found`);
+
+    if (!user.passwordReset.code) {
+      throw createError(400, "Please request a code first");
+    }
+
+    if (Date.now() > user.passwordReset.expiry) {
+      throw createError(400, "Password reset code expired");
+    }
+
+    if (user.passwordReset.code !== code) {
+      throw createError(400, "Invalid password reset code");
+    }
+
+    // everything checks out, so hash the new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // update password and remove passwordReset
+    user.password = hashedPassword;
+    user.passwordReset = undefined;
+    await user.save();
+
+    res.status(200).json({ message: "Password updated" });
   } catch (err) {
     next(err);
   }
