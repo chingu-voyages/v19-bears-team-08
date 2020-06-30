@@ -47,6 +47,10 @@ const userSchema = new mongoose.Schema({
     default: false,
     required: true,
   },
+  passwordReset: {
+    code: String,
+    expiry: Date,
+  },
   githubUsername: {
     type: String,
   },
