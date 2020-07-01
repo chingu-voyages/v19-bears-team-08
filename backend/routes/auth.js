@@ -20,6 +20,7 @@ router.post("/register", handleRegistration);
 router.post("/login/local", handleLocalLogin);
 router.get("/login/github", getToken, handleGithubLogin);
 router.get("/profile", getToken, verifyToken, getProfileInfo);
+router.post("/verify", getNewVerifyEmail);
 router.get("/verify/:token", verifyEmail);
 router.get("/password/forgot/:email", sendForgotPasswordEmail);
 router.post("/password/forgot/change", handleForgotPasswordUpdate);
@@ -205,6 +206,47 @@ async function getProfileInfo(req, res, next) {
     if (!user) throw createError(404, `User(${userId}) not found`);
 
     res.status(200).json({ user });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function getNewVerifyEmail(req, res, next) {
+  try {
+    const { email } = req.body;
+
+    const validEmailFormat = checkIsEmailValid(email);
+    if (!validEmailFormat) throw createError(400, "Invalid email format");
+
+    // find the user with that code
+    const user = await User.findOne({ email });
+    if (!user) throw createError(404, "No user found");
+
+    // create a long string to be used to verify user's email
+    const emailVerificationCode = uid(36);
+
+    // add new emailVerification token and expiry to user
+    user.emailVerification = {
+      // code is valid for 10 mins
+      expiry: Date.now() + 1000 * 60 * 10,
+      code: emailVerificationCode,
+    };
+    await user.save();
+
+    // send verifyEmail to user
+    await sendMail({
+      template: "verifyEmail",
+      to: req.body.email,
+      subject: "Confirm your email - Chingu",
+      ctx: {
+        name: req.body.name,
+        token: emailVerificationCode,
+      },
+    });
+
+    res
+      .status(200)
+      .json({ message: "Please verify your email. Check your inbox." });
   } catch (err) {
     next(err);
   }
