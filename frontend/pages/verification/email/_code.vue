@@ -60,11 +60,13 @@ export default {
   },
   mounted() {
     const code = this.$route.params.code;
+
     // check for code and it's format before making API calls
     if (!code || code.length !== 36) {
       this.$toast.error('Email verification failed: Incorrect code format.');
       this.$router.push('/');
     } else {
+      this.$toast.info('Processing...');
       this.$axios
         .$get(`/user/verify/${code}`)
         .then(resp => {
@@ -83,6 +85,7 @@ export default {
   },
   methods: {
     getNewCode() {
+      this.$toast.info('Processing...');
       this.$axios
         .$post('/user/verify', {
           email: this.email,

@@ -100,6 +100,7 @@ export default {
       if (this.password !== this.confirmPassword) {
         return this.$toast.error('Passwords must match');
       }
+      this.$toast.info('Processing...');
       this.$axios
         .$post('/user/password/forgot/change', {
           email: this.email,

@@ -51,11 +51,12 @@ export default {
   },
   methods: {
     handleSubmit() {
+      this.$toast.info('Processing...');
       this.$axios
         .$get(`/user/password/forgot/${this.email}`)
         .then(resp => {
           this.$router.push('/');
-          this.$toast.info(resp.message);
+          this.$toast.success(resp.message);
         })
         .catch(err => this.$toast.error(err.message));
     },
