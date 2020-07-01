@@ -81,7 +81,7 @@ async function handleRegistration(req, res, next) {
     const emailVerificationCode = uid(36);
 
     //create the new user
-    const newUser = await User.create({
+    await User.create({
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword,
@@ -94,11 +94,7 @@ async function handleRegistration(req, res, next) {
       },
     });
 
-    //create jwt token
-    const token = jwt.sign({ userId: newUser._id }, process.env.TOKEN_SECRET, {
-      expiresIn: "1h",
-    });
-
+    // send verifyEmail to user
     await sendMail({
       template: "verifyEmail",
       to: req.body.email,
@@ -109,7 +105,9 @@ async function handleRegistration(req, res, next) {
       },
     });
 
-    res.status(201).json({ token });
+    res
+      .status(200)
+      .json({ message: "Please verify your email. Check your inbox." });
   } catch (err) {
     next(err);
   }
