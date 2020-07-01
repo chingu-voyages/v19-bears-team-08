@@ -14,13 +14,22 @@
         <span class="italic">A code is only valid for 10 minutes.</span>
       </p>
       <p class="mb-4">
-        If you're not receiving a verification email from us, please
-        <a :href="`mailto:${email}`">contact us</a>
+        Please submit your email address below or
+        <a :href="`mailto:${chinguEmail}`">contact us</a>
         directly.
       </p>
-      <StyledButton green normal :onClick="getNewCode">
-        I understand. Get new code.
-      </StyledButton>
+      <form class="mx-auto mt-1" @submit.prevent="getNewCode">
+        <StyledInput
+          v-model="email"
+          required
+          showInlineButton
+          buttonText="Submit"
+          label="Email"
+          type="email"
+          name="email"
+          placeholder="Your email address"
+        />
+      </form>
     </div>
   </div>
 </template>
@@ -28,37 +37,40 @@
 <script>
 import StyledHeader from '~/components/StyledHeader.vue';
 import StyledLoader from '~/components/StyledLoader.vue';
-import StyledButton from '~/components/StyledButton.vue';
+import StyledInput from '~/components/StyledInput.vue';
 
 export default {
   name: 'VerifyEmail',
   components: {
     StyledHeader,
     StyledLoader,
-    StyledButton,
+    StyledInput,
   },
   asyncData(ctx) {
     return {
-      email: ctx.env.EMAIL,
+      chinguEmail: ctx.env.EMAIL,
     };
   },
   data() {
     return {
       isCodeExpired: false,
+      chinguEmail: '',
       email: '',
     };
   },
   mounted() {
-    const token = this.$route.params.token;
-
-    // check for token and it's format before making API calls
-    if (!token || token.length !== 36) {
-      this.$toast.error('Email verification failed: Incorrect token format.');
+    const code = this.$route.params.code;
+    // check for code and it's format before making API calls
+    if (!code || code.length !== 36) {
+      this.$toast.error('Email verification failed: Incorrect code format.');
       this.$router.push('/');
     } else {
       this.$axios
-        .get(`/user/verify/${token}`)
-        .then(({ data }) => console.log(data))
+        .$get(`/user/verify/${code}`)
+        .then(resp => {
+          this.$router.push('/login');
+          this.$toast.success(resp.message);
+        })
         .catch(err => {
           if (err.message === 'Code expired') {
             this.isCodeExpired = true;
@@ -71,7 +83,15 @@ export default {
   },
   methods: {
     getNewCode() {
-      console.log('getting new code');
+      this.$axios
+        .$post('/user/verify', {
+          email: this.email,
+        })
+        .then(resp => {
+          this.$router.push('/signup/thanks');
+          this.$toast.success(resp.message);
+        })
+        .catch(err => this.$toast.error(err.message));
     },
   },
   head() {
@@ -81,9 +101,3 @@ export default {
   },
 };
 </script>
-
-<style lang="postcss" scoped>
-button {
-  @apply mx-auto mt-1;
-}
-</style>
