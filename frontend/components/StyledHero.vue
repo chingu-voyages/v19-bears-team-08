@@ -1,5 +1,7 @@
 <template>
-  <div class="my-6 md:my-8 flex flex-col-reverse md:flex-row items-center">
+  <div
+    class="styled-hero my-6 md:my-8 flex flex-col-reverse md:flex-row items-center"
+  >
     <div
       class="flex flex-col items-center md:items-start self-start w-full md:w-3/5 px-2 md:px-0"
     >
@@ -19,7 +21,7 @@
     <img
       :src="imgSrc"
       :alt="imgAlt"
-      class="w-8/12 sm:w-1/2 md:w-2/5 ml-0 md:ml-6"
+      class="h-56 sm:h-64 md:h-auto w-auto sm:w-1/2 md:w-2/5 ml-0 md:ml-6"
     />
   </div>
 </template>
@@ -42,12 +44,13 @@ export default class StyledHero extends Vue {
 }
 </script>
 
-<style lang="postcss" scoped>
-img {
+<style lang="postcss">
+.styled-hero img {
   margin-bottom: 1.5rem !important;
 }
+
 @screen md {
-  img {
+  .styled-hero img {
     margin-bottom: 0 !important;
   }
 }
