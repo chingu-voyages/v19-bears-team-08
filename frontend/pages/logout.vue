@@ -19,6 +19,7 @@ export default {
   mounted() {
     this.$auth.logout().then(() => {
       this.$toast.success('Successfully logged out');
+      this.$router.push('/');
     });
   },
   head() {
