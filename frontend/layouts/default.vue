@@ -8,10 +8,10 @@
         class="fixed z-20 top-0 w-full h-16 flex justify-between px-4 items-center bg-gray-300 md:hidden"
       >
         <nuxt-link to="/" class="m-0">
-          <img src="/Logo.png" alt="Chingu logo" class="w-10" />
+          <img src="/Logo.png" alt="Chingu logo" class="w-12" />
         </nuxt-link>
         <div
-          class="flex justify-center items-center h-10 w-10 rounded-full bg-gray-300 hover:bg-gray-200"
+          class="flex justify-center items-center h-12 w-12 rounded-full bg-gray-300 hover:bg-gray-200"
         >
           <fa
             v-if="isOpen"
