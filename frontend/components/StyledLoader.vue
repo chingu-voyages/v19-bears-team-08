@@ -1,10 +1,18 @@
 <template>
   <div class="flex flex-col md:flex-row items-center md:items-start">
-    <fa icon="spinner" class="text-pink text-2xl mb-2 md:mr-3" spin />
-    <p>Please wait...</p>
+    <fa icon="spinner" class="text-pink text-2xl" spin />
+    <p v-if="text" class="mt-2 md:ml-3">{{ text }}</p>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    text: {
+      type: String,
+      required: false,
+      default: '',
+    },
+  },
+};
 </script>
