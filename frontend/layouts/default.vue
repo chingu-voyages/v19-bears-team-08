@@ -63,7 +63,7 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'nuxt-property-decorator';
-import Links from '~/components/Links.vue';
+import Links from '~/components/NavLinks/Links.vue';
 
 @Component({
   components: {

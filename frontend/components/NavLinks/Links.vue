@@ -6,22 +6,39 @@
     </ul>
 
     <!-- Bottom Links -->
-    <ul>
-      <Link v-for="link in links.bottom" :key="link.to" :link="link" />
+    <ul v-if="isMounted">
+      <Link v-for="link in bottomLinks" :key="link.text" :link="link" />
     </ul>
+    <div v-else class="py-3 mx-auto">
+      <StyledLoader />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import Link from '~/components/Link.vue';
+import Link from '~/components/NavLinks/Link.vue';
+import StyledLoader from '~/components/StyledLoader.vue';
+
+type LinkTypes = {
+  to: string;
+  text: string;
+  authRequired: boolean;
+};
 
 @Component({
   components: {
     Link,
+    StyledLoader,
   },
 })
 export default class Links extends Vue {
+  isMounted = false;
+
+  mounted() {
+    this.isMounted = true;
+  }
+
   links = {
     top: [
       { to: '/', text: 'Home', authRequired: null },
@@ -40,6 +57,12 @@ export default class Links extends Vue {
       { to: '/logout', text: 'Log Out', authRequired: true },
     ],
   };
+
+  public get bottomLinks(): LinkTypes[] {
+    return this.links.bottom.filter(
+      link => link.authRequired === this.$auth.loggedIn
+    );
+  }
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <li v-if="showLink" class="w-full flex mb-0">
+  <li class="w-full flex mb-0">
     <nuxt-link
       :to="link.to"
       class="w-full h-full text-sm sm:text-base p-2 sm:p-3 text-center text-gray-800 hover:text-pink hover:no-underline"
@@ -22,13 +22,6 @@ type LinkTypes = {
 @Component({})
 export default class Link extends Vue {
   @Prop() readonly link!: LinkTypes;
-
-  get showLink(): boolean {
-    return (
-      this.link.authRequired === null ||
-      !!this.link.authRequired === this.$auth.loggedIn
-    );
-  }
 }
 </script>
 
