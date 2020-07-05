@@ -1,6 +1,8 @@
 <template>
-  <component :is="level" class="header relative pl-3 pr-2 mx-auto text-center">
-    <slot />
+  <component :is="level" class="header pr-2 mx-auto text-center">
+    <span v-for="sText in splitText" :key="sText" class="">
+      {{ sText + ' ' }}
+    </span>
   </component>
 </template>
 
@@ -10,6 +12,11 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 @Component
 export default class StyledHeader extends Vue {
   @Prop() readonly level!: number;
+  @Prop() readonly text!: string;
+
+  public get splitText() {
+    return this.text.split(' ');
+  }
 }
 </script>
 
@@ -19,12 +26,15 @@ export default class StyledHeader extends Vue {
     margin-left: -0.75rem !important;
   }
 }
-.header:before {
+.header span:first-child {
+  @apply relative pl-3;
+}
+.header span:first-child:before {
   content: '';
   height: 2ch;
   @apply absolute top-0 left-0 w-1 bg-pink opacity-50;
 }
-.header:after {
+.header span:first-child:after {
   content: '';
   width: 2ch;
   @apply absolute top-0 left-0 h-1 bg-green opacity-50;
