@@ -2,7 +2,7 @@
   <div>
     <StyledHeader level="h1" text="Your Settings" />
 
-    <p>
+    <p class="text-center">
       If you want to work on this page, please visit the GitHub issue
       <a
         class="text-pink"
