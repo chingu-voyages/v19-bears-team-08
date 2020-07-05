@@ -5,7 +5,7 @@
       class="app-container min-h-screen max-h-screen ml-auto overflow-hidden bg-gray-200 flex flex-row"
     >
       <div
-        class="fixed z-20 top-0 w-full h-12 flex justify-between px-2 items-center bg-gray-300 md:hidden"
+        class="fixed z-20 top-0 w-full h-16 flex justify-between px-4 items-center bg-gray-300 md:hidden"
       >
         <nuxt-link to="/" class="m-0">
           <img src="/Logo.png" alt="Chingu logo" class="w-10" />
@@ -30,10 +30,11 @@
 
       <!-- Sidebar -->
       <nav
-        class="absolute md:static flex flex-col h-full md:h-auto w-64 bg-gray-300 pt-10 md:mt-0 md:py-3 z-10 transition-transform duration-150 transform md:translate-x-0"
+        class="absolute md:static flex flex-col h-full md:h-auto w-64 bg-gray-300 md:mt-0 pt-16 pb-3 md:py-3 z-10 transition-transform duration-150 transform md:translate-x-0"
         :class="{
           'translate-x-0': isOpen,
           '-translate-x-full': !isOpen,
+          'shadow-none': !isOpen,
         }"
       >
         <nuxt-link class="flex flex-col items-center m-0" to="/">
@@ -49,7 +50,7 @@
 
       <!-- Page Content -->
       <main
-        class="w-full overflow-y-auto overflow-x-hidden mt-12 md:mt-0 px-2 sm:px-3 md:px-10 py-3 md:py-6 flex flex-col items-center md:items-start md:bg-gray-200 md:opacity-100 transition-all duration-100"
+        class="w-full overflow-y-auto overflow-x-hidden mt-16 md:mt-0 px-2 sm:px-3 md:px-10 py-3 md:py-6 flex flex-col items-center md:items-start md:bg-gray-200 md:opacity-100 transition-all duration-100"
         :class="{ 'opacity-25': isOpen }"
       >
         <div class="page-container">
