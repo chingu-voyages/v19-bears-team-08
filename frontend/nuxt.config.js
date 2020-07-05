@@ -71,11 +71,20 @@ export default {
   },
 
   auth: {
+    localStorage: false,
+    resetOnError: true,
     redirect: {
       login: '/login',
       logout: '/',
-      callback: '/login/',
+      callback: '/login',
       home: '/',
+    },
+    cookie: {
+      prefix: 'auth.',
+      options: {
+        path: '/',
+        expires: 1,
+      },
     },
     strategies: {
       local: {
