@@ -2,7 +2,7 @@
   <div>
     <StyledHeader level="h1">Logging out...</StyledHeader>
 
-    <StyledLoader />
+    <StyledLoader text="Please wait..." />
   </div>
 </template>
 

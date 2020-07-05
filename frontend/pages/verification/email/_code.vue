@@ -6,7 +6,7 @@
       }}
     </StyledHeader>
 
-    <StyledLoader v-if="!isCodeExpired" />
+    <StyledLoader v-if="!isCodeExpired" text="Please wait..." />
 
     <div v-else class="text-center md:text-left">
       <p class="mb-4">
