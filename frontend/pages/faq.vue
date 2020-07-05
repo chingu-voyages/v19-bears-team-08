@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StyledHeader level="h1">Frequently Asked Questions</StyledHeader>
+    <StyledHeader level="h1" text="Frequently Asked Questions" />
     <nuxt-content :document="faqs" />
   </div>
 </template>

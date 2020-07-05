@@ -1,8 +1,6 @@
 <template>
   <div>
-    <StyledHeader level="h1">
-      Change Password
-    </StyledHeader>
+    <StyledHeader level="h1" text="Change Password" />
 
     <StyledAuthForm :handleSubmit="handleSubmit">
       <template v-slot:inputs>

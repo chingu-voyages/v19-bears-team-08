@@ -21,7 +21,7 @@
     </StyledHero>
 
     <div class="my-6 md:my-8 flex flex-col">
-      <StyledHeader level="h2">Voyages</StyledHeader>
+      <StyledHeader level="h2" text="Voyages" />
       <blockquote
         class="text-gray-800 py-4 px-8 mt-3 mb-4 mx-0 bg-gray-300 border-pink border-l-4 italic"
       >
@@ -33,7 +33,7 @@
     </div>
 
     <div class="my-6 md:my-8 flex flex-col">
-      <StyledHeader level="h2">Pair Programming</StyledHeader>
+      <StyledHeader level="h2" text="Pair Programming" />
       <blockquote
         class="text-gray-800 py-4 px-8 mt-3 mb-4 mx-0 bg-gray-300 border-pink border-l-4 italic"
       >

@@ -1,10 +1,11 @@
 <template>
   <div>
-    <StyledHeader level="h1">
-      {{
+    <StyledHeader
+      level="h1"
+      :text="
         isCodeExpired ? 'Failed Email Verification' : 'Verifying your email...'
-      }}
-    </StyledHeader>
+      "
+    />
 
     <StyledLoader v-if="!isCodeExpired" text="Please wait..." />
 

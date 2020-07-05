@@ -21,7 +21,7 @@
     </StyledHero>
 
     <div class="my-6 md:my-8 flex flex-col items-center md:items-start">
-      <StyledHeader level="h2">Accomplishments</StyledHeader>
+      <StyledHeader level="h2" text="Accomplishments" />
       <div class="flex flex-wrap justify-center md:justify-start">
         <div
           v-for="stat in stats"
@@ -36,7 +36,7 @@
     </div>
 
     <div class="my-6 md:my-8 flex flex-col items-center md:items-start">
-      <StyledHeader level="h2">Past Voyager Experiences</StyledHeader>
+      <StyledHeader level="h2" text="Past Voyager Experiences" />
       <p class="mb-2 text-lg text-center md:text-left">
         Chingu has helped thousands of people accelerate their learning
       </p>

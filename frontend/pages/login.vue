@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StyledHeader level="h1">Log in below</StyledHeader>
+    <StyledHeader level="h1" text="Log in below" />
 
     <StyledAuthForm :handleSubmit="localLogin">
       <template v-slot:inputs>

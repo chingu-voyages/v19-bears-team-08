@@ -1,8 +1,6 @@
 <template>
   <div>
-    <StyledHeader level="h1">
-      Welcome to Chingu
-    </StyledHeader>
+    <StyledHeader level="h1" text="Welcome to Chingu" />
 
     <p>
       If you want to work on this page, please visit the GitHub issue

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StyledHeader level="h1">Logging out...</StyledHeader>
+    <StyledHeader level="h1" text="Logging out..." />
 
     <StyledLoader text="Please wait..." />
   </div>

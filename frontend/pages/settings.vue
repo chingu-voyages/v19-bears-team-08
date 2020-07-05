@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StyledHeader level="h1">Your Settings</StyledHeader>
+    <StyledHeader level="h1" text="Your Settings" />
 
     <p>
       If you want to work on this page, please visit the GitHub issue

@@ -5,7 +5,7 @@
     <div
       class="flex flex-col items-center md:items-start self-start w-full md:w-3/5 px-2 md:px-0"
     >
-      <StyledHeader level="h1">{{ header }}</StyledHeader>
+      <StyledHeader level="h1" :text="header" />
 
       <p class="mb-6 text-center md:text-left max-w-md md:max-w-none">
         {{ subText }}

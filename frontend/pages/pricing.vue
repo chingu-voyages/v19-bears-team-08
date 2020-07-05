@@ -26,7 +26,7 @@
         :key="option.title"
         class="pricing-container flex w-full flex-col items-center md:items-start p-2 mb-6 md:mb-8"
       >
-        <StyledHeader level="h2">{{ option.title }}</StyledHeader>
+        <StyledHeader level="h2" :text="option.title" />
         <h6 class="text-center">{{ option.subtitle }}</h6>
         <h1 class="mb-2">{{ currency + option.price }}</h1>
         <nuxt-link to="/login">

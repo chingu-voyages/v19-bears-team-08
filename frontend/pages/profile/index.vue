@@ -1,8 +1,6 @@
 <template>
   <div>
-    <StyledHeader level="h1">
-      Profile
-    </StyledHeader>
+    <StyledHeader level="h1" text="Profile" />
 
     <h4>Want to connect your GitHub?</h4>
     <StyledInput

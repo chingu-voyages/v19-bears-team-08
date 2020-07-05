@@ -1,8 +1,6 @@
 <template>
   <div>
-    <StyledHeader level="h1">
-      Project Showcase
-    </StyledHeader>
+    <StyledHeader level="h1" text="Project Showcase" />
 
     <p>
       If you want to work on this page, please visit the GitHub issue

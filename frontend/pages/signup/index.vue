@@ -1,6 +1,6 @@
 <template>
   <div>
-    <StyledHeader level="h1">Sign up below</StyledHeader>
+    <StyledHeader level="h1" text="Sign up below" />
 
     <StyledAuthForm :handleSubmit="handleSubmit">
       <template v-slot:inputs>
