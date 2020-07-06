@@ -127,6 +127,11 @@ async function handleLocalLogin(req, res, next) {
     const isPassValid = await bcrypt.compare(req.body.password, user.password);
     if (!isPassValid) throw createError(400, "Incorrect password");
 
+    console.log(user.isEmailVerified);
+    if (!user.isEmailVerified) {
+      throw createError(400, "Please verify your account first");
+    }
+
     // create and assign a token
     const token = jwt.sign({ userId: user._id }, process.env.TOKEN_SECRET, {
       expiresIn: "1h",
@@ -167,6 +172,11 @@ async function handleGithubLogin(req, res, next) {
         400,
         "An account was not found with the email that's associated with the provided Github account"
       );
+    }
+
+    console.log(chinguUser.isEmailVerified);
+    if (!chinguUser.isEmailVerified) {
+      throw createError(400, "Please verify your account first");
     }
 
     // since they've already authenticated on Github, we ...

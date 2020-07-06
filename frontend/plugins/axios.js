@@ -1,19 +1,29 @@
 export default function({ $axios, app }) {
   $axios.interceptors.response.use(
     response => {
-      console.log(response.config.url);
-
-      if (process.server) {
-        if (response.config.url === '/user/profile') {
-          app.context.redirect('/');
-          app.$toast.success(`Welcome back, ${response.data.user.name}`);
-        }
-
-        if (response.config.url === '/user/login/github') {
-          app.context.redirect('/');
-          app.$toast.success(`Welcome back, ${response.data.chingu.user.name}`);
+      // used when a user first clicks through to login with GitHub
+      if (process.client) {
+        if (response.config.url === '/_auth/oauth/github/authorize') {
+          if (response.data.error_description) {
+            app.$toast.error(
+              `Please log in again, ${response.data.error_description}`
+            );
+          }
         }
       }
+
+      // used for local logins
+      if (response.config.url === '/user/profile') {
+        app.context.redirect('/');
+        app.$toast.success(`Welcome back, ${response.data.user.name}`);
+      }
+
+      // used for GitHub logins
+      if (response.config.url === '/user/login/github') {
+        app.context.redirect('/');
+        app.$toast.success(`Welcome back, ${response.data.chingu.user.name}`);
+      }
+
       return response;
     },
     error => {
@@ -22,6 +32,10 @@ export default function({ $axios, app }) {
           data: { message },
         },
       } = error;
+      if (['/user/profile', '/user/login/github'].includes(error.config.url)) {
+        console.log(message);
+        app.$auth.reset();
+      }
 
       // only want to run these during github logins
       if (error.config.url === '/user/login/github') {

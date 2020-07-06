@@ -8,6 +8,7 @@ export default {
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
     EMAIL: process.env.EMAIL,
+    API_URL: process.env.API_URL,
   },
 
   head: {
@@ -64,15 +65,12 @@ export default {
   ],
 
   axios: {
-    baseURL:
-      process.env.NODE_ENV === 'development'
-        ? 'http://localhost:4000/api'
-        : 'https://bears-team.herokuapp.com/api',
+    baseURL: process.env.API_URL,
   },
 
   auth: {
     localStorage: false,
-    resetOnError: true,
+    resetOnError: false,
     redirect: {
       login: '/login',
       logout: '/',
