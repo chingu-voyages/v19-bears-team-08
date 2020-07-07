@@ -15,13 +15,13 @@ export default function({ $axios, app }) {
       // used for local logins
       if (response.config.url === '/user/profile') {
         app.context.redirect('/');
-        app.$toast.success(`Welcome back, ${response.data.user.name}`);
+        app.$toast.success(`Welcome back, ${response.data.user.local.name}`);
       }
 
       // used for GitHub logins
       if (response.config.url === '/user/login/github') {
         app.context.redirect('/');
-        app.$toast.success(`Welcome back, ${response.data.chingu.user.name}`);
+        app.$toast.success(`Welcome back, ${response.data.local.name}`);
       }
 
       return response;
@@ -33,7 +33,6 @@ export default function({ $axios, app }) {
         },
       } = error;
       if (['/user/profile', '/user/login/github'].includes(error.config.url)) {
-        console.log(message);
         app.$auth.reset();
       }
 

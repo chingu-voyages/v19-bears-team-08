@@ -127,7 +127,6 @@ async function handleLocalLogin(req, res, next) {
     const isPassValid = await bcrypt.compare(req.body.password, user.password);
     if (!isPassValid) throw createError(400, "Incorrect password");
 
-    console.log(user.isEmailVerified);
     if (!user.isEmailVerified) {
       throw createError(400, "Please verify your account first");
     }
@@ -164,18 +163,17 @@ async function handleGithubLogin(req, res, next) {
     const githubUser = await resp.json();
 
     // find that Github user's Chingu account
-    const chinguUser = await User.findOne({ email: githubUser.email })
+    const localUser = await User.findOne({ email: githubUser.email })
       .select({ password: 0, __v: 0 })
       .lean();
-    if (!chinguUser) {
+    if (!localUser) {
       throw createError(
         400,
         "An account was not found with the email that's associated with the provided Github account"
       );
     }
 
-    console.log(chinguUser.isEmailVerified);
-    if (!chinguUser.isEmailVerified) {
+    if (!localUser.isEmailVerified) {
       throw createError(400, "Please verify your account first");
     }
 
@@ -183,20 +181,20 @@ async function handleGithubLogin(req, res, next) {
     // ... will consider them authenticated for our site too
 
     // create and assign a token
-    const chinguToken = jwt.sign(
-      { userId: chinguUser._id },
+    const localToken = jwt.sign(
+      { userId: localUser._id },
       process.env.TOKEN_SECRET,
       { expiresIn: "1h" }
     );
 
     res.status(200).json({
-      chingu: {
-        token: chinguToken,
-        user: chinguUser,
+      local: {
+        token: localToken,
+        ...localUser,
       },
       github: {
         token: githubToken,
-        user: githubUser,
+        ...githubUser,
       },
     });
   } catch (err) {
@@ -207,7 +205,7 @@ async function handleGithubLogin(req, res, next) {
 // returns the user that owns the given jwt token
 async function getProfileInfo(req, res, next) {
   try {
-    const { userId } = res.locals;
+    const { userId, token } = res.locals;
 
     // this takes out the password and send the rest of the user object
     const user = await User.findById(userId)
@@ -215,7 +213,14 @@ async function getProfileInfo(req, res, next) {
       .lean();
     if (!user) throw createError(404, `User(${userId}) not found`);
 
-    res.status(200).json({ user });
+    res.status(200).json({
+      user: {
+        local: {
+          token,
+          ...user,
+        },
+      },
+    });
   } catch (err) {
     next(err);
   }

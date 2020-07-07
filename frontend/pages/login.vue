@@ -88,7 +88,7 @@ export default class Login extends Vue {
       .then(() => {
         this.$router.push('/');
         this.$toast.clear();
-        this.$toast.success(`Welcome back, ${this.$auth.user.name}!`);
+        this.$toast.success(`Welcome back, ${this.$auth.user.local.name}!`);
       })
       .catch(err => this.$toast.error(err.message));
   }
