@@ -37,6 +37,7 @@ $ npm run generate
 GITHUB_CLIENT_ID = string
 GITHUB_CLIENT_SECRET = string
 EMAIL = string
+API_URL = string
 ```
 
 > For detailed explanation on how things work, check out the [Nuxt.js docs](https://nuxtjs.org).
