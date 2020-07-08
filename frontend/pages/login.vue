@@ -50,21 +50,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import StyledHeader from '~/components/StyledHeader.vue';
-import StyledInput from '~/components/StyledInput.vue';
-import StyledAuthForm from '~/components/StyledAuthForm.vue';
-import StyledButton from '~/components/StyledButton.vue';
-import StyledFormLinks from '~/components/StyledFormLinks.vue';
+import { Vue, Component } from 'nuxt-property-decorator';
 
 @Component({
-  components: {
-    StyledHeader,
-    StyledInput,
-    StyledAuthForm,
-    StyledButton,
-    StyledFormLinks,
-  },
   head() {
     return {
       title: 'Login | Chingu',

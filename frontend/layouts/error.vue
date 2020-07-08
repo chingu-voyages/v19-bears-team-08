@@ -20,15 +20,8 @@
 </template>
 
 <script>
-import StyledHero from '~/components/StyledHero.vue';
-import StyledButton from '~/components/StyledButton.vue';
-
 export default {
   name: 'ErrorPage',
-  components: {
-    StyledHero,
-    StyledButton,
-  },
   props: {
     error: {
       type: Object,

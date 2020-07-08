@@ -16,12 +16,7 @@
 </template>
 
 <script>
-import StyledHeader from '~/components/StyledHeader.vue';
-
 export default {
-  components: {
-    StyledHeader,
-  },
   head() {
     return {
       title: 'Your Settings | Chingu',

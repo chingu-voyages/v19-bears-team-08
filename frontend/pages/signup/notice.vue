@@ -6,40 +6,27 @@
       :imgSrc="hero.imgSrc"
       :imgAlt="hero.imgAlt"
     >
-      <div class="flex">
-        <a :href="`mailto:${email}`">
+      <StyledButtonGroup>
+        <MailtoLink>
           <StyledButton green normal>
             Contact Us
           </StyledButton>
-        </a>
-        <nuxt-link to="/verification/new/email" class="ml-3">
+        </MailtoLink>
+        <nuxt-link to="/verification/new/email">
           <StyledButton pink inverted>
             Get Another Email
           </StyledButton>
         </nuxt-link>
-      </div>
+      </StyledButtonGroup>
     </StyledHero>
   </div>
 </template>
 
 <script>
-import StyledHero from '~/components/StyledHero.vue';
-import StyledButton from '~/components/StyledButton.vue';
-
 export default {
   name: 'UnverifiedAccount',
-  components: {
-    StyledHero,
-    StyledButton,
-  },
-  asyncData(ctx) {
-    return {
-      email: ctx.env.EMAIL,
-    };
-  },
   data() {
     return {
-      email: '',
       hero: {
         header: 'Unverified Account',
         subText: `
@@ -54,7 +41,7 @@ export default {
   },
   head() {
     return {
-      title: 'Unverified | Chingu',
+      title: 'Unverified Account | Chingu',
     };
   },
 };

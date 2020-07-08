@@ -28,17 +28,9 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator';
-import StyledHeader from '~/components/StyledHeader.vue';
-import StyledButton from '~/components/StyledButton.vue';
-import StyledInput from '~/components/StyledInput.vue';
 
 @Component({
-  components: {
-    StyledHeader,
-    StyledButton,
-    StyledInput,
-  },
-  middleware: ['auth'],
+  middleware: 'auth',
   head() {
     return {
       title: 'Your Profile | Chingu',

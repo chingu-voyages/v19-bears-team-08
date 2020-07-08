@@ -6,33 +6,20 @@
       :imgSrc="hero.imgSrc"
       :imgAlt="hero.imgAlt"
     >
-      <a :href="`mailto:${email}`">
+      <MailtoLink>
         <StyledButton green normal>
           Contact Us
         </StyledButton>
-      </a>
+      </MailtoLink>
     </StyledHero>
   </div>
 </template>
 
 <script>
-import StyledHero from '~/components/StyledHero.vue';
-import StyledButton from '~/components/StyledButton.vue';
-
 export default {
   name: 'SignupThanks',
-  components: {
-    StyledHero,
-    StyledButton,
-  },
-  asyncData(ctx) {
-    return {
-      email: ctx.env.EMAIL,
-    };
-  },
   data() {
     return {
-      email: '',
       hero: {
         header: 'Welcome to Chingu',
         subText: `

@@ -6,42 +6,30 @@
       :imgSrc="hero.imgSrc"
       :imgAlt="hero.imgAlt"
     >
-      <div class="flex">
+      <StyledButtonGroup>
         <nuxt-link to="/login">
           <StyledButton green normal>
             Create an Account
           </StyledButton>
         </nuxt-link>
-        <nuxt-link to="/about" class="ml-3">
+        <nuxt-link to="/about">
           <StyledButton pink inverted>
             About Us
           </StyledButton>
         </nuxt-link>
-      </div>
+      </StyledButtonGroup>
     </StyledHero>
 
-    <div class="my-6 md:my-8 flex flex-col ">
+    <div class="my-6 md:my-8 flex flex-col">
       <StyledHeader level="h2" text="Our Process" />
       <StyledList :list="processes" isCentered bubbleText />
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-import StyledHeader from '~/components/StyledHeader.vue';
-import StyledButton from '~/components/StyledButton.vue';
-import StyledList from '~/components/StyledList.vue';
-import StyledHero from '~/components/StyledHero.vue';
-
-export default Vue.extend({
+<script>
+export default {
   name: 'HowItWorks',
-  components: {
-    StyledHeader,
-    StyledButton,
-    StyledList,
-    StyledHero,
-  },
   data() {
     return {
       hero: {
@@ -100,5 +88,5 @@ export default Vue.extend({
       title: 'How It Works | Chingu',
     };
   },
-});
+};
 </script>

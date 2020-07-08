@@ -6,18 +6,18 @@
       :imgSrc="hero.imgSrc"
       :imgAlt="hero.imgAlt"
     >
-      <div class="flex">
+      <StyledButtonGroup>
         <nuxt-link to="/login">
           <StyledButton green normal>
             Create an Account
           </StyledButton>
         </nuxt-link>
-        <nuxt-link to="/howitworks" class="ml-3">
+        <nuxt-link to="/howitworks">
           <StyledButton pink inverted>
             How It Works
           </StyledButton>
         </nuxt-link>
-      </div>
+      </StyledButtonGroup>
     </StyledHero>
 
     <div class="my-6 md:my-8 flex flex-col items-center md:items-start">
@@ -52,19 +52,9 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-import StyledHeader from '~/components/StyledHeader.vue';
-import StyledButton from '~/components/StyledButton.vue';
-import StyledHero from '~/components/StyledHero.vue';
-
-export default Vue.extend({
+<script>
+export default {
   name: 'About',
-  components: {
-    StyledHeader,
-    StyledButton,
-    StyledHero,
-  },
   data() {
     return {
       hero: {
@@ -121,7 +111,7 @@ export default Vue.extend({
       title: 'About | Chingu',
     };
   },
-});
+};
 </script>
 
 <style lang="postcss" scoped>

@@ -7,15 +7,8 @@
 </template>
 
 <script>
-import StyledHeader from '~/components/StyledHeader.vue';
-import StyledLoader from '~/components/StyledLoader.vue';
-
 export default {
   name: 'Logout',
-  components: {
-    StyledHeader,
-    StyledLoader,
-  },
   mounted() {
     this.$auth.logout().then(() => {
       this.$toast.success('Successfully logged out');

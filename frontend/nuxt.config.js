@@ -1,4 +1,3 @@
-import path from 'path';
 require('dotenv').config();
 
 export default {
@@ -7,7 +6,6 @@ export default {
   env: {
     GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
     GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
-    EMAIL: process.env.EMAIL,
     API_URL: process.env.API_URL,
   },
 
@@ -25,6 +23,8 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/Logo.png' }],
   },
 
+  components: true,
+
   vue: {
     config: {
       devtools: true,
@@ -36,15 +36,6 @@ export default {
   },
 
   css: ['@/assets/css/tailwind.css'],
-
-  build: {
-    extractCSS: true,
-    postcss: {
-      plugins: {
-        tailwindcss: path.resolve(__dirname, './tailwind.config.js'),
-      },
-    },
-  },
 
   plugins: ['~/plugins/axios.js'],
 
@@ -60,8 +51,8 @@ export default {
     '@nuxtjs/auth',
     '@nuxtjs/toast',
     '@nuxt/content',
+    '@nuxt/components',
     'nuxt-fontawesome',
-    'nuxt-purgecss',
   ],
 
   axios: {
@@ -129,9 +120,5 @@ export default {
         icons: ['faGithub'],
       },
     ],
-  },
-
-  purgeCSS: {
-    whitelistPatterns: [/svg.*/, /fa.*/],
   },
 };

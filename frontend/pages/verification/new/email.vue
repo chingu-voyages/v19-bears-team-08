@@ -25,15 +25,8 @@
 </template>
 
 <script>
-import StyledInput from '~/components/StyledInput.vue';
-import StyledHero from '~/components/StyledHero.vue';
-
 export default {
   name: 'RequestNewVerificationEmail',
-  components: {
-    StyledInput,
-    StyledHero,
-  },
   data() {
     return {
       email: '',

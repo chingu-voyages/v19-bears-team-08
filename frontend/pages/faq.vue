@@ -6,15 +6,15 @@
 </template>
 
 <script>
-import StyledHeader from '~/components/StyledHeader.vue';
-
 export default {
-  components: {
-    StyledHeader,
-  },
   async asyncData({ $content }) {
     const faqs = await $content('pages/faq').fetch();
     return { faqs };
+  },
+  data() {
+    return {
+      faqs: '',
+    };
   },
   head() {
     return {

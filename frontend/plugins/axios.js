@@ -1,4 +1,4 @@
-export default function({ $axios, app }) {
+export default function ({ $axios, app }) {
   $axios.interceptors.response.use(
     response => {
       // used when a user first clicks through to login with GitHub

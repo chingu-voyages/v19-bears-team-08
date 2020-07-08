@@ -10,7 +10,7 @@
     <input
       :class="{ 'border-red-700': !!error }"
       :required="required"
-      :type="type || 'text'"
+      :type="type"
       :name="name"
       :minLength="minLength"
       :maxLength="maxLength"
@@ -40,20 +40,15 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Model, Emit } from 'vue-property-decorator';
-import StyledButton from '~/components/StyledButton.vue';
+import { Vue, Component, Prop, Model, Emit } from 'nuxt-property-decorator';
 
-@Component({
-  components: {
-    StyledButton,
-  },
-})
+@Component
 export default class StyledInput extends Vue {
-  @Prop(String) readonly type!: string;
   @Prop(Number) readonly minLength!: number;
   @Prop(Number) readonly maxLength!: number;
   @Prop(Boolean) readonly required!: boolean;
   @Prop({ type: String, required: true }) readonly placeholder!: string;
+  @Prop({ type: String, default: 'text' }) readonly type!: string;
   @Prop({ type: String, required: true }) readonly name!: string;
   @Prop({ type: String, required: true }) readonly label!: string;
   @Prop({ type: Boolean, default: false }) readonly showLabel!: boolean;

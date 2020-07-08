@@ -13,14 +13,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
-import StyledButton from '~/components/StyledButton.vue';
+import { Vue, Component, Prop } from 'nuxt-property-decorator';
 
-@Component({
-  components: {
-    StyledButton,
-  },
-})
+@Component
 export default class StyledAuthForm extends Vue {
   @Prop({ type: Function, required: true })
   readonly handleSubmit!: () => Promise<any>;

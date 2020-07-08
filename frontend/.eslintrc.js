@@ -13,8 +13,8 @@ module.exports = {
   ],
   plugins: ['prettier'],
   rules: {
-    "no-console": process.env.NODE_ENV === 'production' ? "error" : "off",
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'vue/attribute-hyphenation': ['error', 'never'],
-    "camelcase": "off"
+    camelcase: 'off',
   },
-}
+};

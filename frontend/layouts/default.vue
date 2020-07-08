@@ -45,7 +45,7 @@
           />
         </nuxt-link>
 
-        <Links />
+        <NavLinks />
       </nav>
 
       <!-- Page Content -->
@@ -63,13 +63,8 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'nuxt-property-decorator';
-import Links from '~/components/NavLinks/Links.vue';
 
-@Component({
-  components: {
-    Links,
-  },
-})
+@Component
 export default class Default extends Vue {
   isOpen = false;
 

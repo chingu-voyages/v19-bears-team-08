@@ -2,12 +2,12 @@
   <div class="flex-auto flex flex-col justify-between pt-3">
     <!-- Top Links -->
     <ul>
-      <Link v-for="link in links.top" :key="link.to" :link="link" />
+      <NavLink v-for="link in links.top" :key="link.to" :link="link" />
     </ul>
 
     <!-- Bottom Links -->
     <ul v-if="isMounted">
-      <Link v-for="link in bottomLinks" :key="link.text" :link="link" />
+      <NavLink v-for="link in bottomLinks" :key="link.text" :link="link" />
     </ul>
     <div v-else class="py-3 mx-auto">
       <StyledLoader />
@@ -16,9 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import Link from '~/components/NavLinks/Link.vue';
-import StyledLoader from '~/components/StyledLoader.vue';
+import { Vue, Component } from 'nuxt-property-decorator';
 
 type LinkTypes = {
   to: string;
@@ -26,12 +24,7 @@ type LinkTypes = {
   authRequired: boolean;
 };
 
-@Component({
-  components: {
-    Link,
-    StyledLoader,
-  },
-})
+@Component
 export default class Links extends Vue {
   isMounted = false;
 

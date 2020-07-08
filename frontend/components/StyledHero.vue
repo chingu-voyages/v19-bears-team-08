@@ -28,13 +28,9 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
-import StyledHeader from '~/components/StyledHeader.vue';
 
 @Component({
   name: 'StyledHero',
-  components: {
-    StyledHeader,
-  },
 })
 export default class StyledHero extends Vue {
   @Prop({ type: String, required: true }) readonly header!: string;

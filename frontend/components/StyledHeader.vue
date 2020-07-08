@@ -1,13 +1,13 @@
 <template>
-  <component :is="level" class="header pr-2 mx-auto text-center">
-    <span v-for="sText in splitText" :key="sText" class="">
-      {{ sText + ' ' }}
+  <component :is="level" class="header pr-2 mx-auto text-center md:text-left">
+    <span v-for="sText in splitText" :key="sText">
+      {{ sText }}
     </span>
   </component>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop } from 'nuxt-property-decorator';
 
 @Component
 export default class StyledHeader extends Vue {
@@ -25,6 +25,10 @@ export default class StyledHeader extends Vue {
   .header {
     margin-left: -0.75rem !important;
   }
+}
+.header span {
+  margin-right: -0.25rem !important;
+  @apply inline-block pl-3;
 }
 .header span:first-child {
   @apply relative pl-3;

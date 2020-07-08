@@ -6,18 +6,18 @@
       :imgSrc="hero.imgSrc"
       :imgAlt="hero.imgAlt"
     >
-      <div class="flex">
+      <StyledButtonGroup>
         <nuxt-link to="/login">
           <StyledButton green normal>
             Create an Account
           </StyledButton>
         </nuxt-link>
-        <nuxt-link to="/pricing" class="ml-3">
+        <nuxt-link to="/pricing">
           <StyledButton pink inverted>
             View Pricing
           </StyledButton>
         </nuxt-link>
-      </div>
+      </StyledButtonGroup>
     </StyledHero>
 
     <div class="my-6 md:my-8 flex flex-col">
@@ -48,18 +48,8 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator';
-import StyledHeader from '~/components/StyledHeader.vue';
-import StyledButton from '~/components/StyledButton.vue';
-import StyledList from '~/components/StyledList.vue';
-import StyledHero from '~/components/StyledHero.vue';
 
 @Component({
-  components: {
-    StyledHeader,
-    StyledButton,
-    StyledList,
-    StyledHero,
-  },
   head() {
     return {
       title: 'Schedule | Chingu',

@@ -57,12 +57,16 @@ type UserType = {
 type RepoType = {};
 
 @Component({
-  middleware: ['auth'],
-
+  middleware: 'auth',
+  head(this: Profile) {
+    return {
+      title: `${this.user.name} | Profile | Chingu`,
+    };
+  },
   asyncData({ params, error, $axios }): Promise<void | { user: UserType }> {
     return $axios
       .get(`/user?userId=${params.userId}`)
-      .then(res => {
+      .then((res: any) => {
         const user = res.data.user;
         const githubUsername = user.githubUsername;
 
@@ -73,7 +77,7 @@ type RepoType = {};
         // https://developer.github.com/v3/users/#get-a-user
         return $axios
           .get(`https://api.github.com/users/${githubUsername}`)
-          .then(resGithub => ({
+          .then((resGithub: any) => ({
             user: {
               ...resGithub.data,
               ...user,
@@ -84,11 +88,6 @@ type RepoType = {};
       .catch(() =>
         error({ statusCode: 404, message: `Sorry, we couldn't find that user` })
       );
-  },
-  head(this: Profile) {
-    return {
-      title: `${this.user.name} | Profile | Chingu`,
-    };
   },
 })
 export default class Profile extends Vue {

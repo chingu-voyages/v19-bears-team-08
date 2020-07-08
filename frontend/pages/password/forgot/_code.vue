@@ -64,30 +64,14 @@
 </template>
 
 <script>
-import StyledHeader from '~/components/StyledHeader.vue';
-import StyledAuthForm from '~/components/StyledAuthForm.vue';
-import StyledInput from '~/components/StyledInput.vue';
-import StyledFormLinks from '~/components/StyledFormLinks.vue';
-
 export default {
   name: 'ChangePassword',
-  components: {
-    StyledHeader,
-    StyledAuthForm,
-    StyledInput,
-    StyledFormLinks,
-  },
-  asyncData(ctx) {
-    return {
-      code: ctx.params.code,
-    };
-  },
   data() {
     return {
       email: '',
       password: '',
       confirmPassword: '',
-      code: '',
+      code: this.$route.params.code,
     };
   },
   methods: {

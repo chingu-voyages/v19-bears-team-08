@@ -6,18 +6,18 @@
       :imgSrc="hero.imgSrc"
       :imgAlt="hero.imgAlt"
     >
-      <div class="flex">
+      <StyledButtonGroup>
         <nuxt-link to="/schedule">
           <StyledButton green normal>
             View Schedule
           </StyledButton>
         </nuxt-link>
-        <nuxt-link to="/faq" class="ml-3">
+        <nuxt-link to="/faq">
           <StyledButton pink inverted>
             Have a Question?
           </StyledButton>
         </nuxt-link>
-      </div>
+      </StyledButtonGroup>
     </StyledHero>
 
     <div class="flex flex-col md:flex-row flex-wrap">
@@ -50,17 +50,8 @@
 </template>
 
 <script>
-import StyledHeader from '~/components/StyledHeader.vue';
-import StyledButton from '~/components/StyledButton.vue';
-import StyledHero from '~/components/StyledHero.vue';
-
 export default {
   name: 'Pricing',
-  components: {
-    StyledHeader,
-    StyledButton,
-    StyledHero,
-  },
   data() {
     return {
       hero: {

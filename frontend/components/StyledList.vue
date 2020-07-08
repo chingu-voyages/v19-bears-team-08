@@ -15,11 +15,10 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
-import StyledListItem, { ListItemType } from '~/components/StyledListItem.vue';
+import { ListItemType } from '~/components/StyledListItem.vue';
 
 @Component({
   name: 'List',
-  components: { StyledListItem },
 })
 export default class StyledList extends Vue {
   @Prop(Array) readonly list!: ListItemType[];

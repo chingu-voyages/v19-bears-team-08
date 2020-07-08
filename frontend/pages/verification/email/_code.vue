@@ -16,7 +16,7 @@
       </p>
       <p class="mb-4">
         Please submit your email address below or
-        <a :href="`mailto:${chinguEmail}`">contact us</a>
+        <MailtoLink>contact us</MailtoLink>
         directly.
       </p>
       <form class="mx-auto mt-1" @submit.prevent="getNewCode">
@@ -36,26 +36,11 @@
 </template>
 
 <script>
-import StyledHeader from '~/components/StyledHeader.vue';
-import StyledLoader from '~/components/StyledLoader.vue';
-import StyledInput from '~/components/StyledInput.vue';
-
 export default {
   name: 'VerifyEmail',
-  components: {
-    StyledHeader,
-    StyledLoader,
-    StyledInput,
-  },
-  asyncData(ctx) {
-    return {
-      chinguEmail: ctx.env.EMAIL,
-    };
-  },
   data() {
     return {
       isCodeExpired: false,
-      chinguEmail: '',
       email: '',
     };
   },
