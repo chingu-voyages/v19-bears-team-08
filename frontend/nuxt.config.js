@@ -66,6 +66,7 @@ export default {
 
   axios: {
     baseURL: process.env.API_URL,
+    debug: process.env.NODE_ENV !== 'production',
   },
 
   auth: {
