@@ -6,11 +6,18 @@
       :imgSrc="hero.imgSrc"
       :imgAlt="hero.imgAlt"
     >
-      <a :href="`mailto:${email}`">
-        <StyledButton green normal>
-          Contact Us
-        </StyledButton>
-      </a>
+      <div class="flex">
+        <a :href="`mailto:${email}`">
+          <StyledButton green normal>
+            Contact Us
+          </StyledButton>
+        </a>
+        <nuxt-link to="/verification/new/email" class="ml-3">
+          <StyledButton pink inverted>
+            Get Another Email
+          </StyledButton>
+        </nuxt-link>
+      </div>
     </StyledHero>
   </div>
 </template>
