@@ -14,13 +14,17 @@ export default function({ $axios, app }) {
 
       // used for local logins
       if (response.config.url === '/user/profile') {
-        app.context.redirect('/');
+        if (app.context.route.path === '/login') {
+          app.context.redirect('/');
+        }
         app.$toast.success(`Welcome back, ${response.data.user.local.name}`);
       }
 
       // used for GitHub logins
       if (response.config.url === '/user/login/github') {
-        app.context.redirect('/');
+        if (app.context.route.path === '/login') {
+          app.context.redirect('/');
+        }
         app.$toast.success(`Welcome back, ${response.data.local.name}`);
       }
 
