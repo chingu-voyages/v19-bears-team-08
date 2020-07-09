@@ -6,15 +6,15 @@
       :imgSrc="hero.imgSrc"
       :imgAlt="hero.imgAlt"
     >
-      <div class="flex">
-        <nuxt-link to="/" class="my-0">
+      <StyledButtonGroup>
+        <nuxt-link to="/">
           <StyledButton green normal>Go Home</StyledButton>
         </nuxt-link>
 
-        <StyledButton pink inverted :onClick="goBack" class="my-0 ml-3">
+        <StyledButton pink inverted :onClick="goBack">
           Go Back
         </StyledButton>
-      </div>
+      </StyledButtonGroup>
     </StyledHero>
   </div>
 </template>
@@ -40,6 +40,7 @@ export default {
   },
   computed: {
     statusCode() {
+      console.log(this.error);
       return (this.error && this.error.statusCode) || 500;
     },
     message() {
