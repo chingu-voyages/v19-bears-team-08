@@ -2,7 +2,7 @@
   <div>
     <StyledHero
       :header="hero.header"
-      :subText="message"
+      :subText="hero.subText"
       :imgSrc="hero.imgSrc"
       :imgAlt="hero.imgAlt"
     >
@@ -32,18 +32,17 @@ export default {
     return {
       hero: {
         header: "We're Sorry",
-        subText: this.message,
+        subText: `
+          We've experienced an error. If you continue to experience this issue, please inform us.
+        `,
         imgSrc: '/page/error/BlankCanvas.svg',
         imgAlt: 'blank canvas',
       },
     };
   },
   computed: {
-    statusCode() {
-      console.log(this.error);
-      return (this.error && this.error.statusCode) || 500;
-    },
     message() {
+      console.error(this.error.message);
       return this.error.message || '<%= messages.client_error %>';
     },
   },
@@ -54,7 +53,7 @@ export default {
   },
   head() {
     return {
-      title: this.message,
+      title: 'Error | Chingu',
     };
   },
 };
