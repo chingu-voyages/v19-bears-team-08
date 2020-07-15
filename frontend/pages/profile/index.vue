@@ -1,35 +1,20 @@
 <template>
   <div>
-    <StyledHeader level="h1" text="Profile" />
-
-    <h4>Want to connect your GitHub?</h4>
-    <StyledInput
-      required
-      showInlineButton
-      label="GitHub Username"
-      name="githubUsername"
-      type="text"
-      :minLength="3"
-      placeholder="Enter your GitHub username"
-    />
-    <div v-if="this.$auth.strategy.name === 'github'">
-      <p>{{ this.$auth.user.github.user.name }}</p>
-      <p>{{ this.$auth.user.email }}</p>
-    </div>
-
-    <div v-else>
-      <p>{{ this.$auth.user.email }}</p>
-      <p>{{ this.$auth.user.creationDate }}</p>
-      <p>{{ JSON.stringify(this.$auth.user.roles) }}</p>
-      <p>{{ JSON.stringify(this.$auth.user.activeMember) }}</p>
-    </div>
+    <StyledHeader level="h1" text="Your Profile" />
+    <p class="mb-6 text-center md:text-left max-w-md md:max-w-none">
+      View and manage your profile details below.
+    </p>
+    <p>{{ localUser.name }}</p>
+    <p>{{ githubUser.name }}</p>
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator';
+import { LocalUser, GithubUser } from 'types/User';
 
 @Component({
+  name: 'YourProfile',
   middleware: 'auth',
   head() {
     return {
@@ -38,9 +23,16 @@ import { Vue, Component } from 'nuxt-property-decorator';
   },
 })
 export default class Profile extends Vue {
-  get user() {
-    console.log(this.$auth.strategy.name);
-    return this.$auth.strategy;
+  get isGithubAuth(): boolean {
+    return this.$auth.strategy.name === 'github';
+  }
+
+  get localUser(): LocalUser {
+    return this.$auth.user.local;
+  }
+
+  get githubUser(): GithubUser {
+    return this.$auth.user.github as GithubUser;
   }
 }
 </script>
