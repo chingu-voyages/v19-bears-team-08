@@ -28,9 +28,10 @@
       "@nuxt/types",
       "@nuxt/content",
       "@nuxtjs/axios",
-      "@types/nuxtjs__auth",
+      "@nuxtjs/toast",
     ],
   },
+  "files": ["./types/auth.d.ts"],
   "exclude": [
     "node_modules",
     ".nuxt",
