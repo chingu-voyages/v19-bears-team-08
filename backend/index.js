@@ -29,7 +29,9 @@ app.use(
 //load and set base endpoints here
 const authRoutes = require("./routes/auth");
 const pugTemplateRoutes = require("./routes/pug-templates");
+const openProjectRoutes = require("./routes/open-projects");
 app.use("/api/user", authRoutes);
+app.use("/api/projects", openProjectRoutes);
 app.use("/api/templates", pugTemplateRoutes);
 
 //catches all endpoints that don't exist above
