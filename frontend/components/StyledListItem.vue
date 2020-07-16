@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex listitem"
+    class="listitem flex"
     :class="{
       'listitem-centered': isCentered,
       'opacity-50': index < activeItem - 1,
@@ -13,20 +13,15 @@
     >
       <span
         class="absolute h-full w-1 bg-green"
-        :class="{ 'bg-pink': activeColor }"
+        :class="{ 'bg-pink': isActiveItem }"
       />
-      <div
-        class="flex justify-center items-center rounded-full h-10 w-10 bg-green transform transition-transform duration-150"
-        :class="{ 'bg-pink': activeColor }"
-      >
-        <div v-if="bubbleText" class="absolute text-white font-bold">
-          {{ index + 1 }}
-        </div>
-      </div>
+      <StyledCircleContainer :hasContent="isNumbered" :isActive="isActiveItem">
+        {{ index + 1 }}
+      </StyledCircleContainer>
     </div>
 
     <!-- right side -->
-    <div class="text-container">
+    <div class="listitem__text-container">
       <h4>{{ item.title }}</h4>
       <ul
         v-if="item.information && item.information.length"
@@ -53,16 +48,16 @@ export type ListItemType = {
   information: string[];
 };
 
-@Component({})
+@Component({ name: 'StyledListItem' })
 export default class StyledListItem extends Vue {
   @Prop({ type: Object, required: true }) readonly item!: ListItemType;
   @Prop({ type: Number, required: true }) readonly index!: number;
   @Prop({ type: Boolean }) readonly isCentered!: boolean;
+  @Prop({ type: Boolean }) readonly isNumbered!: boolean;
   @Prop({ type: Boolean }) readonly listDesc!: boolean;
-  @Prop({ type: Boolean }) readonly bubbleText!: boolean;
   @Prop({ type: Number, default: 0 }) readonly activeItem!: number;
 
-  get activeColor(): boolean {
+  get isActiveItem(): boolean {
     return this.index === this.activeItem - 1 && !this.isCentered;
   }
 }
@@ -77,15 +72,15 @@ export default class StyledListItem extends Vue {
   height: 50%;
   top: 0;
 }
-.listitem .text-container ul li:last-child {
+.listitem .listitem__text-container ul li:last-child {
   margin-bottom: 0px;
 }
 
-.listitem:last-child .text-container ul {
+.listitem:last-child .listitem__text-container ul {
   padding-bottom: 0px;
 }
 
-.text-container {
+.listitem__text-container {
   margin: 8px 0;
 }
 

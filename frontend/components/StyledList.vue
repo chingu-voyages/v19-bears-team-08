@@ -7,7 +7,7 @@
       :index="index"
       :isCentered="isCentered"
       :listDesc="listDesc"
-      :bubbleText="bubbleText"
+      :isNumbered="isNumbered"
       :activeItem="activeItem"
     />
   </div>
@@ -17,16 +17,12 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
 import { ListItemType } from '~/components/StyledListItem.vue';
 
-@Component({
-  name: 'List',
-})
+@Component({ name: 'StyledList' })
 export default class StyledList extends Vue {
   @Prop(Array) readonly list!: ListItemType[];
-  @Prop({ type: Boolean, default: false }) readonly isCentered!: boolean;
-  @Prop({ type: Boolean, default: false }) readonly listDesc!: boolean;
-  @Prop({ type: Boolean, default: false }) readonly bubbleText!: boolean;
+  @Prop({ type: Boolean }) readonly isCentered!: boolean;
+  @Prop({ type: Boolean }) readonly listDesc!: boolean;
+  @Prop({ type: Boolean }) readonly isNumbered!: boolean;
   @Prop({ type: Number, default: 0 }) readonly activeItem!: number;
 }
 </script>
-
-<style lang="postcss"></style>

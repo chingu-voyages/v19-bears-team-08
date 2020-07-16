@@ -22,7 +22,7 @@
 
     <div class="my-6 md:my-8 flex flex-col">
       <StyledHeader level="h2" text="Our Process" />
-      <StyledList :list="processes" isCentered bubbleText />
+      <StyledList :list="processes" isCentered isNumbered />
     </div>
   </div>
 </template>
