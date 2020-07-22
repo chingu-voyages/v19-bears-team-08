@@ -1,14 +1,25 @@
 <template>
   <div
-    class="styled-hero my-6 md:my-8 flex flex-col-reverse md:flex-row items-center"
+    class="styled-hero my-6 md:my-8 flex flex-col md:flex-row-reverse items-center md:items-start"
   >
+    <img
+      :src="imgSrc"
+      :alt="imgAlt"
+      class="h-56 sm:h-64 md:h-auto w-auto sm:w-1/2 md:w-2/5 ml-0 md:ml-6 mb-6 md:mb-0"
+    />
+
     <div
       class="flex flex-col items-center md:items-start self-start w-full md:w-3/5 px-2 md:px-0"
     >
       <StyledHeader level="h1" :text="header" />
 
-      <p class="mb-6 text-center md:text-left max-w-md md:max-w-none">
-        {{ subText }}
+      <p
+        v-for="(text, index) in bodyText"
+        :key="text + index"
+        class="text-center md:text-left max-w-md md:max-w-none"
+        :class="index === bodyText.length - 1 ? 'mb-6' : 'mb-1'"
+      >
+        {{ text }}
       </p>
 
       <div
@@ -17,37 +28,24 @@
         <slot />
       </div>
     </div>
-
-    <img
-      :src="imgSrc"
-      :alt="imgAlt"
-      class="h-56 sm:h-64 md:h-auto w-auto sm:w-1/2 md:w-2/5 ml-0 md:ml-6"
-    />
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
 
-@Component({
-  name: 'StyledHero',
-})
+@Component
 export default class StyledHero extends Vue {
   @Prop({ type: String, required: true }) readonly header!: string;
   @Prop({ type: String, required: true }) readonly subText!: string;
   @Prop({ type: String, required: true }) readonly imgSrc!: string;
   @Prop({ type: String, required: true }) readonly imgAlt!: string;
-}
-</script>
+  @Prop({ type: Boolean, default: false }) readonly splitBody!: boolean;
 
-<style lang="postcss">
-.styled-hero img {
-  margin-bottom: 1.5rem !important;
-}
-
-@screen md {
-  .styled-hero img {
-    margin-bottom: 0 !important;
+  get bodyText(): string[] {
+    if (!this.splitBody) return [this.subText];
+    const re = /[^.!?>]+[.!?>]+/g;
+    return this.subText.match(re) || [this.subText];
   }
 }
-</style>
+</script>
