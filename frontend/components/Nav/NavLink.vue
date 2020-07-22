@@ -19,10 +19,8 @@ type LinkTypes = {
   authRequired: boolean;
 };
 
-@Component({})
-export default class Link extends Vue {
+@Component
+export default class NavLink extends Vue {
   @Prop() readonly link!: LinkTypes;
 }
 </script>
-
-<style></style>
