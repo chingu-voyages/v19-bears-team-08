@@ -1,10 +1,15 @@
 <template>
   <div>
     <StyledHero
-      :header="hero.header"
-      :subText="hero.subText"
-      :imgSrc="hero.imgSrc"
-      :imgAlt="hero.imgAlt"
+      splitBody
+      header="We're Sorry"
+      :subText="`
+        We've experienced an error.
+        ${'< ' + message + ' >'}
+        If you continue to experience this issue, please inform us.
+      `"
+      imgSrc="/page/error/BlankCanvas.svg"
+      imgAlt="blank canvas"
     >
       <StyledButtonGroup>
         <nuxt-link to="/">
@@ -19,42 +24,30 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ErrorPage',
-  props: {
-    error: {
-      type: Object,
-      default: null,
-    },
-  },
-  data() {
-    return {
-      hero: {
-        header: "We're Sorry",
-        subText: `
-          We've experienced an error. If you continue to experience this issue, please inform us.
-        `,
-        imgSrc: '/page/error/BlankCanvas.svg',
-        imgAlt: 'blank canvas',
-      },
-    };
-  },
-  computed: {
-    message() {
-      console.error(this.error.message);
-      return this.error.message || '<%= messages.client_error %>';
-    },
-  },
-  methods: {
-    goBack() {
-      this.$router.back();
-    },
-  },
+<script lang="ts">
+import { Vue, Component, Prop } from 'nuxt-property-decorator';
+
+type ErrorType = {
+  message: string;
+  statusCode: number;
+};
+
+@Component({
   head() {
     return {
       title: 'Error | Chingu',
     };
   },
-};
+})
+export default class ErrorPage extends Vue {
+  @Prop({ type: Object }) error!: ErrorType;
+
+  get message(): string {
+    return this.error.message;
+  }
+
+  goBack(): void {
+    this.$router.back();
+  }
+}
 </script>
