@@ -1,4 +1,3 @@
-const getToken = require("./getToken");
 const checkDev = require("./checkDev");
 const isAdmin = require("./isAdmin");
 const isOwner = require("./isOwner");
