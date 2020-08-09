@@ -1,0 +1,80 @@
+html {
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-light;
+}
+h1 {
+  @apply text-4xl mb-4 text-gray-900;
+}
+h2 {
+  @apply text-3xl mb-3 text-gray-900;
+}
+h3 {
+  @apply text-2xl mb-2 text-gray-800;
+}
+h4 {
+  @apply text-xl mb-2 text-gray-800;
+}
+h5 {
+  @apply text-lg mb-1 text-gray-700;
+}
+h6 {
+  @apply text-base mb-1 text-gray-700;
+}
+@media md {
+  h1 {
+    @apply text-5xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-3xl;
+  }
+  h4 {
+    @apply text-2xl;
+  }
+  h5 {
+    @apply text-xl;
+  }
+  h6 {
+    @apply text-lg;
+  }
+}
+p,
+li,
+a,
+div {
+  @apply text-gray-600 font-normal leading-relaxed mb-1;
+}
+a {
+  @apply text-pink;
+}
+a:hover {
+  @apply underline;
+}
+div {
+  @apply mb-0;
+}

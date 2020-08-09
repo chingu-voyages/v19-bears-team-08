@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="faq-page">
     <StyledHeader level="h1" text="Frequently Asked Questions" />
     <nuxt-content :document="faqs" />
   </div>
@@ -24,22 +24,22 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
-h3 {
+<style lang="postcss">
+.faq-page h3 {
   @apply text-center mt-10;
 }
-h3:first-child {
+.faq-page h3:first-child {
   @apply mt-0;
 }
 @screen md {
-  h3 {
+  .faq-page h3 {
     @apply text-left;
   }
 }
-p {
+.faq-page p {
   @apply px-2 mb-2;
 }
-a {
+.faq-page a {
   @apply text-pink;
 }
 </style>

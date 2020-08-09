@@ -113,7 +113,14 @@ export default {
     imports: [
       {
         set: '@fortawesome/free-solid-svg-icons',
-        icons: ['faTimes', 'faBars', 'faSpinner', 'faUserCheck', 'faUserPlus'],
+        icons: [
+          'faTimes',
+          'faBars',
+          'faSpinner',
+          'faUserCheck',
+          'faUserPlus',
+          'faUser',
+        ],
       },
       {
         set: '@fortawesome/free-brands-svg-icons',

@@ -1,10 +1,13 @@
 <template>
   <div>
     <StyledHero
-      :header="hero.header"
-      :subText="hero.subText"
-      :imgSrc="hero.imgSrc"
-      :imgAlt="hero.imgAlt"
+      header="Our Pricing"
+      subText="
+        We have two options available to get started. 
+        Try out a single voyage or have a year's access to really commit to leveling up.
+      "
+      imgSrc="/page/pricing/TwoOptions.svg"
+      imgAlt="two options"
     >
       <StyledButtonGroup>
         <nuxt-link to="/schedule">
@@ -20,11 +23,11 @@
       </StyledButtonGroup>
     </StyledHero>
 
-    <div class="flex flex-col md:flex-row flex-wrap">
+    <div class="flex flex-col md:flex-row flex-wrap my-6 md:my-8">
       <div
         v-for="option in options"
         :key="option.title"
-        class="pricing-container flex w-full flex-col items-center md:items-start p-2 mb-6 md:mb-8"
+        class="flex w-full lg:w-1/2 flex-col items-center md:items-start lg:items-center p-2 mb-6 md:mb-8"
       >
         <StyledHeader level="h2" :text="option.title" />
         <h6 class="text-center">{{ option.subtitle }}</h6>
@@ -54,15 +57,6 @@ export default {
   name: 'Pricing',
   data() {
     return {
-      hero: {
-        header: 'Our Pricing',
-        subText: `
-          We have two options available to get started. 
-          Try out a single voyage or have a year's access to really commit to leveling up.
-        `,
-        imgSrc: '/page/pricing/TwoOptions.svg',
-        imgAlt: 'two options',
-      },
       currency: '$',
       options: [
         {
@@ -103,10 +97,6 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.pricing-container {
-  min-width: 300px;
-}
-
 li span:before {
   content: '🚀';
   @apply mr-1;

@@ -1,0 +1,6 @@
+.toasted-container .toasted.toasted-msg {
+  justify-content: center;
+  text-align: center;
+  line-height: 1.3rem;
+  padding: 5px 20px;
+}

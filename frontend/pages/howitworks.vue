@@ -1,10 +1,12 @@
 <template>
   <div>
     <StyledHero
-      :header="hero.header"
-      :subText="hero.subText"
-      :imgSrc="hero.imgSrc"
-      :imgAlt="hero.imgAlt"
+      header="Developer Voyages"
+      subText="
+        A Chingu Voyage is a remote 6-week program for web developers.
+        You will build a project in a remote team and level-up with the technical and soft skills required in a professional software job."
+      imgSrc="/page/howitworks/TeamSpirit.svg"
+      imgAlt="team spirit"
     >
       <StyledButtonGroup>
         <nuxt-link to="/login">
@@ -20,7 +22,9 @@
       </StyledButtonGroup>
     </StyledHero>
 
-    <div class="my-6 md:my-8 flex flex-col">
+    <div
+      class="my-6 md:my-8 flex flex-col items-center md:items-start lg:items-center"
+    >
       <StyledHeader level="h2" text="Our Process" />
       <StyledList :list="processes" isCentered isNumbered />
     </div>
@@ -32,15 +36,6 @@ export default {
   name: 'HowItWorks',
   data() {
     return {
-      hero: {
-        header: 'Developer Voyages',
-        subText: `
-          A Chingu Voyage is a remote 6-week program for web developers.
-          You will build a project in a remote team and level-up with the technical and soft skills required in a professional software job.
-        `,
-        imgSrc: '/page/howitworks/TeamSpirit.svg',
-        imgAlt: 'team spirit',
-      },
       processes: [
         {
           title: 'Apply',

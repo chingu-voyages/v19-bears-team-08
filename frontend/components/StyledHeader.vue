@@ -1,5 +1,5 @@
 <template>
-  <component :is="level" class="header pr-2 mx-auto text-center md:text-left">
+  <component :is="level" class="header pr-2 text-center md:text-left">
     <span v-for="sText in splitText" :key="sText">
       {{ sText }}
     </span>

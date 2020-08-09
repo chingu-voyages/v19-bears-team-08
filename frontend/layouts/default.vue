@@ -1,132 +1,174 @@
 <template>
-  <div>
-    <div class="app-background app-background-left" />
-    <div
-      class="app-container min-h-screen max-h-screen ml-auto overflow-hidden bg-gray-200 flex flex-row"
+  <div class="layout-container">
+    <nav
+      class="fixed md:relative lg:fixed z-20 top-0 w-full md:w-64 lg:w-full h-16 md:h-24 lg:h-16 px-4 bg-gray-300"
     >
       <div
-        class="fixed z-20 top-0 w-full h-16 flex justify-between px-4 items-center bg-gray-300 md:hidden"
+        class="flex justify-between items-center max-w-screen-lg m-auto py-2 md:py-3 lg:py-2"
       >
-        <nuxt-link to="/" class="m-0">
-          <img src="/Logo.png" alt="Chingu logo" class="w-12" />
-        </nuxt-link>
-        <div
-          class="flex justify-center items-center h-12 w-12 rounded-full bg-gray-300 hover:bg-gray-200"
+        <!-- Chingu logo link here -->
+        <nuxt-link
+          to="/"
+          class="h-auto w-12 md:w-20 lg:w-12 m-0 md:mx-auto lg:m-0"
         >
-          <fa
-            v-if="isOpen"
-            icon="times"
-            class="md:hidden text-xl"
-            @click="setIsOpen(false)"
-          />
-          <fa
-            v-else
-            icon="bars"
-            class="md:hidden text-xl"
-            @click="setIsOpen(true)"
-          />
+          <img src="/Logo.png" alt="Chingu logo" />
+        </nuxt-link>
+
+        <!-- Large screen size links and button/dropdown -->
+        <div class="hidden lg:flex items-end">
+          <!-- Links for screen sizes >= lg -->
+          <ul class="flex mr-2">
+            <LayoutLink
+              v-for="link in links.main"
+              :key="link.to"
+              :link="link"
+            />
+          </ul>
+
+          <LayoutAuthDropdown :icon="isMounted ? 'user' : 'spinner'">
+            <LayoutLink v-for="link in authLinks" :key="link.to" :link="link" />
+          </LayoutAuthDropdown>
+        </div>
+
+        <!-- Button for screen sizes < lg -->
+        <LayoutMenuButton :isOpen="isOpen" :setIsOpen="setIsOpen" />
+      </div>
+    </nav>
+
+    <!-- Sidebar for screen sizes < lg -->
+    <aside
+      class="absolute md:fixed lg:hidden top-0 flex flex-col w-64 bg-gray-300 pt-20 md:pt-24 py-4 md:py-3 z-10 transform md:translate-x-0 transition-transform duration-150"
+      :class="{
+        'translate-x-0': isOpen,
+        '-translate-x-full shadow-none': !isOpen,
+      }"
+    >
+      <div class="flex-auto flex flex-col justify-between">
+        <!-- Top Links -->
+        <ul>
+          <LayoutLink v-for="link in links.main" :key="link.to" :link="link" />
+        </ul>
+
+        <!-- Bottom Links -->
+        <ul v-if="isMounted">
+          <LayoutLink v-for="link in authLinks" :key="link.to" :link="link" />
+        </ul>
+        <div v-else class="py-3 mx-auto">
+          <StyledLoader />
         </div>
       </div>
+    </aside>
 
-      <!-- Sidebar -->
-      <nav
-        class="absolute md:static flex flex-col h-full md:h-auto w-64 bg-gray-300 md:mt-0 pt-16 pb-3 md:py-3 z-10 transition-transform duration-150 transform md:translate-x-0"
-        :class="{
-          'translate-x-0': isOpen,
-          '-translate-x-full': !isOpen,
-          'shadow-none': !isOpen,
-        }"
-      >
-        <nuxt-link class="flex flex-col items-center m-0" to="/">
-          <img
-            src="/Logo.png"
-            alt="Chingu logo"
-            class="w-20 h-20 hidden md:block"
-          />
-        </nuxt-link>
-
-        <NavLinks />
-      </nav>
-
-      <!-- Page Content -->
-      <main
-        class="w-full overflow-y-auto overflow-x-hidden mt-16 md:mt-0 px-2 sm:px-3 md:px-10 py-3 md:py-6 flex flex-col items-center md:items-start md:bg-gray-200 md:opacity-100 transition-all duration-100"
-        :class="{ 'opacity-25': isOpen }"
-      >
-        <div class="page-container">
-          <nuxt />
-        </div>
-      </main>
-    </div>
+    <!-- Nuxt Page Content -->
+    <main
+      class="md:absolute top-0 w-full h-screen overflow-y-auto overflow-x-hidden flex flex-col items-center md:items-start lg:items-center bg-gray-200 md:opacity-100 transition-all duration-100"
+      :class="{ 'opacity-25': isOpen }"
+    >
+      <div class="page-container">
+        <nuxt />
+      </div>
+    </main>
   </div>
 </template>
 
-<script lang="ts">
-import { Vue, Component, Watch } from 'nuxt-property-decorator';
+<script>
+import { links } from '~/utils';
 
-@Component
-export default class Default extends Vue {
-  isOpen = false;
-
-  setIsOpen(bool: boolean) {
-    this.isOpen = bool;
-  }
-
-  onResize() {
-    this.isOpen = window.innerWidth > 767;
-  }
-
-  @Watch('$nuxt.$route.fullPath')
-  onRouteChange() {
-    this.isOpen = false;
-  }
-
+export default {
+  name: 'Layout',
+  data() {
+    return {
+      links,
+      isMounted: false,
+      isOpen: false,
+    };
+  },
+  computed: {
+    authLinks() {
+      return this.$auth.loggedIn ? links.restricted : links.auth;
+    },
+  },
   mounted() {
+    this.isMounted = true;
     this.$nextTick(() => {
       this.onResize();
       window.addEventListener('resize', this.onResize);
     });
-  }
-
+  },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize);
-  }
-}
+  },
+  methods: {
+    setIsOpen(boolean) {
+      this.isOpen = boolean;
+    },
+    onResize() {
+      const isMedium = window.innerWidth > 767 && window.innerWidth < 1025;
+      this.isOpen = isMedium;
+    },
+    onRouteChange() {
+      this.isOpen = false;
+    },
+  },
+};
 </script>
 
 <style lang="postcss">
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
+* > :first-child {
+  margin-top: 0;
+}
+* > :last-child {
+  margin-bottom: 0;
 }
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
+nav {
+  box-shadow: 1px 0 5px 1px #d1d4d8;
+}
+@screen md {
+  nav {
+    @apply shadow-none;
+  }
+}
+@screen lg {
+  nav {
+    box-shadow: 1px 0 5px 1px #d1d4d8;
+  }
 }
 
-.app-background {
-  width: 50%;
-  height: 100vh;
-  position: absolute;
-  z-index: -1;
+aside {
+  @apply h-screen;
 }
-.app-background-left {
-  @apply bg-gray-300 left-0;
+@screen md {
+  aside {
+    @apply fixed pt-24;
+  }
 }
-.app-container {
-  max-width: calc(100vw - ((100vw - 1024px) / 2));
-  @apply w-full;
+@screen lg {
+  aside {
+    @apply hidden;
+  }
 }
+
+main {
+  @apply pt-24 pb-5 px-2;
+}
+@screen sm {
+  main {
+    @apply px-3;
+  }
+}
+@screen md {
+  main {
+    padding-left: 18.5rem;
+    @apply py-6;
+  }
+}
+@screen lg {
+  main {
+    @apply pt-24 pb-8 px-10;
+  }
+}
+
 .page-container {
   @apply max-w-screen-md w-full;
 }
@@ -138,88 +180,9 @@ html {
     @apply items-start;
   }
 }
-
-nav {
-  box-shadow: 1px 0 5px 1px #d1d4d8;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @apply font-light;
-}
-h1 {
-  @apply text-4xl mb-4 text-gray-900;
-}
-h2 {
-  @apply text-3xl mb-3 text-gray-900;
-}
-h3 {
-  @apply text-2xl mb-2 text-gray-800;
-}
-h4 {
-  @apply text-xl mb-2 text-gray-800;
-}
-h5 {
-  @apply text-lg mb-1 text-gray-700;
-}
-h6 {
-  @apply text-base mb-1 text-gray-700;
-}
-@media md {
-  h1 {
-    @apply text-5xl;
+@screen lg {
+  .page-container > div {
+    @apply items-center;
   }
-  h2 {
-    @apply text-4xl;
-  }
-  h3 {
-    @apply text-3xl;
-  }
-  h4 {
-    @apply text-2xl;
-  }
-  h5 {
-    @apply text-xl;
-  }
-  h6 {
-    @apply text-lg;
-  }
-}
-p,
-li,
-a,
-div {
-  @apply text-gray-600 font-normal leading-relaxed mb-1;
-}
-a {
-  @apply text-pink;
-}
-a:hover {
-  @apply underline;
-}
-div {
-  @apply mb-0;
-}
-
-* > :first-child {
-  margin-top: 0;
-}
-* > :last-child {
-  margin-bottom: 0;
-}
-button:focus,
-a:focus {
-  outline: none;
-}
-
-.toasted-container .toasted.toasted-msg {
-  justify-content: center;
-  text-align: center;
-  line-height: 1.3rem;
-  padding: 5px 20px;
 }
 </style>

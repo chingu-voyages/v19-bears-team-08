@@ -1,10 +1,13 @@
 <template>
   <div>
     <StyledHero
-      :header="hero.header"
-      :subText="hero.subText"
-      :imgSrc="hero.imgSrc"
-      :imgAlt="hero.imgAlt"
+      header="Boost Your Career"
+      subText="
+        All self-directed developers run into the same problems. 
+        No team experience, feeling lost working alone, endless tutorials, not enough finished projects. 
+        The good news? Chingu solves them."
+      imgSrc="/page/about/ToTheStars.svg"
+      imgAlt="rocket launching"
     >
       <StyledButtonGroup>
         <nuxt-link to="/login">
@@ -20,7 +23,9 @@
       </StyledButtonGroup>
     </StyledHero>
 
-    <div class="my-6 md:my-8 flex flex-col items-center md:items-start">
+    <div
+      class="my-6 md:my-8 flex flex-col items-center md:items-start lg:items-center"
+    >
       <StyledHeader level="h2" text="Accomplishments" />
       <div class="flex flex-wrap justify-center md:justify-start">
         <div
@@ -35,7 +40,9 @@
       </div>
     </div>
 
-    <div class="my-6 md:my-8 flex flex-col items-center md:items-start">
+    <div
+      class="my-6 md:my-8 flex flex-col items-center md:items-start lg:items-center"
+    >
       <StyledHeader level="h2" text="Past Voyager Experiences" />
       <p class="mb-2 text-lg text-center md:text-left">
         Chingu has helped thousands of people accelerate their learning
@@ -57,16 +64,6 @@ export default {
   name: 'About',
   data() {
     return {
-      hero: {
-        header: 'Boost Your Career',
-        subText: `
-          All self-directed developers run into the same problems. 
-          No team experience, feeling lost working alone, endless tutorials, not enough finished projects. 
-          The good news? Chingu solves them.
-        `,
-        imgSrc: '/page/about/ToTheStars.svg',
-        imgAlt: 'rocket launching',
-      },
       stats: [
         {
           num: '2,028',

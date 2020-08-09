@@ -1,10 +1,13 @@
 <template>
   <div>
     <StyledHero
-      :header="hero.header"
-      :subText="hero.subText"
-      :imgSrc="hero.imgSrc"
-      :imgAlt="hero.imgAlt"
+      header="Our Schedules"
+      subText="
+        We offer two types of services: voyages and pair-programming. 
+        The former is 6 weeks in length and the latter can be anything from 30 minutes to a couple of hours. 
+        Below you'll find a breakdown of each service's schedule."
+      imgSrc="/page/schedule/Events.svg"
+      imgAlt="girl looking at a calendar"
     >
       <StyledButtonGroup>
         <nuxt-link to="/login">
@@ -20,10 +23,12 @@
       </StyledButtonGroup>
     </StyledHero>
 
-    <div class="my-6 md:my-8 flex flex-col">
+    <div
+      class="my-6 md:my-8 flex flex-col items-center md:items-start lg:items-center"
+    >
       <StyledHeader level="h2" text="Voyages" />
       <blockquote
-        class="text-gray-800 py-4 px-8 mt-3 mb-4 mx-0 bg-gray-300 border-pink border-l-4 italic"
+        class="text-gray-800 w-10/12 py-4 px-8 mt-3 mb-4 mx-0 bg-gray-300 border-pink border-l-4 italic"
       >
         <p class="text-gray-700">
           We start a new voyage launch on the first Sunday of every month
@@ -32,10 +37,12 @@
       <StyledList :list="voyageSchedule" />
     </div>
 
-    <div class="my-6 md:my-8 flex flex-col">
+    <div
+      class="my-6 md:my-8 flex flex-col items-center md:items-start lg:items-center"
+    >
       <StyledHeader level="h2" text="Pair Programming" />
       <blockquote
-        class="text-gray-800 py-4 px-8 mt-3 mb-4 mx-0 bg-gray-300 border-pink border-l-4 italic"
+        class="text-gray-800 w-10/12 py-4 px-8 mt-3 mb-4 mx-0 bg-gray-300 border-pink border-l-4 italic"
       >
         <p class="text-gray-700">
           We start a new voyage launch on the first Sunday of every month
@@ -57,17 +64,6 @@ import { Vue, Component } from 'nuxt-property-decorator';
   },
 })
 export default class Schedule extends Vue {
-  hero = {
-    header: 'Our Schedules',
-    subText: `
-      We offer two types of services: voyages and pair-programming. 
-      The former is 6 weeks in length and the latter can be anything from 30 minutes to a couple of hours. 
-      Below you'll find a breakdown of each service's schedule.
-    `,
-    imgSrc: '/page/schedule/Events.svg',
-    imgAlt: 'girl looking at a calendar',
-  };
-
   voyageSchedule = [
     {
       title: 'Preparation',

@@ -2,6 +2,7 @@
   "editor.tabSize": 2,
   "emmet.triggerExpansionOnTab": true,
   "eslint.validate": ["javascript", "javascriptreact", "vue"],
+  
   "window.zoomLevel": -2,
   "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
   "editor.formatOnSave": false,
@@ -10,5 +11,6 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vetur.experimental.templateInterpolationService": true,
   "workbench.colorTheme": "Default Dark+",
-  "workbench.editor.scrollToSwitchTabs": true
+  "workbench.editor.scrollToSwitchTabs": true,
+  "css.validate": false
 }

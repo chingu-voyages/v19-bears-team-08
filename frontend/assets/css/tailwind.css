@@ -1,5 +1,11 @@
 /* purgecss start ignore */
 @import 'tailwindcss/base';
+
+/* custom base styles */
+@import './base.css';
+@import './toast.css';
+
 @import 'tailwindcss/components';
+
 /* purgecss end ignore */
 @import 'tailwindcss/utilities';
