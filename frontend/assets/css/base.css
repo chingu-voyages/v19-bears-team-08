@@ -67,7 +67,7 @@ p,
 li,
 a,
 div {
-  @apply text-gray-600 font-normal leading-relaxed mb-1;
+  @apply text-gray-700 font-normal leading-relaxed mb-1;
 }
 a {
   @apply text-pink;

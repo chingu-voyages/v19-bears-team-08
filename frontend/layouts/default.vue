@@ -154,7 +154,7 @@ main {
 }
 @screen sm {
   main {
-    @apply px-3;
+    @apply px-4;
   }
 }
 @screen md {
