@@ -25,19 +25,21 @@ export default {
 </script>
 
 <style lang="postcss">
+.nuxt-content {
+  max-width: 600px;
+}
 .faq-page h3 {
-  @apply text-center mt-10;
+  @apply mt-10;
 }
 .faq-page h3:first-child {
   @apply mt-0;
 }
-@screen md {
-  .faq-page h3 {
-    @apply text-left;
-  }
-}
 .faq-page p {
-  @apply px-2 mb-2;
+  @apply pt-3 pb-1 pl-3 pr-2 mb-0 border-pink;
+  border-left-width: 2px;
+}
+.faq-page h3 + p {
+  @apply pt-1;
 }
 .faq-page a {
   @apply text-pink;
