@@ -120,6 +120,8 @@ export default {
           'faUserCheck',
           'faUserPlus',
           'faUser',
+          'faExclamationCircle',
+          'faCode',
         ],
       },
       {
@@ -127,5 +129,9 @@ export default {
         icons: ['faGithub'],
       },
     ],
+  },
+
+  build: {
+    transpile: [/^vue-intersect/],
   },
 };

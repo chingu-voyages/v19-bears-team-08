@@ -1,5 +1,9 @@
 <template>
-  <component :is="level" class="header pr-2 text-center md:text-left">
+  <component
+    :is="level"
+    class="header pr-2 text-center md:text-left"
+    :class="className"
+  >
     <span v-for="sText in splitText" :key="sText">
       {{ sText }}
     </span>
@@ -13,6 +17,7 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator';
 export default class StyledHeader extends Vue {
   @Prop() readonly level!: number;
   @Prop() readonly text!: string;
+  @Prop() readonly className!: string;
 
   public get splitText() {
     return this.text.split(' ');
