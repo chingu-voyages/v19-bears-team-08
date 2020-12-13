@@ -13,10 +13,13 @@
         <nuxt-link to="/projects/open">
           <StyledButton normal green>View Open Projects</StyledButton>
         </nuxt-link>
+        <nuxt-link to="/login">
+          <StyledButton inverted pink>Login</StyledButton>
+        </nuxt-link>
       </StyledButtonGroup>
     </StyledHero>
 
-    <form class="w-full max-w-lg" @submit.prevent="verifyRepo">
+    <form class="w-full max-w-md" @submit.prevent="verifyRepo">
       <StyledInput
         v-model="githubRepoUrl"
         required
@@ -30,16 +33,21 @@
     </form>
 
     <div
-      v-if="project.ownerName"
-      class="flex flex-col items-center w-full pt-2 sm:p-2 md:p-4"
+      class="flex flex-col items-center md:items-start lg:items-center w-full pt-1 sm:p-2 md:p-4"
     >
-      <StyledHeader level="h2" text="Your Repo Preview:" />
+      <StyledHeader level="h2" text="Your Repo Preview" />
 
-      <StyledOpenProjectCard :project="project" />
+      <div v-if="!project.ownerName" class="text-center">
+        Please enter your GitHub repository URL above and search first.
+      </div>
 
-      <StyledButton normal green :onClick="handleSubmit">
-        Submit Project
-      </StyledButton>
+      <template v-else>
+        <StyledOpenProjectCard :project="project" />
+
+        <StyledButton normal green :onClick="handleSubmit">
+          Submit Project
+        </StyledButton>
+      </template>
     </div>
   </div>
 </template>
@@ -88,7 +96,7 @@ export default class AddProjectPage extends Vue {
 
     // check cachedProjects to see if the user has already search this one
     const cachedProject = this.cachedProjects.find(
-      cachedProject => cachedProject.url === url
+      cachedProject => cachedProject.url.toLowerCase() === url.toLowerCase()
     );
     if (cachedProject) {
       this.project = cachedProject;
@@ -99,6 +107,7 @@ export default class AddProjectPage extends Vue {
     this.$axios
       .$get(url)
       .then((data: GithubRepo) => {
+        console.log(data);
         // extract the data we want
         const project = {
           ownerUrl: data.owner.html_url,

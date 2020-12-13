@@ -1,6 +1,6 @@
 <template>
   <div
-    class="styled-hero my-6 md:my-8 flex flex-col md:flex-row-reverse items-center md:items-start"
+    class="flex flex-col md:flex-row-reverse items-center md:items-start w-full my-6 md:my-8"
   >
     <img
       :src="imgSrc"

@@ -122,6 +122,7 @@ export default {
           'faUser',
           'faExclamationCircle',
           'faCode',
+          'faTrashAlt',
         ],
       },
       {

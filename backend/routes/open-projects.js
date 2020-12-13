@@ -19,10 +19,14 @@ async function getAllProjects(req, res, next) {
 
 async function createProjects(req, res, next) {
   try {
-    const { link } = req.body;
+    const { repoName, repoOwnerName } = req.body;
     const { userId } = req.locals;
 
-    const project = await OpenProject.create({ link, owner: userId });
+    const project = await OpenProject.create({
+      repoName,
+      repoOwnerName,
+      chinguOwnerId: userId,
+    });
     if (!project) throw createError(400, "Error adding your repo");
 
     res.status(200).json({ message: "Added your repo" });

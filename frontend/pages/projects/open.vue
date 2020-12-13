@@ -18,7 +18,7 @@
       </StyledButtonGroup>
     </StyledHero>
 
-    <div v-if="!projects.length" class="text-lg">
+    <div v-if="!projects.length" class="text-lg text-center">
       No open projects available currently.
     </div>
 
@@ -28,7 +28,7 @@
     >
       <Intersect
         v-for="project in projects"
-        :key="project._id + project.isLoadingRepoDeets"
+        :key="project._id"
         :enter="entry => handleCardEnter(entry, project._id, project.link)"
       >
         <StyledOpenProjectCard :project="project" />
@@ -63,6 +63,12 @@ export default class OpenProjects extends Vue {
       _id: 'idk',
       ownerId: 'idk',
       link: 'dastrong/eslintherok-front',
+    },
+    {
+      isLoadingRepoDeets: true,
+      _id: 'idk3',
+      ownerId: 'idk3',
+      link: 'chingu-voyages/v16-bears-team-04',
     },
     {
       isLoadingRepoDeets: true,
@@ -112,30 +118,30 @@ export default class OpenProjects extends Vue {
     link: string
   ): Promise<void> {
     console.log(entry);
-    return this.$axios
-      .$get(`https://api.github.com/repos/${link}`)
-      .then((data: GithubRepo) => {
-        const projectIdx = this.projects.findIndex(({ _id }) => _id === id);
-        if (projectIdx === -1) {
-          this.$toast.error(`Unexpected error with project: ${id}`);
-        } else {
-          const updatedProject = {
-            ...this.projects[projectIdx],
-            isLoadingRepoDeets: false,
-            ownerUrl: data.owner.html_url,
-            ownerImg: data.owner.avatar_url,
-            repoName: data.name,
-            description: data.description,
-            issueCount: data.open_issues,
-            language: data.language,
-            liveUrl: data.homepage,
-            repoUrl: data.html_url,
-            lastUpdated: data.updated_at,
-          };
-          this.$set(this.projects, projectIdx, updatedProject);
-        }
-      })
-      .catch(err => console.log(err));
+    // return this.$axios
+    //   .$get(`https://api.github.com/repos/${link}`)
+    //   .then((data: GithubRepo) => {
+    //     const projectIdx = this.projects.findIndex(({ _id }) => _id === id);
+    //     if (projectIdx === -1) {
+    //       this.$toast.error(`Unexpected error with project: ${id}`);
+    //     } else {
+    //       const updatedProject = {
+    //         ...this.projects[projectIdx],
+    //         isLoadingRepoDeets: false,
+    //         ownerUrl: data.owner.html_url,
+    //         ownerImg: data.owner.avatar_url,
+    //         repoName: data.name,
+    //         description: data.description,
+    //         issueCount: data.open_issues,
+    //         language: data.language,
+    //         liveUrl: data.homepage,
+    //         repoUrl: data.html_url,
+    //         lastUpdated: data.updated_at,
+    //       };
+    //       this.$set(this.projects, projectIdx, updatedProject);
+    //     }
+    //   })
+    //   .catch(err => console.log(err));
   }
 }
 </script>

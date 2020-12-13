@@ -1,12 +1,17 @@
 const mongoose = require("mongoose");
 
 const openProjectSchema = new mongoose.Schema({
-  link: {
+  repoName: {
     type: String,
     required: true,
   },
-  ownerId: {
+  repoOwnerName: {
     type: String,
+    required: true,
+  },
+  chinguOwnerId: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
     required: true,
   },
 });
