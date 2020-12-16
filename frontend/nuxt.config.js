@@ -123,6 +123,7 @@ export default {
           'faExclamationCircle',
           'faCode',
           'faTrashAlt',
+          'faExternalLinkAlt',
         ],
       },
       {
