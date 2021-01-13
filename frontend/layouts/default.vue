@@ -25,9 +25,7 @@
             />
           </ul>
 
-          <LayoutAuthDropdown :icon="isMounted ? 'user' : 'spinner'">
-            <LayoutLink v-for="link in authLinks" :key="link.to" :link="link" />
-          </LayoutAuthDropdown>
+          <LayoutUserDropdown :icon="isMounted ? 'user' : 'spinner'" />
         </div>
 
         <!-- Button for screen sizes < lg -->
