@@ -4,39 +4,54 @@
 
 I've used React for over the past year and wanted to try out Vue because I've heard many good things about it and I'm interested in learning something new to expand my skillset.
 
-I choose to build the dashboard with NuxtJS, mostly because it's the Vue equivilant to React's NextJS (which I absolutely love).
+I choose to build the dashboard with [Nuxt](https://nuxtjs.org), mostly because it's the Vue equivilant to React's Next (which I absolutely love).
 
-Styling will be done with TailwindCSS because I enjoyed my previous experience with it and I wanted more control over the styling.
+Styling will be done with [TailwindCSS](https://tailwindcss.com/) because I enjoyed my previous experience with it and I wanted more control over the styling.
 
-I'm attempting to write most of the code in TypeScript, but my main goal is to learn Vue, so I may use `any` more than I have before if I hit some weird issues.
+You may notice an inconsistency between component setups. Some use class components, while others use the more traditional Vue way. Since this started as a learning project, the inconsistency was a trade off of learning different approaches.
 
-## Build Setup
+## How to Get Started
 
-```bash
-# install dependencies
-$ npm install
+Follow the steps below to get started locally and if you run into any issues, please [open an issue](https://github.com/chingu-voyages/v19-bears-team-08/issues/new).
 
-# create .env file (refer to the .env file below)
+- Clone the Repo (*if you haven't already*)
 
-# install Vetur from the VSCode marketplace for development purposes
+  ```bash
+  git clone https://github.com/chingu-voyages/v19-bears-team-08.git
+  ```
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+- Navigate to the frontend folder
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+- Install dependencies
 
-# generate static project
-$ npm run generate
-```
+  ```bash
+  npm install
+  ```
+
+- Create a `.env` file in backend root
+
+  ```bash
+  # Github OAuth Credentials
+  # https://docs.github.com/en/free-pro-team@latest/developers/apps/creating-an-oauth-app
+  GITHUB_CLIENT_ID="______"
+  GITHUB_CLIENT_SECRET="______"
+
+  # Backend API URL - Development Only
+  API_URL=http://localhost:4000/api
+  ```
 
 
-## .env file
-```
-GITHUB_CLIENT_ID = string
-GITHUB_CLIENT_SECRET = string
-API_URL = string
-```
+- Start a Nuxt server
 
-> For detailed explanation on how things work, check out the [Nuxt.js docs](https://nuxtjs.org).
+  ```bash
+  npm run dev
+
+  # You'll see many console messages, but the last two should be:
+  # `Listening on: http://localhost:3000/`
+  # `No issues found.`
+  ```
+
+- The frontend server is now ready. Happy coding.
+
+> To get up and running quickly, use VSCode and install the [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) extension. 
+Furthermore, you should open and work from within the `frontend` folder. 

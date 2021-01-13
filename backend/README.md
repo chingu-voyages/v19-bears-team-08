@@ -2,36 +2,65 @@
 
 ## Tech Choices
 
-I have chosen to use Node.js and mongoDB for the api as I have used them in the past, it is my first time making an API with authenticaion for the login as my pervious projects did not require it.
+It's your basic Express, Mongoose and MongoDB setup.
 
-## Build Setup
+We use [Nodemailer](https://nodemailer.com/) to send emails to users, [MailTrap](https://mailtrap.io/) to test these emails in development and [PUG](https://pugjs.org/) to style them.
 
-```bash
-# install dependencies
-$ npm install
+Code is formatted with [Prettier](https://prettier.io/).
 
-# production
-$ npm run start
+[Postman](https://www.postman.com/) is mainly used for testing routes.
 
-# development
-$ npm run dev
+## How To Get Started
 
-```
+There's a couple things you need in order to get up and running smoothly across. Please follow the steps to get started and if you run into any issues, please [open an issue](https://github.com/chingu-voyages/v19-bears-team-08/issues/new).
 
-## **.env** file
+- Clone the Repo (_if you haven't already_)
 
-```
-DB_CONNECT = DB_URL_HERE
+  ```bash
+  git clone https://github.com/chingu-voyages/v19-bears-team-08.git
+  ```
 
-TOKEN_SECRET = TOKEN_STRING_HERE
+- Navigate to the backend folder
 
-MAILER_EMAIL = PROD_EMAIL_ADDRESS_STRING_HERE
-MAILER_PASSWORD = PROD_EMAIL_PASSWORD_STRING_HERE
+- Install dependencies
 
-DEV_MAILER_HOST = DEV_EMAIL_HOST_STRING_HERE
-DEV_MAILER_PORT = DEV_EMAIL_PORT_STRING_HERE
-DEV_MAILER_USER = DEV_EMAIL_USER_STRING_HERE
-DEV_MAILER_PASS = DEV_EMAIL_PASS_STRING_HERE
-```
+  ```bash
+  npm install
+  ```
 
-> I used [Postman](https://www.postman.com/) for testing the server
+- Create a `.env` file in backend root
+
+  ```bash
+  # MongoDB Atlas Connection String
+  # https://www.mongodb.com/cloud/atlas
+  DB_CONNECT="______"
+
+  # Secret String for JWT
+  TOKEN_SECRET="______"
+
+  # Email - Production Only
+  # account where emails are sent from in production
+  MAILER_EMAIL="______@gmail.com"
+  MAILER_PASSWORD="______"
+
+  # Email - Development Only
+  # https://mailtrap.io/ - SMTP
+  DEV_MAILER_HOST=smtp.mailtrap.io
+  DEV_MAILER_PORT="______"
+  DEV_MAILER_USER="______"
+  DEV_MAILER_PASS="______"
+
+  # you can remove the quotation marks and underlines
+  ```
+
+- Start a self reloading server
+
+  ```bash
+  npm run dev
+
+  # TWO messages will pop up, if you're successful:
+  # `DB established`
+  # `Server listening on port: ${PORT}`
+  ```
+
+- The backend server is now ready. Happy coding.
