@@ -8,8 +8,9 @@
   />
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+export default Vue.extend({
   name: 'LayoutMenuButton',
   props: {
     isOpen: {
@@ -26,5 +27,5 @@ export default {
       return this.isOpen ? 'times' : 'bars';
     },
   },
-};
+});
 </script>
