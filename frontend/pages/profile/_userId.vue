@@ -52,8 +52,6 @@ type UserType = {
   repos?: [];
 };
 
-type RepoType = {};
-
 @Component({
   middleware: 'auth',
   head(this: Profile) {
