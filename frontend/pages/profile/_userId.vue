@@ -14,9 +14,7 @@
       <a v-if="user.html_url" :href="user.html_url" target="_blank">
         View on GitHub
       </a>
-      <a v-if="user.blog" :href="user.blog" target="_blank">
-        View Blog
-      </a>
+      <a v-if="user.blog" :href="user.blog" target="_blank">View Blog</a>
       <a v-if="user.email" :href="`mailto:${user.email}`" target="_blank">
         Send an Email
       </a>

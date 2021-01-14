@@ -3,7 +3,7 @@
     <StyledHeader level="h1" text="Sign up below" />
 
     <StyledAuthForm :handleSubmit="handleSubmit">
-      <template v-slot:inputs>
+      <template #inputs>
         <StyledInput
           v-model="name"
           required
@@ -36,11 +36,9 @@
         />
       </template>
 
-      <template v-slot:extras>
+      <template #extras>
         <StyledFormLinks>
-          <nuxt-link to="/login">
-            Have an account? Log in here.
-          </nuxt-link>
+          <nuxt-link to="/login">Have an account? Log in here.</nuxt-link>
         </StyledFormLinks>
       </template>
     </StyledAuthForm>

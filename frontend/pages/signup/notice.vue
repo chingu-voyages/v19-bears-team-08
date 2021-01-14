@@ -8,14 +8,10 @@
     >
       <StyledButtonGroup>
         <MailtoLink>
-          <StyledButton green normal>
-            Contact Us
-          </StyledButton>
+          <StyledButton green normal>Contact Us</StyledButton>
         </MailtoLink>
         <nuxt-link to="/verification/new/email">
-          <StyledButton pink inverted>
-            Get Another Email
-          </StyledButton>
+          <StyledButton pink inverted>Get Another Email</StyledButton>
         </nuxt-link>
       </StyledButtonGroup>
     </StyledHero>

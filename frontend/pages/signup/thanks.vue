@@ -7,9 +7,7 @@
       :imgAlt="hero.imgAlt"
     >
       <MailtoLink>
-        <StyledButton green normal>
-          Contact Us
-        </StyledButton>
+        <StyledButton green normal>Contact Us</StyledButton>
       </MailtoLink>
     </StyledHero>
   </div>

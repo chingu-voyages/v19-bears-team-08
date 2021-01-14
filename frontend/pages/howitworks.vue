@@ -10,14 +10,10 @@
     >
       <StyledButtonGroup>
         <nuxt-link to="/login">
-          <StyledButton green normal>
-            Create an Account
-          </StyledButton>
+          <StyledButton green normal>Create an Account</StyledButton>
         </nuxt-link>
         <nuxt-link to="/about">
-          <StyledButton pink inverted>
-            About Us
-          </StyledButton>
+          <StyledButton pink inverted>About Us</StyledButton>
         </nuxt-link>
       </StyledButtonGroup>
     </StyledHero>

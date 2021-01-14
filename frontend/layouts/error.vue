@@ -16,9 +16,7 @@
           <StyledButton green normal>Go Home</StyledButton>
         </nuxt-link>
 
-        <StyledButton pink inverted :onClick="goBack">
-          Go Back
-        </StyledButton>
+        <StyledButton pink inverted :onClick="goBack">Go Back</StyledButton>
       </StyledButtonGroup>
     </StyledHero>
   </div>

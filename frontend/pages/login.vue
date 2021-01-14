@@ -3,7 +3,7 @@
     <StyledHeader level="h1" text="Log in below" />
 
     <StyledAuthForm :handleSubmit="localLogin">
-      <template v-slot:inputs>
+      <template #inputs>
         <StyledInput
           v-model="email"
           required
@@ -27,7 +27,7 @@
         />
       </template>
 
-      <template v-slot:extras>
+      <template #extras>
         <div class="text-center text-xl my-3 leading-none">OR</div>
 
         <StyledButton full github :onClick="githubLogin">
@@ -36,13 +36,9 @@
         </StyledButton>
 
         <StyledFormLinks>
-          <nuxt-link to="/signup">
-            No account? Sign up here.
-          </nuxt-link>
+          <nuxt-link to="/signup">No account? Sign up here.</nuxt-link>
 
-          <nuxt-link to="/password/forgot">
-            Forgot Password?
-          </nuxt-link>
+          <nuxt-link to="/password/forgot">Forgot Password?</nuxt-link>
         </StyledFormLinks>
       </template>
     </StyledAuthForm>

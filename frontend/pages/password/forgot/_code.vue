@@ -3,7 +3,7 @@
     <StyledHeader level="h1" text="Change Password" />
 
     <StyledAuthForm :handleSubmit="handleSubmit">
-      <template v-slot:inputs>
+      <template #inputs>
         <StyledInput
           v-model="email"
           required
@@ -48,7 +48,7 @@
         />
       </template>
 
-      <template v-slot:extras>
+      <template #extras>
         <StyledFormLinks>
           <nuxt-link to="/signup" class="form-links">
             No account? Sign up here.
@@ -74,6 +74,11 @@ export default {
       code: this.$route.params.code,
     };
   },
+  head() {
+    return {
+      title: 'Change Password | Chingu',
+    };
+  },
   methods: {
     handleSubmit() {
       if (this.code.length !== 20) {
@@ -95,11 +100,6 @@ export default {
         })
         .catch(err => this.$toast.error(err.message));
     },
-  },
-  head() {
-    return {
-      title: 'Change Password | Chingu',
-    };
   },
 };
 </script>

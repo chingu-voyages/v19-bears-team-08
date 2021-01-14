@@ -3,9 +3,7 @@
     <form @submit.prevent="handleSubmit">
       <slot name="inputs" />
 
-      <StyledButton green normal full type="submit">
-        Submit
-      </StyledButton>
+      <StyledButton green normal full type="submit">Submit</StyledButton>
     </form>
 
     <slot name="extras" />

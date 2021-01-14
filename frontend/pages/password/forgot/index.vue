@@ -42,6 +42,11 @@ export default {
       },
     };
   },
+  head() {
+    return {
+      title: 'Forgot Password | Chingu',
+    };
+  },
   methods: {
     handleSubmit() {
       this.$toast.info('Processing...');
@@ -53,11 +58,6 @@ export default {
         })
         .catch(err => this.$toast.error(err.message));
     },
-  },
-  head() {
-    return {
-      title: 'Forgot Password | Chingu',
-    };
   },
 };
 </script>

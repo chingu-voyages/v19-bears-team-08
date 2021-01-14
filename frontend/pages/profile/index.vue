@@ -18,9 +18,7 @@
             {{ new Date().toDateString() }}
           </p>
         </div>
-        <nuxt-link v-else to="/payment">
-          Upgrade your membership now!
-        </nuxt-link>
+        <nuxt-link v-else to="/payment">Upgrade your membership now!</nuxt-link>
       </div>
     </div>
 

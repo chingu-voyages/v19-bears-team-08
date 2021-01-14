@@ -11,14 +11,10 @@
     >
       <StyledButtonGroup>
         <nuxt-link to="/schedule">
-          <StyledButton green normal>
-            View Schedule
-          </StyledButton>
+          <StyledButton green normal>View Schedule</StyledButton>
         </nuxt-link>
         <nuxt-link to="/faq">
-          <StyledButton pink inverted>
-            Have a Question?
-          </StyledButton>
+          <StyledButton pink inverted>Have a Question?</StyledButton>
         </nuxt-link>
       </StyledButtonGroup>
     </StyledHero>
@@ -33,9 +29,7 @@
         <h6 class="text-center">{{ option.subtitle }}</h6>
         <h1 class="mb-2">{{ currency + option.price }}</h1>
         <nuxt-link to="/login">
-          <StyledButton green normal>
-            Apply Now
-          </StyledButton>
+          <StyledButton green normal>Apply Now</StyledButton>
         </nuxt-link>
         <ul class="mt-4 max-w-sm">
           <li
