@@ -53,5 +53,18 @@ Follow the steps below to get started locally and if you run into any issues, pl
 
 - The frontend server is now ready. Happy coding.
 
-> To get up and running quickly, use VSCode and install the [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) extension. 
-Furthermore, you should open and work from within the `frontend` folder. 
+- While the server is running, you can visualize the Tailwind configurations [here](http://localhost:3000/_tailwind).
+
+## VS Code Extensions
+
+It's not necessary to use VS Code with this project, but to get up and running quickly, I'd suggest using it. If you use another IDE and get it all sorted, please create a PR with that info below this VS Code section for others to use.
+
+The following are extensions that I'd suggest installing/enabling while working.
+
+> *Note:* you should open and work from within the `frontend` folder, so these extensions work correctly. 
+
+- [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+- [Sass](https://marketplace.visualstudio.com/items?itemName=Syler.sass-indented)
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
