@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 // Type definitions for @nuxtjs/auth 4.8
 // Project: https://auth.nuxtjs.org
 // Definitions by: Ruskin Constant <https://github.com/jonnyparris>
