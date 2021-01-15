@@ -24,7 +24,7 @@ export default Vue.extend({
     },
   },
   computed: {
-    icon() {
+    icon(): 'times' | 'bars' {
       return this.isOpen ? 'times' : 'bars';
     },
   },
