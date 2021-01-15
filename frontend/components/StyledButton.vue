@@ -16,7 +16,8 @@
     :href="href"
     @click="onClick"
   >
-    <slot />
+    <fa v-if="icon" :icon="icon" />
+    {{ text }}
   </component>
 </template>
 
@@ -35,6 +36,8 @@ export default class StyledButton extends Vue {
   @Prop({ type: Boolean, default: false }) readonly github!: boolean;
 
   // FUNCTIONALITY
+  @Prop({ type: String, required: true }) readonly text!: string;
+  @Prop({ required: false }) readonly icon!: string | string[];
   @Prop({ type: String, required: false }) readonly to!: string;
   @Prop({ type: String, required: false }) readonly href!: string;
   @Prop({ type: Function, default: () => undefined }) readonly onClick!: any;
