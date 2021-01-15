@@ -12,11 +12,8 @@
       imgAlt="blank canvas"
     >
       <StyledButtonGroup>
-        <nuxt-link to="/">
-          <StyledButton green normal>Go Home</StyledButton>
-        </nuxt-link>
-
-        <StyledButton pink inverted :onClick="goBack">Go Back</StyledButton>
+        <StyledButton green normal to="/" text="Go Home" />
+        <StyledButton pink inverted :onClick="goBack" text="Go Back" />
       </StyledButtonGroup>
     </StyledHero>
   </div>

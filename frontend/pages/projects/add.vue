@@ -10,12 +10,13 @@
       imgAlt="code typing"
     >
       <StyledButtonGroup>
-        <nuxt-link to="/projects/open">
-          <StyledButton normal green>View Open Projects</StyledButton>
-        </nuxt-link>
-        <nuxt-link to="/login">
-          <StyledButton inverted pink>Login</StyledButton>
-        </nuxt-link>
+        <StyledButton
+          normal
+          green
+          to="/projects/open"
+          text="Available Projects"
+        />
+        <StyledButton inverted pink to="/login" text="Login" />
       </StyledButtonGroup>
     </StyledHero>
 
@@ -43,10 +44,12 @@
 
       <template v-else>
         <StyledOpenProjectCard :project="project" />
-
-        <StyledButton normal green :onClick="handleSubmit">
-          Submit Project
-        </StyledButton>
+        <StyledButton
+          normal
+          green
+          :onClick="handleSubmit"
+          text="Submit Project"
+        />
       </template>
     </div>
   </div>

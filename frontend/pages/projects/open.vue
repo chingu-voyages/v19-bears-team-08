@@ -12,9 +12,7 @@
       imgAlt="code typing"
     >
       <StyledButtonGroup>
-        <nuxt-link to="/projects/add">
-          <StyledButton normal green>Add Project</StyledButton>
-        </nuxt-link>
+        <StyledButton normal green to="/projects/add" text="Add Project" />
       </StyledButtonGroup>
     </StyledHero>
 

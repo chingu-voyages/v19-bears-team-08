@@ -30,14 +30,16 @@
       <template #extras>
         <div class="text-center text-xl my-3 leading-none">OR</div>
 
-        <StyledButton full github :onClick="githubLogin">
-          <fa :icon="['fab', 'github']" />
-          Login With Github
-        </StyledButton>
+        <StyledButton
+          full
+          github
+          :onClick="githubLogin"
+          text="Login With Github"
+          :icon="['fab', 'github']"
+        />
 
         <StyledFormLinks>
           <nuxt-link to="/signup">No account? Sign up here.</nuxt-link>
-
           <nuxt-link to="/password/forgot">Forgot Password?</nuxt-link>
         </StyledFormLinks>
       </template>

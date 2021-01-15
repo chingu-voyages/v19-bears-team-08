@@ -9,12 +9,8 @@
       imgAlt="team spirit"
     >
       <StyledButtonGroup>
-        <nuxt-link to="/login">
-          <StyledButton green normal>Create an Account</StyledButton>
-        </nuxt-link>
-        <nuxt-link to="/about">
-          <StyledButton pink inverted>About Us</StyledButton>
-        </nuxt-link>
+        <StyledButton green normal to="/login" text="Create an Account" />
+        <StyledButton pink inverted to="/about" text="About Us" />
       </StyledButtonGroup>
     </StyledHero>
 

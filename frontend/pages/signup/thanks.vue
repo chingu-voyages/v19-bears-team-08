@@ -6,9 +6,12 @@
       :imgSrc="hero.imgSrc"
       :imgAlt="hero.imgAlt"
     >
-      <MailtoLink>
-        <StyledButton green normal>Contact Us</StyledButton>
-      </MailtoLink>
+      <StyledButton
+        green
+        normal
+        href="mailto:chingucommunity@gmail.com"
+        text="Contact Us"
+      />
     </StyledHero>
   </div>
 </template>

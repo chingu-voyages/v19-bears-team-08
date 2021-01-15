@@ -7,12 +7,18 @@
       :imgAlt="hero.imgAlt"
     >
       <StyledButtonGroup>
-        <MailtoLink>
-          <StyledButton green normal>Contact Us</StyledButton>
-        </MailtoLink>
-        <nuxt-link to="/verification/new/email">
-          <StyledButton pink inverted>Get Another Email</StyledButton>
-        </nuxt-link>
+        <StyledButton
+          green
+          normal
+          href="mailto:chingucommunity@gmail.com"
+          text="Contact Us"
+        />
+        <StyledButton
+          pink
+          inverted
+          to="/verification/new/email"
+          text="Get Another Email"
+        />
       </StyledButtonGroup>
     </StyledHero>
   </div>

@@ -10,12 +10,8 @@
       imgAlt="girl looking at a calendar"
     >
       <StyledButtonGroup>
-        <nuxt-link to="/login">
-          <StyledButton green normal>Create an Account</StyledButton>
-        </nuxt-link>
-        <nuxt-link to="/pricing">
-          <StyledButton pink inverted>View Pricing</StyledButton>
-        </nuxt-link>
+        <StyledButton green normal to="/login" text="Create an Account" />
+        <StyledButton pink inverted to="/pricing" text="View Pricing" />
       </StyledButtonGroup>
     </StyledHero>
 

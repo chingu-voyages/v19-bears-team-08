@@ -10,16 +10,8 @@
       imgAlt="rocket launching"
     >
       <StyledButtonGroup>
-        <nuxt-link to="/login">
-          <StyledButton green normal>
-            Create an Account
-          </StyledButton>
-        </nuxt-link>
-        <nuxt-link to="/howitworks">
-          <StyledButton pink inverted>
-            How It Works
-          </StyledButton>
-        </nuxt-link>
+        <StyledButton green normal to="/login">Create an Account</StyledButton>
+        <StyledButton pink inverted to="/howitworks">How It Works</StyledButton>
       </StyledButtonGroup>
     </StyledHero>
 
@@ -33,9 +25,15 @@
           :key="stat.title"
           class="stat-container flex flex-col items-center w-10/12 md:w-1/3 text-center p-3"
         >
-          <h2 class="mb-2">{{ stat.num }}</h2>
-          <h5 class="font-bold">{{ stat.title }}</h5>
-          <p>{{ stat.body }}</p>
+          <h2 class="mb-2">
+            {{ stat.num }}
+          </h2>
+          <h5 class="font-bold">
+            {{ stat.title }}
+          </h5>
+          <p>
+            {{ stat.body }}
+          </p>
         </div>
       </div>
     </div>
@@ -49,20 +47,36 @@
       </p>
       <div
         v-for="testimonial in testimonials"
-        :key="testimonial.author"
+        :key="testimonial.text"
         class="max-w-xl w-10/12 md:w-full mx-auto mt-6"
       >
-        <h6 class="mb-2">"{{ testimonial.text }}"</h6>
-        <p class="text-gray-700 italic text-right">{{ testimonial.author }}</p>
+        <h6 class="mb-2">
+          {{ testimonial.text }}
+        </h6>
+        <p class="text-gray-700 italic text-right">
+          {{ testimonial.author }}
+        </p>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
+type DataTypes = {
+  stats: {
+    num: string;
+    title: string;
+    body: string;
+  }[];
+  testimonials: {
+    text: string;
+    author: string;
+  }[];
+};
+
 export default {
   name: 'About',
-  data() {
+  data(): DataTypes {
     return {
       stats: [
         {
@@ -84,25 +98,30 @@ export default {
             'We love to optimally match learners from around the world. Whether in a team setting or for a one-time meeting to complete a challenge.',
         },
       ],
+
       testimonials: [
         {
           text:
             'I got my first developer job at the age of 35 largely due to the technical AND soft skills I gained through Chingu.',
+
           author: 'Eric Zumwalt, USA',
         },
         {
           text:
             'I realized pretty quickly that I was learning more from the Voyage project than from everything I did in the entire rest of the year put together.',
+
           author: 'Sarah Schneider, USA',
         },
         {
           text:
             'Chingu was a great place for me because while working on the projects there, I honed my skills and I learned how to collaborate with other developers. During my job interview process, I was able to speak on the projects I worked on at Chingu. It impressed my interviewers and consequently, I landed a job at a Fortune 500.',
+
           author: 'Owen Ekhator, USA',
         },
       ],
     };
   },
+
   head() {
     return {
       title: 'About | Chingu',
