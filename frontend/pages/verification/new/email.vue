@@ -1,10 +1,12 @@
 <template>
   <div>
     <StyledHero
-      :header="hero.header"
-      :subText="hero.subText"
-      :imgSrc="hero.imgSrc"
-      :imgAlt="hero.imgAlt"
+      header="Account Verification"
+      subText="
+          Before you request another email, please double check your spam folder.
+          Otherwise, feel free to request another email."
+      imgSrc="/page/requestemailverification/Letter.svg"
+      imgAlt="letter"
     >
       <form class="w-full" @submit.prevent="handleSubmit">
         <StyledInput
@@ -30,16 +32,6 @@ export default {
   data() {
     return {
       email: '',
-
-      hero: {
-        header: 'Account Verification',
-        subText: `
-          Before you request another email, please double check your spam folder.
-          Otherwise, feel free to request another email.
-        `,
-        imgSrc: '/page/requestemailverification/Letter.svg',
-        imgAlt: 'letter',
-      },
     };
   },
   head() {

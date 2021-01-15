@@ -1,10 +1,12 @@
 <template>
   <div>
     <StyledHero
-      :header="hero.header"
-      :subText="hero.subText"
-      :imgSrc="hero.imgSrc"
-      :imgAlt="hero.imgAlt"
+      header="Forgot Password"
+      subText="
+        Don't worry it happens to everyone. 
+        Just submit the email address you signed up with and we'll send you an email to reset your password."
+      imgSrc="/page/forgotpassword/Password.svg"
+      imgAlt="password screen"
     >
       <form class="w-full" @submit.prevent="handleSubmit">
         <StyledInput
@@ -30,16 +32,6 @@ export default {
   data() {
     return {
       email: '',
-
-      hero: {
-        header: 'Forgot Password',
-        subText: `
-          Don't worry it happens to everyone. 
-          Just submit the email address you signed up with and we'll send you an email to reset your password.
-        `,
-        imgSrc: '/page/forgotpassword/Password.svg',
-        imgAlt: 'password screen',
-      },
     };
   },
   head() {
