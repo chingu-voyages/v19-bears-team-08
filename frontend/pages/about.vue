@@ -10,8 +10,8 @@
       imgAlt="rocket launching"
     >
       <StyledButtonGroup>
-        <StyledButton green normal to="/login">Create an Account</StyledButton>
-        <StyledButton pink inverted to="/howitworks">How It Works</StyledButton>
+        <StyledButton green normal to="/login" text="Create an Account" />
+        <StyledButton pink inverted to="/howitworks" text="How It Works" />
       </StyledButtonGroup>
     </StyledHero>
 
