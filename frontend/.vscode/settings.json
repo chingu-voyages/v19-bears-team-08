@@ -18,6 +18,8 @@
   "eslint.validate": ["javascript", "typescript", "vue"],
   
   "vetur.experimental.templateInterpolationService": true,
+  "vetur.validation.template": false,
+  "vetur.format.enable": false,
   
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnFileMove.enabled": "always",
