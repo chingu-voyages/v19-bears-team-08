@@ -1,0 +1,9 @@
+{
+  "workbench.editor.scrollToSwitchTabs": true,
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#56b7f7",
+    "titleBar.activeForeground": "#000000",
+    "titleBar.inactiveBackground": "#56b7f7",
+    "titleBar.inactiveForeground": "#000000",
+  },
+}
