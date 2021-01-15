@@ -1,27 +1,31 @@
 <template>
-  <button
+  <component
+    :is="type"
     class="btn"
     :class="{
-      'btn-green': isGreen,
-      'btn-pink': isPink,
-      'btn-normal': isNormal,
-      'btn-inverted': isInverted,
-      'btn-full': isFull,
+      'btn-green': green,
+      'btn-pink': pink,
+      'btn-normal': normal,
+      'btn-inverted': inverted,
+      'btn-full': full,
       'btn-disabled': disabled,
       'btn-github': github,
     }"
-    :disabled="isDisabled"
+    :disabled="disabled"
+    :to="to"
+    :href="href"
     @click="onClick"
   >
     <slot />
-  </button>
+  </component>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator';
 
 @Component
-export default class Form extends Vue {
+export default class StyledButton extends Vue {
+  // STYLING
   @Prop({ type: Boolean, default: false }) readonly green!: boolean;
   @Prop({ type: Boolean, default: false }) readonly pink!: boolean;
   @Prop({ type: Boolean, default: false }) readonly normal!: boolean;
@@ -29,21 +33,26 @@ export default class Form extends Vue {
   @Prop({ type: Boolean, default: false }) readonly full!: boolean;
   @Prop({ type: Boolean, default: false }) readonly disabled!: boolean;
   @Prop({ type: Boolean, default: false }) readonly github!: boolean;
+
+  // FUNCTIONALITY
+  @Prop({ type: String, required: false }) readonly to!: string;
+  @Prop({ type: String, required: false }) readonly href!: string;
   @Prop({ type: Function, default: () => undefined }) readonly onClick!: any;
 
-  isGreen = this.green;
-  isPink = this.pink;
-  isNormal = this.normal;
-  isInverted = this.inverted;
-  isFull = this.full;
-  isDisabled = this.disabled;
-  isGithub = this.github;
+  get type(): string {
+    if (this.href) return 'a';
+    if (this.to) return 'nuxt-link';
+    return 'button';
+  }
 }
 </script>
 
 <style lang="postcss">
 .btn {
   @apply font-bold py-2 px-4 rounded border transition-all duration-100;
+}
+.btn:hover {
+  @apply no-underline;
 }
 .btn-normal {
   @apply text-white;
