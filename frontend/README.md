@@ -68,3 +68,14 @@ The following are extensions that I'd suggest installing/enabling while working.
 - [Sass](https://marketplace.visualstudio.com/items?itemName=Syler.sass-indented)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+## ESLint / Prettier / Typescript Info
+I've done quite a bit of work to ensure those mentioned above are set up correctly moving forward. There's a couple things to take note of, before you begin your coding.
+- The pre-commit hook has two commands that run for staged files:
+  - One will only check staged `.ts` files for TypeScript errors
+  - The others checks all `.{ts,js,vue}` files for Prettier/ESLint errors
+    - ESLint warnings won't cause a commit to fail, only errors.
+- [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) will check your files while you're coding
+  - You should have auto-completion within your Vue `template` and `script` tags
+  - You should also see ESLint errrors/warning
+  - **Remember:** the pre-commit hook won't catch type errors in `.vue` files, so if you notice an error, please fix it prior to committing that file
