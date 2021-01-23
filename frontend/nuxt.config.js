@@ -46,7 +46,7 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth',
+    '@nuxtjs/auth-next',
     '@nuxtjs/toast',
     '@nuxt/content',
     '@nuxt/components',

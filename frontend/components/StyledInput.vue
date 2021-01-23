@@ -26,9 +26,8 @@
       normal
       type="submit"
       class="w-24 absolute"
-    >
-      {{ buttonText }}
-    </StyledButton>
+      :text="buttonText"
+    />
 
     <p
       v-if="!!error"

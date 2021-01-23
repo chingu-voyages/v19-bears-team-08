@@ -9,11 +9,13 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
-    "fix": "eslint --ext .ts,.js,.vue --fix --ignore-path .gitignore ."
+    "check-types": "tsc --noEmit",
+    "check-eslint": "eslint --ext .ts,.vue --ignore-path .gitignore .",
+    "eslint-fix": "eslint --ext .ts,.vue --fix --ignore-path .gitignore ."
   },
   "lint-staged": {
-    "*.{js,vue}": "npm run lint"
+    "*.ts": "npm run check-types",
+    "*.{ts,js,vue}": "npm run check-eslint"
   },
   "husky": {
     "hooks": {
@@ -25,7 +27,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@nuxt/components": "^1.2.5",
     "@nuxt/content": "^1.11.1",
-    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/auth-next": "5.0.0-1610716891.541d68d",
     "@nuxtjs/axios": "^5.12.5",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/toast": "^3.3.1",
@@ -40,7 +42,6 @@
     "@nuxtjs/eslint-config-typescript": "^5.0.0",
     "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/tailwindcss": "^3.4.2",
-    "@types/nuxtjs__auth": "^4.8.7",
     "eslint": "^7.17.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-nuxt": ">=2.0.0",
