@@ -2,23 +2,23 @@
   <div
     class="open-project-card shadow-sm rounded-lg bg-white w-full max-w-md md:max-w-lg mb-4 md:mb-5 lg:mb-4 p-3 md:p-4 md:py-4 md:pr-4 border hover:border-green"
   >
-    <!-- <div class="flex justify-between items-center"> -->
-    <a :href="project.github ? project.github.repoUrl : ''" target="_blank">
+    <a :href="repoUrl" target="_blank">
       <StyledHeader
         level="h3"
         :text="project.chingu.repoName"
         className="text-left"
       />
-      <!-- <fa icon="external-link-alt" /> -->
     </a>
-    <!-- </div> -->
 
     <div class="w-full">
       <div class="pt-1 pb-4">
         <template v-if="!project.github">
-          <StyledSkeleton className="h-5 w-4/12 inline-block" />
-          <StyledSkeleton className="h-5 w-1/12 inline-block" />
+          <StyledSkeleton className="h-5 w-2/12 inline-block" />
           <StyledSkeleton className="h-5 w-3/12 inline-block" />
+          <StyledSkeleton className="h-5 w-4/12 inline-block" />
+          <StyledSkeleton className="h-5 w-5/12 inline-block" />
+          <StyledSkeleton className="h-5 w-3/12 inline-block" />
+          <StyledSkeleton className="h-5 w-2/12 inline-block" />
         </template>
 
         <template v-else>{{ project.github.description }}</template>
@@ -27,7 +27,7 @@
       <div class="flex justify-between items-center h-6 w-full">
         <div class="flex justify-start items-center">
           <a
-            :href="project.github ? project.github.repoUrl : '' + '/issues'"
+            :href="repoUrl + '/issues'"
             target="_blank"
             class="text-gray-700 mb-0 mr-2"
           >
@@ -83,18 +83,24 @@ export default class StyledOpenProjectCard extends Vue {
     const baseString = `${issueCount} issue`;
     return `${baseString}${isSingle ? '' : 's'}`;
   }
+
+  get repoUrl(): string {
+    return this.project.github?.repoUrl || '';
+  }
 }
 </script>
 
 <style lang="postcss">
 .open-project-card {
   padding-left: 1.75rem;
-}
 
+  &:focus-within {
+    @apply border-green;
+  }
+}
 .open-project-card .header {
-  text-align: left;
+  @apply text-left -ml-3;
 }
-
 .open-project-card__info {
   width: 6.25rem;
 }

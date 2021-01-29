@@ -1,15 +1,15 @@
 <template>
   <div
-    class="flex flex-col md:flex-row-reverse items-center md:items-start w-full my-6 md:my-8"
+    class="flex flex-col md:flex-row-reverse items-center md:items-start md:justify-between w-full my-6 md:my-8"
   >
     <img
       :src="imgSrc"
       :alt="imgAlt"
-      class="h-56 sm:h-64 md:h-auto w-auto sm:w-1/2 md:w-2/5 ml-0 md:ml-6 mb-6 md:mb-0"
+      class="h-56 sm:h-64 md:h-auto w-auto sm:w-1/2 md:w-2/5 ml-0 mb-6 md:mb-0 md:pl-1"
     />
 
     <div
-      class="flex flex-col items-center md:items-start self-start w-full md:w-3/5 px-2 md:px-0"
+      class="flex flex-col items-center md:items-start self-start w-full md:w-7/12 px-2 md:px-0"
     >
       <StyledHeader level="h1" :text="header" />
 
