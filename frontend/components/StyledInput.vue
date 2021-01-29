@@ -1,6 +1,6 @@
 <template>
   <div
-    class="input-container relative w-full"
+    class="input-container relative w-full mb-5"
     :class="{ inputInlineButton: showInlineButton }"
   >
     <label v-if="showLabel" class="text-xl" :for="name">
@@ -29,10 +29,7 @@
       :text="buttonText"
     />
 
-    <p
-      v-if="!!error"
-      class="text-xs text-center text-red-500 w-full absolute bottom-0"
-    >
+    <p v-if="!!error" class="text-xs text-center text-red-500 w-full">
       {{ error }}
     </p>
   </div>
@@ -104,19 +101,15 @@ export default class StyledInput extends Vue {
 
 <style lang="postcss" scoped>
 .input-container:last-of-type {
-  margin-bottom: 0.625rem;
-}
-.input-container:first-of-type {
-  margin-bottom: 0;
+  margin-bottom: 1.875rem;
 }
 /* this is here because of the last child selector in /layout/default */
-.input-container input {
-  @apply w-full rounded p-3 mb-5 bg-gray-300 text-base border;
-}
 .input-container p {
-  bottom: 0.1rem;
+  @apply -mb-5 leading-5;
 }
-
+.input-container input {
+  @apply relative w-full rounded p-3 bg-gray-300 text-base border;
+}
 .inputInlineButton input {
   padding-right: calc(6rem + 4px + 0.5rem);
 }
