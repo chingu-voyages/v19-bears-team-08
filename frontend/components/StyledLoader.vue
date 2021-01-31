@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col md:flex-row items-center md:items-start">
-    <fa icon="spinner" class="text-pink text-2xl" spin />
-    <p v-if="text" class="mt-2 md:ml-3">{{ text }}</p>
+  <div class="flex flex-col md:flex-row-reverse items-center">
+    <p v-if="text" class="mb-5 md:mb-0 md:ml-3 text-center">{{ text }}</p>
+    <fa icon="spinner" class="text-pink text-4xl md:text-2xl" spin />
   </div>
 </template>
 
