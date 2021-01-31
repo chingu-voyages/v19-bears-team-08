@@ -24,7 +24,7 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.validate.enable": true,
-  "javascript.validate.enable": false,
+  "javascript.validate.enable": true,
   
   "css.validate": false,
 }

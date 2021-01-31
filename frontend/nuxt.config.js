@@ -35,7 +35,7 @@ export default {
 
   css: ['@/assets/css/tailwind.css'],
 
-  plugins: ['~/plugins/axios.js'],
+  plugins: ['~/plugins/axios.ts'],
 
   buildModules: [
     '@nuxtjs/dotenv',
@@ -60,37 +60,33 @@ export default {
 
   auth: {
     localStorage: false,
-    resetOnError: false,
+    resetOnError: true,
     redirect: {
       login: '/login',
       logout: '/',
-      callback: '/login',
+      callback: '/login/github/redirect',
       home: '/',
-    },
-    cookie: {
-      prefix: 'auth.',
-      options: {
-        path: '/',
-        expires: 1,
-      },
     },
     strategies: {
       local: {
+        token: { property: 'token', maxAge: 1800 },
+        user: { property: 'user' },
         endpoints: {
-          login: {
-            url: '/user/login/local',
-            method: 'post',
-            propertyName: 'token',
-          },
-          logout: null,
-          user: { url: '/user/profile', method: 'get', propertyName: 'user' },
+          login: { url: '/user/login/local', method: 'post' },
+          logout: false,
+          user: { url: '/user/profile', method: 'get' },
         },
       },
       github: {
-        client_id: process.env.GITHUB_CLIENT_ID,
-        client_secret: process.env.GITHUB_CLIENT_SECRET,
-        userinfo_endpoint: '/user/login/github',
-        scope: ['email', 'user'],
+        scheme: 'oauth2',
+        clientId: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        endpoints: {
+          authorization: 'https://github.com/login/oauth/authorize',
+          token: 'https://github.com/login/oauth/access_token',
+          userInfo: 'http://localhost:4000/api/user/login/github',
+        },
+        redirectUri: 'http://localhost:3000/login/github/redirect',
       },
     },
   },
