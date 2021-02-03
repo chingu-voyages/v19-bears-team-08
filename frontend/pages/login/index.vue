@@ -72,11 +72,13 @@ export default class Login extends Vue {
     this.$auth
       .loginWith('local', { data })
       .then(() => {
-        this.$router.push('/');
         this.$toast.clear();
         this.$toast.success(`Welcome back, ${this.$auth.user.local.name}!`);
       })
-      .catch(err => this.$toast.error(err.message));
+      .catch(err => {
+        this.$toast.clear();
+        this.$toast.error(err.message);
+      });
   }
 }
 </script>

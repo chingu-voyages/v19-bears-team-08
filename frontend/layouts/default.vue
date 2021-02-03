@@ -87,6 +87,10 @@ export default {
     },
   },
   mounted() {
+    // show welcome back message for SSR'd pages
+    if (this.$auth.loggedIn) {
+      this.$toast.success(`Welcome back, ${this.$auth.user.local.name}`);
+    }
     this.isMounted = true;
     this.$nextTick(() => {
       this.onResize();
