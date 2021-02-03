@@ -1,37 +1,41 @@
-require('dotenv').config();
+import { NuxtConfig } from '@nuxt/types';
+import { config as dotenvConfig } from 'dotenv';
 
-export default {
+dotenvConfig();
+
+const config: NuxtConfig = {
   env: {
-    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
-    GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
-    API_URL: process.env.API_URL,
+    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID || '',
+    GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET || '',
+    API_URL: process.env.API_URL || '',
   },
 
   head: {
     title: 'Dashboard | Chingu',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
+      },
       {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/Logo.png' }],
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/Logo.png',
+      },
+    ],
   },
 
   components: true,
 
-  vue: {
-    config: {
-      devtools: true,
-    },
-  },
-
-  loading: {
-    color: '#13e58c',
-  },
+  loading: { color: '#13e58c' },
 
   css: ['@/assets/css/tailwind.css'],
 
@@ -59,8 +63,9 @@ export default {
   },
 
   auth: {
-    localStorage: false,
+    localStorage: undefined,
     resetOnError: true,
+
     redirect: {
       login: '/login',
       logout: '/',
@@ -69,12 +74,21 @@ export default {
     },
     strategies: {
       local: {
-        token: { property: 'token', maxAge: 1800 },
+        token: {
+          property: 'token',
+          maxAge: 3600,
+        },
         user: { property: 'user' },
         endpoints: {
-          login: { url: '/user/login/local', method: 'post' },
+          login: {
+            url: '/user/login/local',
+            method: 'post',
+          },
+          user: {
+            url: '/user/profile',
+            method: 'get',
+          },
           logout: false,
-          user: { url: '/user/profile', method: 'get' },
         },
       },
       github: {
@@ -84,7 +98,7 @@ export default {
         endpoints: {
           authorization: 'https://github.com/login/oauth/authorize',
           token: 'https://github.com/login/oauth/access_token',
-          userInfo: 'http://localhost:4000/api/user/login/github',
+          userInfo: '/api/user/login/github',
         },
         redirectUri: 'http://localhost:3000/login/github/redirect',
       },
@@ -131,3 +145,5 @@ export default {
     transpile: [/^vue-intersect/],
   },
 };
+
+export default config;
