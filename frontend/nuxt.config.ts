@@ -98,7 +98,7 @@ const config: NuxtConfig = {
         endpoints: {
           authorization: 'https://github.com/login/oauth/authorize',
           token: 'https://github.com/login/oauth/access_token',
-          userInfo: '/api/user/login/github',
+          userInfo: '/user/login/github',
         },
         redirectUri: 'http://localhost:3000/login/github/redirect',
       },
