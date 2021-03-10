@@ -1,5 +1,26 @@
+type Token = { token: string };
+
+export type LocalUser = {
+  _id: string;
+  name: string;
+  email: string;
+  creationDate: Date;
+  hideEmail: boolean;
+  isActiveMember: boolean;
+  isEmailVerified: boolean;
+  roles: string[];
+  github?: {
+    id: string;
+    username: string;
+  };
+  discord?: {
+    id: string;
+    username: string;
+  };
+};
+
 // https://docs.github.com/en/rest/reference/users#get-the-authenticated-user
-export type GithubUser = { token: string } & {
+export type GithubUser = {
   login: string;
   id: number;
   node_id: string;
@@ -32,4 +53,9 @@ export type GithubUser = { token: string } & {
   following: number;
   created_at: Date;
   updated_at: Date;
+};
+
+export type UserType = {
+  local: Token & LocalUser;
+  github?: Token & GithubUser;
 };

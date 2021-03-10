@@ -5,7 +5,7 @@ import type {
   ModuleOptions,
   RecursivePartial,
 } from '@nuxtjs/auth-next/dist/index';
-import { UserType } from './types/User';
+import { UserType } from './types/user';
 
 // export * from '@nuxtjs/auth-next';
 
