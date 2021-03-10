@@ -22,27 +22,23 @@
       </div>
     </div>
 
-    <div>
-      <p>{{ user.local.name }}</p>
-    </div>
-    <div v-if="user.github">
-      <p>
-        {{ user.github.name }}
-      </p>
-    </div>
+    <ProfileSection header="Account Information" />
+    <ProfileSection header="Voyage Preferences" />
+    <ProfileSection header="Voyage History" />
+    <ProfileSection header="Testimonials" />
   </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator';
-import { UserType } from 'types/User';
+import { UserType } from 'types/user';
 
 @Component({
-  name: 'YourProfile',
+  name: 'Profile',
   middleware: 'auth',
   head() {
     return {
-      title: 'Your Profile | Chingu',
+      title: 'Profile | Chingu',
     };
   },
 })
