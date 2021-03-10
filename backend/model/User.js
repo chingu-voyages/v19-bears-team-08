@@ -51,12 +51,31 @@ const userSchema = new mongoose.Schema({
     code: String,
     expiry: Date,
   },
-  githubUsername: {
-    type: String,
-  },
   hideEmail: {
     type: Boolean,
     default: false,
+  },
+  socials: {
+    github: {
+      id: {
+        type: String,
+        required: true,
+      },
+      username: {
+        type: String,
+        required: true,
+      },
+    },
+    discord: {
+      id: {
+        type: String,
+        required: true,
+      },
+      username: {
+        type: String,
+        required: true,
+      },
+    },
   },
 });
 
