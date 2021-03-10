@@ -15,9 +15,9 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator';
 
 @Component
 export default class StyledHeader extends Vue {
-  @Prop() readonly level!: number;
-  @Prop() readonly text!: string;
-  @Prop() readonly className!: string;
+  @Prop({ type: String, required: true }) readonly level!: string;
+  @Prop({ type: String, required: true }) readonly text!: string;
+  @Prop(String) readonly className!: string;
 
   public get splitText() {
     return this.text.split(' ');
